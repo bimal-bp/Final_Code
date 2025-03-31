@@ -1,5 +1,7 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
+import psycopg2
+from psycopg2 import sql
 
 # Configure page
 st.set_page_config(
@@ -71,6 +73,19 @@ st.markdown("""
         color: #1E90FF !important;
         font-weight: bold;
     }
+    .stButton>button {
+        background-color: #1E90FF;
+        color: white;
+        border-radius: 5px;
+        padding: 10px 24px;
+        font-weight: bold;
+        border: none;
+        transition: all 0.3s;
+    }
+    .stButton>button:hover {
+        background-color: #0066CC;
+        transform: scale(1.05);
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -79,39 +94,87 @@ st.markdown('<div class="header">Orbt-Tech</div>', unsafe_allow_html=True)
 st.markdown('<div class="subheader">Complete your final year projects with excellence</div>', unsafe_allow_html=True)
 
 # Navigation Menu
-with st.container():
-    selected = option_menu(
-        menu_title=None,
-        options=["Home", "Services", "Projects", "Team", "Contact"],
-        icons=["house", "list-task", "folder", "people", "envelope"],
-        menu_icon="cast",
-        default_index=0,
-        orientation="horizontal",
-        styles={
-            "container": {"padding": "0!important", "background-color": "#f0f2f6"},
-            "icon": {"color": "orange", "font-size": "18px"}, 
-            "nav-link": {
-                "font-size": "16px",
-                "text-align": "center",
-                "margin": "0px",
-                "--hover-color": "#eee",
-            },
-            "nav-link-selected": {"background-color": "#1E90FF"},
-        }
-    )
-
-
 selected = option_menu(
     menu_title=None,
-    options=["Home", "Our Projects", "Our Team", "Contact"],
-    icons=["house", "code-slash", "people", "envelope"],
+    options=["Home", "Services", "Projects", "Team", "Contact"],
+    icons=["house", "list-task", "folder", "people", "envelope"],
+    menu_icon="cast",
     default_index=0,
     orientation="horizontal",
     styles={
-        "container": {"padding": "0!important"},
-        "nav-link": {"font-size": "16px", "text-align": "center"},
+        "container": {"padding": "0!important", "background-color": "#f0f2f6"},
+        "icon": {"color": "orange", "font-size": "18px"}, 
+        "nav-link": {
+            "font-size": "16px",
+            "text-align": "center",
+            "margin": "0px",
+            "--hover-color": "#eee",
+        },
+        "nav-link-selected": {"background-color": "#1E90FF"},
     }
 )
+
+# Database connection function
+def get_db_connection():
+    try:
+        conn = psycopg2.connect(
+            dbname="neondb",
+            user="neondb_owner",
+            password="npg_cVaeU8k1ofnZ",
+            host="ep-snowy-bar-a59qktoz-pooler.us-east-2.aws.neon.tech",
+            port="5432",
+            sslmode="require"
+        )
+        return conn
+    except Exception as e:
+        st.error(f"Error connecting to database: {e}")
+        return None
+
+# Create contacts table if not exists
+def init_db():
+    conn = get_db_connection()
+    if conn:
+        try:
+            cur = conn.cursor()
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS contacts (
+                    id SERIAL PRIMARY KEY,
+                    name VARCHAR(100) NOT NULL,
+                    email VARCHAR(100) NOT NULL,
+                    project_type VARCHAR(50) NOT NULL,
+                    message TEXT,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            """)
+            conn.commit()
+        except Exception as e:
+            st.error(f"Error creating table: {e}")
+        finally:
+            if conn:
+                conn.close()
+
+# Insert contact form data
+def insert_contact(name, email, project_type, message):
+    conn = get_db_connection()
+    if conn:
+        try:
+            cur = conn.cursor()
+            cur.execute(
+                "INSERT INTO contacts (name, email, project_type, message) VALUES (%s, %s, %s, %s)",
+                (name, email, project_type, message)
+            )
+            conn.commit()
+            return True
+        except Exception as e:
+            st.error(f"Error inserting data: {e}")
+            return False
+        finally:
+            if conn:
+                conn.close()
+    return False
+
+# Initialize database
+init_db()
 
 # Page Content
 if selected == "Home":
@@ -163,7 +226,7 @@ if selected == "Home":
     - Affordable Pricing
     """)
     
-elif selected == "Our Team":
+elif selected == "Team":
     st.subheader("Our Team")
     
     col1, col2 = st.columns(2)
@@ -226,7 +289,7 @@ elif selected == "Our Team":
         </div>
         """, unsafe_allow_html=True)
     
-elif selected == "Our Projects":
+elif selected == "Projects":
     st.subheader("Our Projects")
     
     st.markdown("""
@@ -281,11 +344,23 @@ elif selected == "Contact":
     st.subheader("Contact Us")
     
     with st.form("contact_form"):
-        name = st.text_input("Name")
-        email = st.text_input("Email")
-        project_type = st.selectbox("Project Type", ["AI/ML", "Mobile App", "Web App", "Other"])
-        message = st.text_area("Message")
-        submit = st.form_submit_button("Submit", type="primary")
+        name = st.text_input("Name*", placeholder="Your name")
+        email = st.text_input("Email*", placeholder="Your email address")
+        project_type = st.selectbox("Project Type*", 
+                                  ["Select project type", "AI/ML", "Mobile App", "Web App", "Other"],
+                                  index=0)
+        message = st.text_area("Message", placeholder="Tell us about your project requirements")
         
-        if submit:
-            st.success("Thank you! We'll contact you soon.")
+        # Custom styled submit button
+        submit_button = st.form_submit_button("Submit", type="primary")
+        
+        if submit_button:
+            if not name or not email or project_type == "Select project type":
+                st.error("Please fill all required fields (marked with *)")
+            else:
+                if insert_contact(name, email, project_type, message):
+                    st.success("Thank you for contacting us! We'll get back to you soon.")
+                    # Clear form after successful submission
+                    st.experimental_rerun()
+                else:
+                    st.error("There was an error submitting your form. Please try again.")
