@@ -25,6 +25,27 @@ st.markdown("""
     .nav {
         margin-bottom: 20px;
     }
+    .orbt-button {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        text-align: center;
+    }
+    .orbt-button:hover {
+        background-color: #45a049;
+    }
+    .team-card {
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        background-color: #f5f5f5;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -95,6 +116,9 @@ if selected == "Home":
     - Affordable Pricing
     """)
     
+    # Orbt-Tech Button
+    st.markdown('<a href="#"><button class="orbt-button">Orbt-Tech</button></a>', unsafe_allow_html=True)
+    
 elif selected == "Our Team":
     st.subheader("Our Team")
     
@@ -102,31 +126,59 @@ elif selected == "Our Team":
     
     with col1:
         st.markdown("""
-        <div class="card">
-            <b>AI/ML Specialists</b>
-            <p>Experts in machine learning and data science</p>
+        <div class="team-card">
+            <b>John Doe</b>
+            <p>AI/ML Specialist</p>
+            <p>Expert in machine learning and data science</p>
         </div>
         """, unsafe_allow_html=True)
         
         st.markdown("""
-        <div class="card">
-            <b>Mobile Developers</b>
+        <div class="team-card">
+            <b>Mike Johnson</b>
+            <p>Mobile Developer</p>
             <p>Skilled in Android, iOS and cross-platform development</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown("""
+        <div class="team-card">
+            <b>Sarah Williams</b>
+            <p>Web Developer</p>
+            <p>Full stack developer with modern frameworks</p>
         </div>
         """, unsafe_allow_html=True)
     
     with col2:
         st.markdown("""
-        <div class="card">
-            <b>Web Developers</b>
-            <p>Full stack developers with modern frameworks</p>
+        <div class="team-card">
+            <b>David Smith</b>
+            <p>Project Manager</p>
+            <p>Ensuring smooth project execution</p>
         </div>
         """, unsafe_allow_html=True)
         
         st.markdown("""
-        <div class="card">
-            <b>Project Managers</b>
-            <p>Ensuring smooth project execution</p>
+        <div class="team-card">
+            <b>Robert Brown</b>
+            <p>Data Scientist</p>
+            <p>Specialized in predictive analytics</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown("""
+        <div class="team-card">
+            <b>Emily Davis</b>
+            <p>UI/UX Designer</p>
+            <p>Creating intuitive user interfaces</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown("""
+        <div class="team-card">
+            <b>James Wilson</b>
+            <p>Backend Developer</p>
+            <p>Database and server-side expert</p>
         </div>
         """, unsafe_allow_html=True)
     
@@ -137,7 +189,7 @@ elif selected == "Our Projects":
     <div class="card">
         <b>Career Recommendation System</b>
         <p>AI-powered career guidance platform</p>
-        <p><a href="#" target="_blank">View Project</a></p>
+        <p><a href="https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/" target="_blank">View Project</a></p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -145,7 +197,23 @@ elif selected == "Our Projects":
     <div class="card">
         <b>Bank Customer Analysis</b>
         <p>Predictive analytics for banking sector</p>
-        <p><a href="#" target="_blank">View Project</a></p>
+        <p><a href="https://bankattritionprojects-tymyqz4hyygziox37gfttt.streamlit.app/" target="_blank">View Project</a></p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div class="card">
+        <b>Crime Spot Prediction</b>
+        <p>AI system for predicting crime hotspots</p>
+        <p><a href="https://crmiespotpredict-zi269clpbwhknp8d3cqqex.streamlit.app/" target="_blank">View Project</a></p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div class="card">
+        <b>Legal App</b>
+        <p>Legal assistance and documentation platform</p>
+        <p><a href="https://legal-app-6ovymevnmlyrcasclwtt8u.streamlit.app/" target="_blank">View Project</a></p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -153,7 +221,15 @@ elif selected == "Our Projects":
     <div class="card">
         <b>Student Performance Tracker</b>
         <p>Educational analytics dashboard</p>
-        <p><a href="#" target="_blank">View Project</a></p>
+        <p><a href="https://studentperformance-fvqesnqvjzxvjcpx78zheo.streamlit.app/" target="_blank">View Project</a></p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div class="card">
+        <b>Water Quality Analysis</b>
+        <p>Water quality monitoring system</p>
+        <p><a href="https://waterqualityproject-fjfw7dmgbjgbzdestmpdsi.streamlit.app/" target="_blank">View Project</a></p>
     </div>
     """, unsafe_allow_html=True)
     
