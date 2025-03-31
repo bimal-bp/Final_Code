@@ -39,7 +39,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Company Header
-st.markdown('<div class="company-header">Welcome to Orb-Tech</div>', unsafe_allow_html=True)
+st.markdown('<div class="company-header">Welcome to Orbt-Tech</div>', unsafe_allow_html=True)
 st.markdown('<div class="tagline">Complete your final year projects with excellence</div>', unsafe_allow_html=True)
 
 # Services Section
