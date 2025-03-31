@@ -214,7 +214,7 @@ def init_db():
                 )
             """)
             conn.commit()
-            st.success("Database table created/updated successfully!")
+
         except Exception as e:
             st.error(f"Error creating table: {e}")
         finally:
@@ -335,7 +335,7 @@ elif selected == "Team":
     with col2:
         st.markdown("""
         <div class="team-card">
-            <b>Heema Senapati</b>
+            <b>Heema Samal</b>
             <p>Project Manager</p>
             <p>Ensuring smooth project execution</p>
         </div>
@@ -372,6 +372,7 @@ elif selected == "Projects":
     <div class="card">
         <b>Right Education for Perfect Job</b>
         <p>ORBT-LeARN</p>
+        <p>This app will help you choosing your right education path for your sussesful job carrier</p>
         <p>Created by - Bimal Patra</p>
         <p><a href="https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/" target="_blank">View Project</a></p>
     </div>
@@ -425,12 +426,12 @@ elif selected == "Contact":
     <div style="margin-bottom: 20px;">
         <h4 style="text-align: center;">Directly Contact Our Project Managers</h4>
         <div class="manager-card">
-            <b>David Smith (Project Manager)</b>
+            <b>Hemma Samal (Project Manager)</b>
             <p>📞 <a href="tel:+919876543210">+91 98765 43210</a></p>
             <p>📱 <a href="https://wa.me/919876543210" target="_blank">WhatsApp</a></p>
         </div>
         <div class="manager-card">
-            <b>Sarah Johnson (Project Coordinator)</b>
+            <b>Jasmine kartik (Project Coordinator)</b>
             <p>📞 <a href="tel:+919876543211">+91 98765 43211</a></p>
             <p>📱 <a href="https://wa.me/919876543211" target="_blank">WhatsApp</a></p>
         </div>
