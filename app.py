@@ -25,7 +25,13 @@ st.markdown("""
     .nav {
         margin-bottom: 20px;
     }
-    .orbt-button {
+    .team-card {
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        background-color: #f5f5f5;
+    }
+    .contact-button {
         display: block;
         margin: 20px auto;
         padding: 10px 20px;
@@ -37,14 +43,8 @@ st.markdown("""
         font-size: 16px;
         text-align: center;
     }
-    .orbt-button:hover {
+    .contact-button:hover {
         background-color: #45a049;
-    }
-    .team-card {
-        padding: 15px;
-        margin: 10px 0;
-        border-radius: 8px;
-        background-color: #f5f5f5;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -115,9 +115,6 @@ if selected == "Home":
     - Regular Updates
     - Affordable Pricing
     """)
-    
-    # Orbt-Tech Button
-    st.markdown('<a href="#"><button class="orbt-button">Orbt-Tech</button></a>', unsafe_allow_html=True)
     
 elif selected == "Our Team":
     st.subheader("Our Team")
@@ -241,7 +238,7 @@ elif selected == "Contact":
         email = st.text_input("Email")
         project_type = st.selectbox("Project Type", ["AI/ML", "Mobile App", "Web App", "Other"])
         message = st.text_area("Message")
-        submit = st.form_submit_button("Submit")
+        submit = st.form_submit_button("Submit", type="primary")
         
         if submit:
             st.success("Thank you! We'll contact you soon.")
