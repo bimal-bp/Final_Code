@@ -8,19 +8,31 @@ st.set_page_config(
     layout="wide"
 )
 
-# Simple CSS styling
+# CSS styling
 st.markdown("""
     <style>
     .header {
-        font-size: 2rem;
+        font-size: 2.5rem;
         text-align: center;
         margin-bottom: 1rem;
+        color: white;
+        background-color: #1E90FF;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    }
+    .subheader {
+        text-align:center; 
+        margin-bottom:30px;
+        font-size: 1.2rem;
+        color: #555;
     }
     .card {
         padding: 15px;
         margin: 10px 0;
         border-radius: 8px;
         background-color: #f5f5f5;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     .nav {
         margin-bottom: 20px;
@@ -30,6 +42,7 @@ st.markdown("""
         margin: 10px 0;
         border-radius: 8px;
         background-color: #f5f5f5;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     .contact-button {
         display: block;
@@ -42,18 +55,52 @@ st.markdown("""
         cursor: pointer;
         font-size: 16px;
         text-align: center;
+        transition: all 0.3s;
     }
     .contact-button:hover {
         background-color: #45a049;
+        transform: scale(1.05);
+    }
+    /* Style for the navigation menu */
+    .st-b7 {
+        background-color: #f0f2f6 !important;
+        border-radius: 10px;
+        padding: 10px;
+    }
+    .st-c7 {
+        color: #1E90FF !important;
+        font-weight: bold;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# Company Header
+# Company Header with blue button style
 st.markdown('<div class="header">Orbt-Tech</div>', unsafe_allow_html=True)
-st.markdown('<div style="text-align:center; margin-bottom:30px">Complete your final year projects with excellence</div>', unsafe_allow_html=True)
+st.markdown('<div class="subheader">Complete your final year projects with excellence</div>', unsafe_allow_html=True)
 
 # Navigation Menu
+with st.container():
+    selected = option_menu(
+        menu_title=None,
+        options=["Home", "Services", "Projects", "Team", "Contact"],
+        icons=["house", "list-task", "folder", "people", "envelope"],
+        menu_icon="cast",
+        default_index=0,
+        orientation="horizontal",
+        styles={
+            "container": {"padding": "0!important", "background-color": "#f0f2f6"},
+            "icon": {"color": "orange", "font-size": "18px"}, 
+            "nav-link": {
+                "font-size": "16px",
+                "text-align": "center",
+                "margin": "0px",
+                "--hover-color": "#eee",
+            },
+            "nav-link-selected": {"background-color": "#1E90FF"},
+        }
+    )
+
+
 selected = option_menu(
     menu_title=None,
     options=["Home", "Our Projects", "Our Team", "Contact"],
