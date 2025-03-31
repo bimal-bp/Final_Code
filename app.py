@@ -198,6 +198,9 @@ def init_db():
     if conn:
         try:
             cur = conn.cursor()
+            # Drop existing table if it has old schema
+            cur.execute("DROP TABLE IF EXISTS contacts")
+            # Create new table with updated schema
             cur.execute("""
                 CREATE TABLE IF NOT EXISTS contacts (
                     id SERIAL PRIMARY KEY,
@@ -211,6 +214,7 @@ def init_db():
                 )
             """)
             conn.commit()
+            st.success("Database table created/updated successfully!")
         except Exception as e:
             st.error(f"Error creating table: {e}")
         finally:
