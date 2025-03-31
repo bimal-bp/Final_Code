@@ -63,14 +63,15 @@ st.markdown("""
     }
     .github-badge {
         display: inline-block;
-        background-color: #24292e;
-        color: white;
+        background-color: white;
+        color: black;
         padding: 6px 12px;
         border-radius: 5px;
         margin: 8px 0;
         text-decoration: none;
         font-weight: bold;
         font-size: 0.9rem;
+        border: 1px solid #ddd;
     }
     .manager-card {
         padding: 12px;
@@ -83,18 +84,19 @@ st.markdown("""
         display: block;
         margin: 15px auto;
         padding: 10px 20px;
-        background-color: #FF8C00;
-        color: white;
-        border: none;
+        background-color: white;
+        color: black;
+        border: 1px solid #ddd;
         border-radius: 5px;
         cursor: pointer;
         font-size: 16px;
         text-align: center;
         transition: all 0.3s;
         width: 80%;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     .job-button:hover {
-        background-color: #FF7000;
+        background-color: #f5f5f5;
         transform: scale(1.05);
     }
     
@@ -161,17 +163,7 @@ st.markdown("""
 st.markdown('<div class="header">Orbt-Tech</div>', unsafe_allow_html=True)
 st.markdown('<div class="subheader">Complete your final year projects with excellence</div>', unsafe_allow_html=True)
 
-# GitHub link
-st.markdown("""
-    <div style="text-align:center;">
-        <a href="https://github.com/bimal-bp" class="github-badge" target="_blank">
-            <i class="fab fa-github"></i> View My GitHub (72+ Projects)
-        </a>
-    </div>
-    <div style="text-align:center; margin-bottom:15px;">
-        <small>Machine Learning | Deep Learning | GenAI | MLOps | PowerBI</small>
-    </div>
-""", unsafe_allow_html=True)
+# GitHub link (removed from home page, will be in projects section only)
 
 # Navigation Menu
 selected = option_menu(
@@ -266,7 +258,7 @@ init_db()
 
 # Page Content
 if selected == "Home":
-    # Job Career Button
+    # Job Career Button - now in white box
     st.markdown("""
     <div style="text-align: center; margin-bottom: 30px;">
         <a href="https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/" class="job-button" target="_blank">
@@ -277,7 +269,7 @@ if selected == "Home":
     
     st.subheader("Our Services")
     
-    col1, col2, col3 = st.columns(3)
+    col1, col2 = st.columns(2)  # Changed to 2 columns instead of 3
     
     with col1:
         st.markdown("""
@@ -305,20 +297,6 @@ if selected == "Home":
                 <li>MERN/MEAN Stack Development</li>
                 <li>Cross-platform Apps</li>
                 <li>Cloud Integration</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col3:
-        st.markdown("""
-        <div class="card">
-            <b>Data Science & Analytics</b>
-            <ul style="padding-left: 20px;">
-                <li>Data Visualization</li>
-                <li>Business Intelligence</li>
-                <li>PowerBI Dashboards</li>
-                <li>Big Data Solutions</li>
-                <li>Data Warehousing</li>
             </ul>
         </div>
         """, unsafe_allow_html=True)
@@ -402,6 +380,15 @@ elif selected == "Team":
     
 elif selected == "Projects":
     st.subheader("Our Projects")
+    
+    # GitHub button in white box (only in Projects section)
+    st.markdown("""
+    <div style="text-align:center; margin-bottom: 20px;">
+        <a href="https://github.com/bimal-bp" class="github-badge" target="_blank">
+            <i class="fab fa-github"></i> View My GitHub (72+ Projects)
+        </a>
+    </div>
+    """, unsafe_allow_html=True)
     
     st.markdown("""
     <div class="card">
