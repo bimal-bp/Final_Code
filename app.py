@@ -86,6 +86,16 @@ st.markdown("""
         background-color: #0066CC;
         transform: scale(1.05);
     }
+    .github-badge {
+        display: inline-block;
+        background-color: #24292e;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 5px;
+        margin: 10px 0;
+        text-decoration: none;
+        font-weight: bold;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -93,11 +103,23 @@ st.markdown("""
 st.markdown('<div class="header">Orbt-Tech</div>', unsafe_allow_html=True)
 st.markdown('<div class="subheader">Complete your final year projects with excellence</div>', unsafe_allow_html=True)
 
+# Add GitHub link
+st.markdown("""
+    <div style="text-align:center;">
+        <a href="https://github.com/bimal-bp" class="github-badge" target="_blank">
+            <i class="fab fa-github"></i> View My GitHub (72+ Projects)
+        </a>
+    </div>
+    <div style="text-align:center; margin-bottom:20px;">
+        <small>Machine Learning | Deep Learning | GenAI | MLOps | PowerBI</small>
+    </div>
+""", unsafe_allow_html=True)
+
 # Navigation Menu
 selected = option_menu(
     menu_title=None,
-    options=["Home", "Services", "Projects", "Team", "Contact"],
-    icons=["house", "list-task", "folder", "people", "envelope"],
+    options=["Home", "Projects", "Team", "Contact"],
+    icons=["house", "folder", "people", "envelope"],
     menu_icon="cast",
     default_index=0,
     orientation="horizontal",
@@ -224,6 +246,7 @@ if selected == "Home":
     - Documentation Support
     - Regular Updates
     - Affordable Pricing
+    - 72+ Completed Projects across ML, DL, GenAI, MLOps
     """)
     
 elif selected == "Team":
@@ -352,15 +375,26 @@ elif selected == "Contact":
         message = st.text_area("Message", placeholder="Tell us about your project requirements")
         
         # Custom styled submit button
-        submit_button = st.form_submit_button("Submit", type="primary")
+        submitted = st.form_submit_button("Submit", type="primary")
         
-        if submit_button:
+        if submitted:
             if not name or not email or project_type == "Select project type":
                 st.error("Please fill all required fields (marked with *)")
             else:
                 if insert_contact(name, email, project_type, message):
                     st.success("Thank you for contacting us! We'll get back to you soon.")
-                    # Clear form after successful submission
-                    st.experimental_rerun()
+                    # Redirect to home page after delay
+                    st.markdown("""
+                    <script>
+                    setTimeout(function() {
+                        window.location.href = "#home";
+                    }, 2000);
+                    </script>
+                    """, unsafe_allow_html=True)
                 else:
                     st.error("There was an error submitting your form. Please try again.")
+
+# Add Font Awesome for GitHub icon
+st.markdown("""
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+""", unsafe_allow_html=True)
