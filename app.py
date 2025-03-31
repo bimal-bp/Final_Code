@@ -19,7 +19,7 @@ st.markdown("""
         text-align: center;
         margin-bottom: 1rem;
         color: white;
-        background-color: #1E90FF;
+        background-color: #00BFFF;  /* Changed to sky blue */
         padding: 15px;
         border-radius: 10px;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -79,6 +79,24 @@ st.markdown("""
         background-color: #e3f2fd;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
+    .job-button {
+        display: block;
+        margin: 15px auto;
+        padding: 10px 20px;
+        background-color: #FF8C00;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        text-align: center;
+        transition: all 0.3s;
+        width: 80%;
+    }
+    .job-button:hover {
+        background-color: #FF7000;
+        transform: scale(1.05);
+    }
     
     /* Mobile optimizations */
     @media screen and (max-width: 768px) {
@@ -115,11 +133,11 @@ st.markdown("""
         padding: 8px;
     }
     .st-c7 {
-        color: #1E90FF !important;
+        color: #00BFFF !important;  /* Changed to sky blue */
         font-weight: bold;
     }
     .stButton>button {
-        background-color: #1E90FF;
+        background-color: #00BFFF;  /* Changed to sky blue */
         color: white;
         border-radius: 5px;
         padding: 10px 20px;
@@ -172,7 +190,7 @@ selected = option_menu(
             "margin": "0px",
             "--hover-color": "#eee",
         },
-        "nav-link-selected": {"background-color": "#1E90FF"},
+        "nav-link-selected": {"background-color": "#00BFFF"},  # Changed to sky blue
     }
 )
 
@@ -248,6 +266,15 @@ init_db()
 
 # Page Content
 if selected == "Home":
+    # Job Career Button
+    st.markdown("""
+    <div style="text-align: center; margin-bottom: 30px;">
+        <a href="https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/" class="job-button" target="_blank">
+            <i class="fas fa-briefcase"></i> Find Your Perfect Job Career Path
+        </a>
+    </div>
+    """, unsafe_allow_html=True)
+    
     st.subheader("Our Services")
     
     col1, col2, col3 = st.columns(3)
@@ -257,9 +284,13 @@ if selected == "Home":
         <div class="card">
             <b>AI/ML Projects</b>
             <ul style="padding-left: 20px;">
-                <li>Machine Learning</li>
+                <li>Predictive Analytics Projects</li>
+                <li>Classification Models</li>
+                <li>Recommendation Systems</li>
+                <li>Deep Learning Projects</li>
+                <li>Unsupervised Learning</li>
+                <li>Generative AI Projects</li>
                 <li>Natural Language Processing</li>
-                <li>Predictive Analytics</li>
             </ul>
         </div>
         """, unsafe_allow_html=True)
@@ -267,11 +298,13 @@ if selected == "Home":
     with col2:
         st.markdown("""
         <div class="card">
-            <b>Mobile Applications</b>
+            <b>Software Development</b>
             <ul style="padding-left: 20px;">
-                <li>Android Development</li>
-                <li>iOS Development</li>
+                <li>Mobile Applications (Android/iOS)</li>
+                <li>Web Applications (Full Stack)</li>
+                <li>MERN/MEAN Stack Development</li>
                 <li>Cross-platform Apps</li>
+                <li>Cloud Integration</li>
             </ul>
         </div>
         """, unsafe_allow_html=True)
@@ -279,11 +312,13 @@ if selected == "Home":
     with col3:
         st.markdown("""
         <div class="card">
-            <b>Web Applications</b>
+            <b>Data Science & Analytics</b>
             <ul style="padding-left: 20px;">
-                <li>Full Stack Development</li>
-                <li>MERN/MEAN Stack</li>
-                <li>Cloud Integration</li>
+                <li>Data Visualization</li>
+                <li>Business Intelligence</li>
+                <li>PowerBI Dashboards</li>
+                <li>Big Data Solutions</li>
+                <li>Data Warehousing</li>
             </ul>
         </div>
         """, unsafe_allow_html=True)
