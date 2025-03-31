@@ -310,7 +310,7 @@ elif selected == "Team":
     with col1:
         st.markdown("""
         <div class="team-card">
-            <b>John Doe</b>
+            <b>Bimal Patra</b>
             <p>AI/ML Specialist</p>
             <p>Expert in machine learning and data science</p>
         </div>
@@ -318,7 +318,7 @@ elif selected == "Team":
         
         st.markdown("""
         <div class="team-card">
-            <b>Mike Johnson</b>
+            <b>Rakesh Behera</b>
             <p>Mobile Developer</p>
             <p>Skilled in Android, iOS and cross-platform development</p>
         </div>
@@ -326,7 +326,7 @@ elif selected == "Team":
         
         st.markdown("""
         <div class="team-card">
-            <b>Sarah Williams</b>
+            <b>Sravan Sahoo</b>
             <p>Web Developer</p>
             <p>Full stack developer with modern frameworks</p>
         </div>
@@ -335,7 +335,7 @@ elif selected == "Team":
     with col2:
         st.markdown("""
         <div class="team-card">
-            <b>David Smith</b>
+            <b>Heema Senapati</b>
             <p>Project Manager</p>
             <p>Ensuring smooth project execution</p>
         </div>
@@ -343,7 +343,7 @@ elif selected == "Team":
         
         st.markdown("""
         <div class="team-card">
-            <b>Robert Brown</b>
+            <b>Ramhari Sasmal</b>
             <p>Data Scientist</p>
             <p>Specialized in predictive analytics</p>
         </div>
@@ -351,15 +351,15 @@ elif selected == "Team":
         
         st.markdown("""
         <div class="team-card">
-            <b>Emily Davis</b>
-            <p>UI/UX Designer</p>
+            <b>Mantu Gouda</b>
+            <p>Ml Developer</p>
             <p>Creating intuitive user interfaces</p>
         </div>
         """, unsafe_allow_html=True)
         
         st.markdown("""
         <div class="team-card">
-            <b>James Wilson</b>
+            <b>Pabitra Jena</b>
             <p>Backend Developer</p>
             <p>Database and server-side expert</p>
         </div>
@@ -370,8 +370,9 @@ elif selected == "Projects":
     
     st.markdown("""
     <div class="card">
-        <b>Career Recommendation System</b>
-        <p>AI-powered career guidance platform</p>
+        <b>Right Education for Perfect Job</b>
+        <p>ORBT-LeARN</p>
+        <p>Created by - Bimal Patra</p>
         <p><a href="https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/" target="_blank">View Project</a></p>
     </div>
     """, unsafe_allow_html=True)
