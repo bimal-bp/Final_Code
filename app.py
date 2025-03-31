@@ -39,7 +39,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Company Header
-st.markdown('<div class="company-header">**Welcome to Orb-Tech**</div>', unsafe_allow_html=True)
+st.markdown('<div class="company-header">Welcome to Orb-Tech</div>', unsafe_allow_html=True)
 st.markdown('<div class="tagline">Complete your final year projects with excellence</div>', unsafe_allow_html=True)
 
 # Services Section
@@ -51,7 +51,7 @@ with col1:
     <div class="service-card">
         <div class="service-title">AI/ML Projects</div>
         <ul>
-            <li>Computer Vision</li>
+            <li>Machine Learning</li>
             <li>Natural Language Processing</li>
             <li>Predictive Analytics</li>
             <li>Deep Learning</li>
