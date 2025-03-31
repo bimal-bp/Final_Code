@@ -109,67 +109,51 @@ if selected == "Home":
     - Affordable Pricing
     """)
     
-elif selected == "Our Projects":
-    st.header("Our Completed Projects")
-    
-    # Project 1 - Carrier Option Project
-    with st.expander("Orbt-Learn: Career Recommendation System"):
-        st.write("""
-        - Key Feature: AI-powered career path recommendation based on skills and preferences
-        - [View Project](https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/)
-        """)
-    
-    # Project 2 - Bank Attrition Project
-    with st.expander("Bank Customer Attrition Prediction"):
-        st.write("""
-        - Key Feature: Predicts bank customer churn with 92% accuracy using machine learning
-        - [View Project](https://bankattritionprojects-tymyqz4hyygziox37gfttt.streamlit.app/)
-        """)
-    
-    # Project 3 - Crime Spot Prediction
-    with st.expander("Crime Spot Prediction System"):
-        st.write("""
-        - Key Feature: Geographic crime hotspot identification using historical data analysis
-        - [View Project](https://crmiespotpredict-zi269clpbwhknp8d3cqqex.streamlit.app/)
-        """)
-    
-    # Project 4 - Legal App
-    with st.expander("Legal Document Analysis App"):
-        st.write("""
-        - Key Feature: NLP-powered legal document processing and summary generation
-        - [View Project](https://legal-app-6ovymevnmlyrcasclwtt8u.streamlit.app/)
-        """)
-    
-    # Project 5 - Student Performance
-    with st.expander("Student Performance Analyzer"):
-        st.write("""
-        - Key Feature: Identifies at-risk students early using academic pattern recognition
-        - [View Project](https://studentperformance-fvqesnqvjzxvjcpx78zheo.streamlit.app/)
-        """)
-    
-    # Project 6 - Water Quality Project
-    with st.expander("Water Quality Monitoring System"):
-        st.write("""
-        - Key Feature: Real-time water quality assessment with safety recommendations
-        - [View Project](https://waterqualityproject-fjfw7dmgbjgbzdestmpdsi.streamlit.app/)
-        """)
-    
-    # Original project remains
-    with st.expander("AI-Based Attendance System (2023)"):
-        st.write("""
-        - Technologies: Python, OpenCV, Face Recognition
-        - Features: Real-time face detection, Excel report generation
-        - Completion: 3 months
-        """)
-    
 elif selected == "Our Team":
-    st.header("Meet Our Developers")
-    # Add your 5-6 team members
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.image("https://via.placeholder.com/150", caption="John Doe (AI/ML Specialist)")
-    with col2:
-        st.image("https://via.placeholder.com/150", caption="Jane Smith (Mobile Dev)")
+    st.header("Meet Our Expert Team")
+    
+    # Team Members List
+    st.markdown("""
+    <div style="background-color:#f8fafc; padding:20px; border-radius:10px; margin-bottom:20px;">
+        <h3 style="color:#2563eb;">Our Core Team</h3>
+        <ol>
+            <li><b>Bimal Patra</b> - AI/ML Engineer (Project: Career Recommendation System)</li>
+            <li><b>Priya Sharma</b> - Project Manager (Project: Bank Customer Attrition Prediction)</li>
+            <li><b>Ananya Gupta</b> - ML Developer (Project: Crime Spot Prediction System)</li>
+            <li><b>Rahul Verma</b> - Mobile Application Developer (Project: Legal Document Analysis App)</li>
+            <li><b>Arjun Mehta</b> - Web Application Developer (Project: Student Performance Analyzer)</li>
+        </ol>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Projects Assignment with Review Links
+    st.subheader("Current Projects & Reviews")
+    st.markdown("""
+    <div style="background-color:#f8fafc; padding:20px; border-radius:10px;">
+        <h4 style="color:#2563eb;">Active Projects</h4>
+        <ul>
+            <li><b>Orbt-Learn Career System</b> - Bimal Patra (AI/ML) 
+                <br>➤ <a href="https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/" target="_blank">Live Demo</a> | 
+                <a href="https://github.com/orbt-tech/career-system-reviews" target="_blank">Client Reviews</a></li>
+            
+            <li><b>Bank Attrition Prediction</b> - Priya Sharma (Project Lead) 
+                <br>➤ <a href="https://bankattritionprojects-tymyqz4hyygziox37gfttt.streamlit.app/" target="_blank">Live Demo</a> | 
+                <a href="https://github.com/orbt-tech/bank-attrition-reviews" target="_blank">Client Reviews</a></li>
+            
+            <li><b>Crime Spot Prediction</b> - Ananya Gupta (ML Dev) 
+                <br>➤ <a href="https://crmiespotpredict-zi269clpbwhknp8d3cqqex.streamlit.app/" target="_blank">Live Demo</a> | 
+                <a href="https://github.com/orbt-tech/crime-spot-reviews" target="_blank">Client Reviews</a></li>
+            
+            <li><b>Legal Document App</b> - Rahul Verma (Mobile Dev) 
+                <br>➤ <a href="https://legal-app-6ovymevnmlyrcasclwtt8u.streamlit.app/" target="_blank">Live Demo</a> | 
+                <a href="https://github.com/orbt-tech/legal-app-reviews" target="_blank">Client Reviews</a></li>
+            
+            <li><b>Student Analyzer</b> - Arjun Mehta (Web Dev) 
+                <br>➤ <a href="https://studentperformance-fvqesnqvjzxvjcpx78zheo.streamlit.app/" target="_blank">Live Demo</a> | 
+                <a href="https://github.com/orbt-tech/student-analyzer-reviews" target="_blank">Client Reviews</a></li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
     
 elif selected == "Contact Us":
     st.header("Get In Touch")
