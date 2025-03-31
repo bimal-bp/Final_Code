@@ -111,7 +111,50 @@ if selected == "Home":
     
 elif selected == "Our Projects":
     st.header("Our Completed Projects")
-    # Add your 7 projects here with expanders
+    
+    # Project 1 - Carrier Option Project
+    with st.expander("Orbt-Learn: Career Recommendation System"):
+        st.write("""
+        - Key Feature: AI-powered career path recommendation based on skills and preferences
+        - [View Project](https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/)
+        """)
+    
+    # Project 2 - Bank Attrition Project
+    with st.expander("Bank Customer Attrition Prediction"):
+        st.write("""
+        - Key Feature: Predicts bank customer churn with 92% accuracy using machine learning
+        - [View Project](https://bankattritionprojects-tymyqz4hyygziox37gfttt.streamlit.app/)
+        """)
+    
+    # Project 3 - Crime Spot Prediction
+    with st.expander("Crime Spot Prediction System"):
+        st.write("""
+        - Key Feature: Geographic crime hotspot identification using historical data analysis
+        - [View Project](https://crmiespotpredict-zi269clpbwhknp8d3cqqex.streamlit.app/)
+        """)
+    
+    # Project 4 - Legal App
+    with st.expander("Legal Document Analysis App"):
+        st.write("""
+        - Key Feature: NLP-powered legal document processing and summary generation
+        - [View Project](https://legal-app-6ovymevnmlyrcasclwtt8u.streamlit.app/)
+        """)
+    
+    # Project 5 - Student Performance
+    with st.expander("Student Performance Analyzer"):
+        st.write("""
+        - Key Feature: Identifies at-risk students early using academic pattern recognition
+        - [View Project](https://studentperformance-fvqesnqvjzxvjcpx78zheo.streamlit.app/)
+        """)
+    
+    # Project 6 - Water Quality Project
+    with st.expander("Water Quality Monitoring System"):
+        st.write("""
+        - Key Feature: Real-time water quality assessment with safety recommendations
+        - [View Project](https://waterqualityproject-fjfw7dmgbjgbzdestmpdsi.streamlit.app/)
+        """)
+    
+    # Original project remains
     with st.expander("AI-Based Attendance System (2023)"):
         st.write("""
         - Technologies: Python, OpenCV, Face Recognition
