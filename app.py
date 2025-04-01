@@ -249,6 +249,29 @@ st.markdown(f"""
     
     /* Floating WhatsApp button */
     .floating-button {{
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #25D366;
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 30px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }}
+    .floating-button:hover {{
+        background-color: #128C7E;
+        transform: scale(1.1);
+    }}
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+""", unsafe_allow_html=True)
        
 # Database connection function
 def get_db_connection():
