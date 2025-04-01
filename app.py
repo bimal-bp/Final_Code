@@ -12,11 +12,16 @@ st.set_page_config(
     layout="wide"
 )
 
-# Initialize session state at the very beginning
-if 'admin_logged_in' not in st.session_state:
-    st.session_state.admin_logged_in = False
-if 'show_admin_login' not in st.session_state:
-    st.session_state.show_admin_login = False
+# Initialize session state
+def init_session_state():
+    if 'admin_logged_in' not in st.session_state:
+        st.session_state.admin_logged_in = False
+    if 'show_admin_login' not in st.session_state:
+        st.session_state.show_admin_login = False
+    if 'selected_menu' not in st.session_state:
+        st.session_state.selected_menu = "Home"
+
+init_session_state()
 
 # Generate random color for project cards
 def get_random_color():
@@ -287,31 +292,6 @@ st.markdown("""
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 """, unsafe_allow_html=True)
 
-# Company Header
-st.markdown('<div class="header">Orbt-Tech</div>', unsafe_allow_html=True)
-st.markdown('<div class="subheader">Complete your final year projects with excellence</div>', unsafe_allow_html=True)
-
-# Navigation Menu
-selected = option_menu(
-    menu_title=None,
-    options=["Home", "Projects", "Team", "Contact"],
-    icons=["house", "folder", "people", "envelope"],
-    menu_icon="cast",
-    default_index=0,
-    orientation="horizontal",
-    styles={
-        "container": {"padding": "0!important", "background-color": "#F8F9FA"},
-        "icon": {"color": "#F72585", "font-size": "16px"},
-        "nav-link": {
-            "font-size": "14px",
-            "text-align": "center",
-            "margin": "0px",
-            "--hover-color": "#E9ECEF",
-        },
-        "nav-link-selected": {"background-color": "#7209B7"},
-    }
-)
-
 # Database connection function
 def get_db_connection():
     try:
@@ -413,13 +393,11 @@ def admin_login_page():
                 st.session_state.admin_logged_in = True
                 st.session_state.show_admin_login = False
                 st.success("Login successful!")
-                st.experimental_rerun()
             else:
                 st.error("Invalid credentials")
     
     if st.button("Back to Home"):
         st.session_state.show_admin_login = False
-        st.experimental_rerun()
 
 # Admin dashboard
 def admin_dashboard():
@@ -484,7 +462,6 @@ def admin_dashboard():
                     cur.execute("TRUNCATE TABLE contacts RESTART IDENTITY")
                     conn.commit()
                     st.success("All submissions have been deleted")
-                    st.experimental_rerun()
                 except Exception as e:
                     st.error(f"Error deleting data: {e}")
                 finally:
@@ -496,14 +473,9 @@ def admin_dashboard():
     if st.button("Logout"):
         st.session_state.admin_logged_in = False
         st.session_state.show_admin_login = False
-        st.experimental_rerun()
 
-# Page Content
-if st.session_state.get('admin_logged_in', False):
-    admin_dashboard()
-elif st.session_state.get('show_admin_login', False):
-    admin_login_page()
-elif selected == "Home":
+# Home Page
+def show_home_page():
     # Job Career Button
     st.markdown("""
     <div style="text-align: center; margin-bottom: 30px;">
@@ -564,72 +536,9 @@ elif selected == "Home":
     # Admin Button at the bottom of the page
     if st.button("Admin Login", key="admin_button"):
         st.session_state.show_admin_login = True
-        st.experimental_rerun()
-    
-elif selected == "Team":
-    st.subheader("Our Team")
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.markdown(f"""
-        <div class="team-card" style="border-left-color: {get_random_color()}">
-            <b>Bimal Patra</b>
-            <p>AI/ML Specialist</p>
-            <p>Expert in machine learning and data science</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown(f"""
-        <div class="team-card" style="border-left-color: {get_random_color()}">
-            <b>Rakesh Behera</b>
-            <p>Mobile Developer</p>
-            <p>Skilled in Android, iOS and cross-platform development</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown(f"""
-        <div class="team-card" style="border-left-color: {get_random_color()}">
-            <b>Sravan Sahoo</b>
-            <p>Web Developer</p>
-            <p>Full stack developer with modern frameworks</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown(f"""
-        <div class="team-card" style="border-left-color: {get_random_color()}">
-            <b>Heema Samal</b>
-            <p>Project Manager</p>
-            <p>Ensuring smooth project execution</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown(f"""
-        <div class="team-card" style="border-left-color: {get_random_color()}">
-            <b>Ramhari Sasmal</b>
-            <p>Data Scientist</p>
-            <p>Specialized in predictive analytics</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown(f"""
-        <div class="team-card" style="border-left-color: {get_random_color()}">
-            <b>Mantu Gouda</b>
-            <p>ML Developer</p>
-            <p>Creating intuitive user interfaces</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown(f"""
-        <div class="team-card" style="border-left-color: {get_random_color()}">
-            <b>Pabitra Jena</b>
-            <p>Backend Developer</p>
-            <p>Database and server-side expert</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-elif selected == "Projects":
+
+# Projects Page
+def show_projects_page():
     st.subheader("Our Projects")
     
     # GitHub button in Projects section
@@ -691,7 +600,72 @@ elif selected == "Projects":
     </div>
     """, unsafe_allow_html=True)
 
-elif selected == "Contact":
+# Team Page
+def show_team_page():
+    st.subheader("Our Team")
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.markdown(f"""
+        <div class="team-card" style="border-left-color: {get_random_color()}">
+            <b>Bimal Patra</b>
+            <p>AI/ML Specialist</p>
+            <p>Expert in machine learning and data science</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown(f"""
+        <div class="team-card" style="border-left-color: {get_random_color()}">
+            <b>Rakesh Behera</b>
+            <p>Mobile Developer</p>
+            <p>Skilled in Android, iOS and cross-platform development</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown(f"""
+        <div class="team-card" style="border-left-color: {get_random_color()}">
+            <b>Sravan Sahoo</b>
+            <p>Web Developer</p>
+            <p>Full stack developer with modern frameworks</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown(f"""
+        <div class="team-card" style="border-left-color: {get_random_color()}">
+            <b>Heema Samal</b>
+            <p>Project Manager</p>
+            <p>Ensuring smooth project execution</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown(f"""
+        <div class="team-card" style="border-left-color: {get_random_color()}">
+            <b>Ramhari Sasmal</b>
+            <p>Data Scientist</p>
+            <p>Specialized in predictive analytics</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown(f"""
+        <div class="team-card" style="border-left-color: {get_random_color()}">
+            <b>Mantu Gouda</b>
+            <p>ML Developer</p>
+            <p>Creating intuitive user interfaces</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown(f"""
+        <div class="team-card" style="border-left-color: {get_random_color()}">
+            <b>Pabitra Jena</b>
+            <p>Backend Developer</p>
+            <p>Database and server-side expert</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+# Contact Page
+def show_contact_page():
     st.subheader("Contact Us")
     
     # Project Manager Contact Cards
@@ -781,15 +755,57 @@ elif selected == "Contact":
                         
                         Please try again or contact us directly via WhatsApp/phone.
                         """)
-    
-    # Back to Home button in Contact page
-    if st.button("Back to Home", key="back_to_home"):
-        st.session_state.show_admin_login = False
-        st.experimental_rerun()
 
-# Floating WhatsApp button for mobile
-st.markdown("""
-<a href="https://wa.me/919876543210" class="floating-button" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-</a>
-""", unsafe_allow_html=True)
+# Main App Logic
+def main():
+    # Company Header
+    st.markdown('<div class="header">Orbt-Tech</div>', unsafe_allow_html=True)
+    st.markdown('<div class="subheader">Complete your final year projects with excellence</div>', unsafe_allow_html=True)
+
+    # Navigation Menu - only show if not in admin views
+    if not st.session_state.admin_logged_in and not st.session_state.show_admin_login:
+        selected = option_menu(
+            menu_title=None,
+            options=["Home", "Projects", "Team", "Contact"],
+            icons=["house", "folder", "people", "envelope"],
+            menu_icon="cast",
+            default_index=0,
+            orientation="horizontal",
+            styles={
+                "container": {"padding": "0!important", "background-color": "#F8F9FA"},
+                "icon": {"color": "#F72585", "font-size": "16px"},
+                "nav-link": {
+                    "font-size": "14px",
+                    "text-align": "center",
+                    "margin": "0px",
+                    "--hover-color": "#E9ECEF",
+                },
+                "nav-link-selected": {"background-color": "#7209B7"},
+            }
+        )
+        st.session_state.selected_menu = selected
+
+    # Page routing
+    if st.session_state.admin_logged_in:
+        admin_dashboard()
+    elif st.session_state.show_admin_login:
+        admin_login_page()
+    else:
+        if st.session_state.selected_menu == "Home":
+            show_home_page()
+        elif st.session_state.selected_menu == "Projects":
+            show_projects_page()
+        elif st.session_state.selected_menu == "Team":
+            show_team_page()
+        elif st.session_state.selected_menu == "Contact":
+            show_contact_page()
+
+    # Floating WhatsApp button for mobile
+    st.markdown("""
+    <a href="https://wa.me/919876543210" class="floating-button" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    """, unsafe_allow_html=True)
+
+if __name__ == "__main__":
+    main()
