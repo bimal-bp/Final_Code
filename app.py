@@ -26,14 +26,13 @@ init_session_state()
 # Generate random color for project cards
 def get_random_color():
     colors = [
-        "#FF6B6B", "#4CC9F0", "#7209B7", "#F72585", "#4361EE", 
-        "#3A0CA3", "#4895EF", "#3F37C9", "#560BAD", "#B5179E",
-        "#2EC4B6", "#E71D36", "#FF9F1C", "#011627", "#2EC4B6",
-        "#E8F1F2", "#1B98E0", "#247BA0", "#006494", "#13293D"
+        "#00B4D8", "#48CAE4", "#90E0EF", "#ADE8F4", "#CAF0F8",  # Sky blue shades
+        "#FF6B6B", "#4CC9F0", "#4361EE", "#3A0CA3", "#4895EF",
+        "#2EC4B6", "#E71D36", "#FF9F1C", "#011627", "#1B98E0"
     ]
     return random.choice(colors)
 
-# CSS styling with random color scheme
+# CSS styling with sky blue color scheme
 st.markdown(f"""
     <style>
     /* Base styles */
@@ -42,7 +41,7 @@ st.markdown(f"""
         text-align: center;
         margin-bottom: 1rem;
         color: white;
-        background-color: #FF6B6B;
+        background-color: #00B4D8;
         padding: 15px;
         border-radius: 10px;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -67,13 +66,13 @@ st.markdown(f"""
         border-radius: 8px;
         background-color: #F8F9FA;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        border-left: 4px solid #7209B7;
+        border-left: 4px solid #00B4D8;
     }}
     .contact-button {{
         display: block;
         margin: 15px auto;
         padding: 8px 16px;
-        background-color: #4361EE;
+        background-color: #00B4D8;
         color: white;
         border: none;
         border-radius: 5px;
@@ -83,7 +82,7 @@ st.markdown(f"""
         transition: all 0.3s;
     }}
     .contact-button:hover {{
-        background-color: #3A0CA3;
+        background-color: #0077B6;
         transform: scale(1.05);
     }}
     .github-badge {{
@@ -104,7 +103,7 @@ st.markdown(f"""
         border-radius: 8px;
         background-color: #E9ECEF;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        border-left: 4px solid #F72585;
+        border-left: 4px solid #0077B6;
     }}
     .job-button {{
         display: block;
@@ -149,7 +148,7 @@ st.markdown(f"""
         display: block;
         margin: 15px auto;
         padding: 10px 20px;
-        background-color: #7209B7;
+        background-color: #00B4D8;
         color: white !important;
         border-radius: 5px;
         cursor: pointer;
@@ -161,7 +160,7 @@ st.markdown(f"""
         text-decoration: none;
     }}
     .back-to-home:hover {{
-        background-color: #5A08A3;
+        background-color: #0077B6;
         transform: scale(1.05);
     }}
     
@@ -188,11 +187,13 @@ st.markdown(f"""
         }}
     }}
     
-    /* Form styling */
+    /* Form styling - Improved dropdown visibility */
     .stTextInput>div>div>input, 
     .stSelectbox>div>div>select,
     .stTextArea>div>div>textarea {{
         font-size: 14px !important;
+        color: #212529 !important;
+        background-color: white !important;
     }}
     .st-b7 {{
         background-color: #F8F9FA !important;
@@ -200,11 +201,11 @@ st.markdown(f"""
         padding: 8px;
     }}
     .st-c7 {{
-        color: #4361EE !important;
+        color: #00B4D8 !important;
         font-weight: bold;
     }}
     .stButton>button {{
-        background-color: #7209B7;
+        background-color: #00B4D8;
         color: white;
         border-radius: 5px;
         padding: 10px 20px;
@@ -214,7 +215,7 @@ st.markdown(f"""
         width: 100%;
     }}
     .stButton>button:hover {{
-        background-color: #5A08A3;
+        background-color: #0077B6;
     }}
     .whatsapp-button {{
         background-color: #25D366 !important;
@@ -225,7 +226,7 @@ st.markdown(f"""
         color: white !important;
     }}
     
-    /* Navigation menu colors */
+    /* Navigation menu colors - Changed to sky blue */
     .st-bx {{
         background-color: #F8F9FA !important;
     }}
@@ -233,12 +234,12 @@ st.markdown(f"""
         color: #495057 !important;
     }}
     .st-cz {{
-        background-color: #7209B7 !important;
+        background-color: #00B4D8 !important;
     }}
     
     /* Project cards */
     .card a {{
-        color: #4361EE !important;
+        color: #0077B6 !important;
         text-decoration: none;
         font-weight: bold;
     }}
@@ -248,50 +249,7 @@ st.markdown(f"""
     
     /* Floating WhatsApp button */
     .floating-button {{
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: #25D366;
-        color: white;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        text-align: center;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-    }}
-    @media screen and (min-width: 768px) {{
-        .floating-button {{
-            display: none;
-        }}
-    }}
-    
-    /* Admin table styling */
-    .dataframe {{
-        width: 100%;
-    }}
-    .dataframe th {{
-        background-color: #7209B7;
-        color: white;
-    }}
-    .dataframe tr:nth-child(even) {{
-        background-color: #F8F9FA;
-    }}
-    .dataframe tr:hover {{
-        background-color: #E9ECEF;
-    }}
-    </style>
-""", unsafe_allow_html=True)
-
-# Add Font Awesome for icons
-st.markdown("""
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-""", unsafe_allow_html=True)
-
+       
 # Database connection function
 def get_db_connection():
     try:
