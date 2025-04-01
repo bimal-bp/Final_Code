@@ -709,7 +709,7 @@ def show_contact_page():
                                 <li>We'll schedule a free consultation call</li>
                                 <li>You'll receive a project proposal with timeline and cost estimate</li>
                             </ol>
-                            <p>In the meantime, you can explore our <a href="#projects">project portfolio</a> or check our <a href="https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/" target="_blank">Career Path Finder</a>.</p>
+                            <p>In the meantime, you can explore our <a href="#projects">project portfolio</a>, check our <a href="https://github.com/your-org/your-repo" target="_blank">GitHub page</a>, or try our <a href="https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/" target="_blank">Career Path Finder</a>.</p>
                         </div>
                         """, unsafe_allow_html=True)
                     else:
