@@ -217,14 +217,6 @@ st.markdown(f"""
     .stButton>button:hover {{
         background-color: #0077B6;
     }}
-    .whatsapp-button {{
-        background-color: #25D366 !important;
-        color: white !important;
-    }}
-    .call-button {{
-        background-color: #34B7F1 !important;
-        color: white !important;
-    }}
     
     /* Navigation menu colors - Changed to sky blue */
     .st-bx {{
@@ -245,29 +237,6 @@ st.markdown(f"""
     }}
     .card a:hover {{
         text-decoration: underline;
-    }}
-    
-    /* Floating WhatsApp button */
-    .floating-button {{
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: #25D366;
-        color: white;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        text-align: center;
-        font-size: 30px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        z-index: 100;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }}
-    .floating-button:hover {{
-        background-color: #128C7E;
-        transform: scale(1.1);
     }}
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -671,13 +640,11 @@ def show_contact_page():
         <div class="manager-card">
             <b>Heema Samal (Project Manager)</b>
             <p>📞 <a href="tel:+919876543210">+91 98765 43210</a></p>
-
             <p>📧 <a href="mailto:heema.samal@orbt-tech.com">heema.samal@orbt-tech.com</a></p>
         </div>
         <div class="manager-card">
             <b>Jasmine Kartik (Project Coordinator)</b>
             <p>📞 <a href="tel:+919876543211">+91 98765 43211</a></p>
-
             <p>📧 <a href="mailto:jasmine.kartik@orbt-tech.com">jasmine.kartik@orbt-tech.com</a></p>
         </div>
     </div>
@@ -692,7 +659,7 @@ def show_contact_page():
             email = st.text_input("Email Address*", placeholder="Your email address")
             
         with col2:
-            mobile = st.text_input("Mobile Number*", placeholder="Your WhatsApp number")
+            mobile = st.text_input("Mobile Number*", placeholder="Your contact number")
             project_type = st.selectbox("Project Type*", 
                                      ["Select project type", "AI/ML", "Mobile App", "Web App", 
                                       "Data Science", "IoT", "Blockchain", "Other"],
@@ -749,7 +716,7 @@ def show_contact_page():
                         st.error("""
                         ❌ There was an error submitting your request.
                         
-                        Please try again or contact us directly via WhatsApp/phone.
+                        Please try again or contact us directly via phone or email.
                         """)
 
 # Main App Logic
@@ -795,13 +762,6 @@ def main():
             show_team_page()
         elif st.session_state.selected_menu == "Contact":
             show_contact_page()
-
-    # Floating WhatsApp button for mobile
-    st.markdown("""
-    <a href="https://wa.me/919876543210" class="floating-button" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-    """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
