@@ -2,6 +2,7 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 import psycopg2
 from psycopg2 import sql
+import random
 
 # Configure page
 st.set_page_config(
@@ -10,11 +11,21 @@ st.set_page_config(
     layout="wide"
 )
 
+# Generate random color for project cards
+def get_random_color():
+    colors = [
+        "#FF6B6B", "#4CC9F0", "#7209B7", "#F72585", "#4361EE", 
+        "#3A0CA3", "#4895EF", "#3F37C9", "#560BAD", "#B5179E",
+        "#2EC4B6", "#E71D36", "#FF9F1C", "#011627", "#2EC4B6",
+        "#E8F1F2", "#1B98E0", "#247BA0", "#006494", "#13293D"
+    ]
+    return random.choice(colors)
+
 # CSS styling with random color scheme
-st.markdown("""
+st.markdown(f"""
     <style>
     /* Base styles */
-    .header {
+    .header {{
         font-size: 2rem;
         text-align: center;
         margin-bottom: 1rem;
@@ -23,30 +34,30 @@ st.markdown("""
         padding: 15px;
         border-radius: 10px;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    }
-    .subheader {
+    }}
+    .subheader {{
         text-align:center; 
         margin-bottom:20px;
         font-size: 1rem;
         color: #6C757D;
-    }
-    .card {
+    }}
+    .card {{
         padding: 12px;
         margin: 8px 0;
         border-radius: 8px;
         background-color: #F8F9FA;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        border-left: 4px solid #4CC9F0;
-    }
-    .team-card {
+        border-left: 4px solid {get_random_color()};
+    }}
+    .team-card {{
         padding: 12px;
         margin: 8px 0;
         border-radius: 8px;
         background-color: #F8F9FA;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         border-left: 4px solid #7209B7;
-    }
-    .contact-button {
+    }}
+    .contact-button {{
         display: block;
         margin: 15px auto;
         padding: 8px 16px;
@@ -58,12 +69,12 @@ st.markdown("""
         font-size: 14px;
         text-align: center;
         transition: all 0.3s;
-    }
-    .contact-button:hover {
+    }}
+    .contact-button:hover {{
         background-color: #3A0CA3;
         transform: scale(1.05);
-    }
-    .github-badge {
+    }}
+    .github-badge {{
         display: inline-block;
         background-color: #212529;
         color: white !important;
@@ -74,16 +85,16 @@ st.markdown("""
         font-weight: bold;
         font-size: 0.9rem;
         border: 1px solid #495057;
-    }
-    .manager-card {
+    }}
+    .manager-card {{
         padding: 12px;
         margin: 10px 0;
         border-radius: 8px;
         background-color: #E9ECEF;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         border-left: 4px solid #F72585;
-    }
-    .job-button {
+    }}
+    .job-button {{
         display: block;
         margin: 15px auto;
         padding: 10px 20px;
@@ -97,52 +108,52 @@ st.markdown("""
         transition: all 0.3s;
         width: 80%;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .job-button:hover {
+    }}
+    .job-button:hover {{
         background-color: #F8F9FA;
         transform: scale(1.05);
         border-color: #ADB5BD;
-    }
+    }}
     
     /* Mobile optimizations */
-    @media screen and (max-width: 768px) {
-        .header {
+    @media screen and (max-width: 768px) {{
+        .header {{
             font-size: 1.5rem;
             padding: 10px;
-        }
-        .subheader {
+        }}
+        .subheader {{
             font-size: 0.9rem;
-        }
-        .card, .team-card, .manager-card {
+        }}
+        .card, .team-card, .manager-card {{
             padding: 10px;
             margin: 6px 0;
-        }
-        .stButton>button {
+        }}
+        .stButton>button {{
             padding: 8px 16px;
             font-size: 14px;
-        }
+        }}
         /* Make columns stack on mobile */
-        .st-cq {
+        .st-cq {{
             flex-direction: column;
-        }
-    }
+        }}
+    }}
     
     /* Form styling */
     .stTextInput>div>div>input, 
     .stSelectbox>div>div>select,
-    .stTextArea>div>div>textarea {
+    .stTextArea>div>div>textarea {{
         font-size: 14px !important;
-    }
-    .st-b7 {
+    }}
+    .st-b7 {{
         background-color: #F8F9FA !important;
         border-radius: 10px;
         padding: 8px;
-    }
-    .st-c7 {
+    }}
+    .st-c7 {{
         color: #4361EE !important;
         font-weight: bold;
-    }
-    .stButton>button {
+    }}
+    .stButton>button {{
         background-color: #7209B7;
         color: white;
         border-radius: 5px;
@@ -151,42 +162,42 @@ st.markdown("""
         border: none;
         transition: all 0.3s;
         width: 100%;
-    }
-    .stButton>button:hover {
+    }}
+    .stButton>button:hover {{
         background-color: #5A08A3;
-    }
-    .whatsapp-button {
+    }}
+    .whatsapp-button {{
         background-color: #25D366 !important;
         color: white !important;
-    }
-    .call-button {
+    }}
+    .call-button {{
         background-color: #34B7F1 !important;
         color: white !important;
-    }
+    }}
     
     /* Navigation menu colors */
-    .st-bx {
+    .st-bx {{
         background-color: #F8F9FA !important;
-    }
-    .st-c0 {
+    }}
+    .st-c0 {{
         color: #495057 !important;
-    }
-    .st-cz {
+    }}
+    .st-cz {{
         background-color: #7209B7 !important;
-    }
+    }}
     
     /* Project cards */
-    .card a {
+    .card a {{
         color: #4361EE !important;
         text-decoration: none;
         font-weight: bold;
-    }
-    .card a:hover {
+    }}
+    .card a:hover {{
         text-decoration: underline;
-    }
+    }}
     
     /* Floating WhatsApp button */
-    .floating-button {
+    .floating-button {{
         position: fixed;
         bottom: 20px;
         right: 20px;
@@ -202,12 +213,12 @@ st.markdown("""
         align-items: center;
         justify-content: center;
         font-size: 24px;
-    }
-    @media screen and (min-width: 768px) {
-        .floating-button {
+    }}
+    @media screen and (min-width: 768px) {{
+        .floating-button {{
             display: none;
-        }
-    }
+        }}
+    }}
     </style>
 """, unsafe_allow_html=True)
 
@@ -327,8 +338,8 @@ if selected == "Home":
     col1, col2 = st.columns(2)
     
     with col1:
-        st.markdown("""
-        <div class="card">
+        st.markdown(f"""
+        <div class="card" style="border-left-color: {get_random_color()}">
             <b>AI/ML Projects</b>
             <ul style="padding-left: 20px;">
                 <li>Predictive Analytics Projects</li>
@@ -343,8 +354,8 @@ if selected == "Home":
         """, unsafe_allow_html=True)
     
     with col2:
-        st.markdown("""
-        <div class="card">
+        st.markdown(f"""
+        <div class="card" style="border-left-color: {get_random_color()}">
             <b>Software Development</b>
             <ul style="padding-left: 20px;">
                 <li>Mobile Applications (Android/iOS)</li>
@@ -357,8 +368,8 @@ if selected == "Home":
         """, unsafe_allow_html=True)
     
     st.subheader("Why Choose Us?")
-    st.markdown("""
-    <div class="card">
+    st.markdown(f"""
+    <div class="card" style="border-left-color: {get_random_color()}">
         <ul style="padding-left: 20px;">
             <li>100% Project Completion</li>
             <li>Documentation Support</li>
@@ -376,24 +387,24 @@ elif selected == "Team":
     col1, col2 = st.columns(2)
     
     with col1:
-        st.markdown("""
-        <div class="team-card">
+        st.markdown(f"""
+        <div class="team-card" style="border-left-color: {get_random_color()}">
             <b>Bimal Patra</b>
             <p>AI/ML Specialist</p>
             <p>Expert in machine learning and data science</p>
         </div>
         """, unsafe_allow_html=True)
         
-        st.markdown("""
-        <div class="team-card">
+        st.markdown(f"""
+        <div class="team-card" style="border-left-color: {get_random_color()}">
             <b>Rakesh Behera</b>
             <p>Mobile Developer</p>
             <p>Skilled in Android, iOS and cross-platform development</p>
         </div>
         """, unsafe_allow_html=True)
         
-        st.markdown("""
-        <div class="team-card">
+        st.markdown(f"""
+        <div class="team-card" style="border-left-color: {get_random_color()}">
             <b>Sravan Sahoo</b>
             <p>Web Developer</p>
             <p>Full stack developer with modern frameworks</p>
@@ -401,32 +412,32 @@ elif selected == "Team":
         """, unsafe_allow_html=True)
     
     with col2:
-        st.markdown("""
-        <div class="team-card">
+        st.markdown(f"""
+        <div class="team-card" style="border-left-color: {get_random_color()}">
             <b>Heema Samal</b>
             <p>Project Manager</p>
             <p>Ensuring smooth project execution</p>
         </div>
         """, unsafe_allow_html=True)
         
-        st.markdown("""
-        <div class="team-card">
+        st.markdown(f"""
+        <div class="team-card" style="border-left-color: {get_random_color()}">
             <b>Ramhari Sasmal</b>
             <p>Data Scientist</p>
             <p>Specialized in predictive analytics</p>
         </div>
         """, unsafe_allow_html=True)
         
-        st.markdown("""
-        <div class="team-card">
+        st.markdown(f"""
+        <div class="team-card" style="border-left-color: {get_random_color()}">
             <b>Mantu Gouda</b>
             <p>ML Developer</p>
             <p>Creating intuitive user interfaces</p>
         </div>
         """, unsafe_allow_html=True)
         
-        st.markdown("""
-        <div class="team-card">
+        st.markdown(f"""
+        <div class="team-card" style="border-left-color: {get_random_color()}">
             <b>Pabitra Jena</b>
             <p>Backend Developer</p>
             <p>Database and server-side expert</p>
@@ -445,8 +456,8 @@ elif selected == "Projects":
     </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("""
-    <div class="card">
+    st.markdown(f"""
+    <div class="card" style="border-left-color: {get_random_color()}">
         <b>Right Education for Perfect Job</b>
         <p>ORBT-LeARN</p>
         <p>This app will help you choosing your right education path for your successful job career</p>
@@ -455,40 +466,40 @@ elif selected == "Projects":
     </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("""
-    <div class="card">
+    st.markdown(f"""
+    <div class="card" style="border-left-color: {get_random_color()}">
         <b>Bank Customer Analysis</b>
         <p>Predictive analytics for banking sector</p>
         <p><a href="https://bankattritionprojects-tymyqz4hyygziox37gfttt.streamlit.app/" target="_blank">View Project</a></p>
     </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("""
-    <div class="card">
+    st.markdown(f"""
+    <div class="card" style="border-left-color: {get_random_color()}">
         <b>Crime Spot Prediction</b>
         <p>AI system for predicting crime hotspots</p>
         <p><a href="https://crmiespotpredict-zi269clpbwhknp8d3cqqex.streamlit.app/" target="_blank">View Project</a></p>
     </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("""
-    <div class="card">
+    st.markdown(f"""
+    <div class="card" style="border-left-color: {get_random_color()}">
         <b>Legal App</b>
         <p>Legal assistance and documentation platform</p>
         <p><a href="https://legal-app-6ovymevnmlyrcasclwtt8u.streamlit.app/" target="_blank">View Project</a></p>
     </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("""
-    <div class="card">
+    st.markdown(f"""
+    <div class="card" style="border-left-color: {get_random_color()}">
         <b>Student Performance Tracker</b>
         <p>Educational analytics dashboard</p>
         <p><a href="https://studentperformance-fvqesnqvjzxvjcpx78zheo.streamlit.app/" target="_blank">View Project</a></p>
     </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("""
-    <div class="card">
+    st.markdown(f"""
+    <div class="card" style="border-left-color: {get_random_color()}">
         <b>Water Quality Analysis</b>
         <p>Water quality monitoring system</p>
         <p><a href="https://waterqualityproject-fjfw7dmgbjgbzdestmpdsi.streamlit.app/" target="_blank">View Project</a></p>
