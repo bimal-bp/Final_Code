@@ -19,7 +19,7 @@ st.markdown("""
         text-align: center;
         margin-bottom: 1rem;
         color: white;
-        background-color: #FF6B6B;  /* Coral red */
+        background-color: #FF6B6B;
         padding: 15px;
         border-radius: 10px;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -28,15 +28,15 @@ st.markdown("""
         text-align:center; 
         margin-bottom:20px;
         font-size: 1rem;
-        color: #6C757D;  /* Gray */
+        color: #6C757D;
     }
     .card {
         padding: 12px;
         margin: 8px 0;
         border-radius: 8px;
-        background-color: #F8F9FA;  /* Light gray */
+        background-color: #F8F9FA;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        border-left: 4px solid #4CC9F0;  /* Sky blue */
+        border-left: 4px solid #4CC9F0;
     }
     .team-card {
         padding: 12px;
@@ -44,13 +44,13 @@ st.markdown("""
         border-radius: 8px;
         background-color: #F8F9FA;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        border-left: 4px solid #7209B7;  /* Purple */
+        border-left: 4px solid #7209B7;
     }
     .contact-button {
         display: block;
         margin: 15px auto;
         padding: 8px 16px;
-        background-color: #4361EE;  /* Royal blue */
+        background-color: #4361EE;
         color: white;
         border: none;
         border-radius: 5px;
@@ -60,12 +60,12 @@ st.markdown("""
         transition: all 0.3s;
     }
     .contact-button:hover {
-        background-color: #3A0CA3;  /* Dark blue */
+        background-color: #3A0CA3;
         transform: scale(1.05);
     }
     .github-badge {
         display: inline-block;
-        background-color: #212529;  /* Dark gray */
+        background-color: #212529;
         color: white !important;
         padding: 6px 12px;
         border-radius: 5px;
@@ -81,7 +81,7 @@ st.markdown("""
         border-radius: 8px;
         background-color: #E9ECEF;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        border-left: 4px solid #F72585;  /* Pink */
+        border-left: 4px solid #F72585;
     }
     .job-button {
         display: block;
@@ -139,11 +139,11 @@ st.markdown("""
         padding: 8px;
     }
     .st-c7 {
-        color: #4361EE !important;  /* Royal blue */
+        color: #4361EE !important;
         font-weight: bold;
     }
     .stButton>button {
-        background-color: #7209B7;  /* Purple */
+        background-color: #7209B7;
         color: white;
         border-radius: 5px;
         padding: 10px 20px;
@@ -172,12 +172,12 @@ st.markdown("""
         color: #495057 !important;
     }
     .st-cz {
-        background-color: #7209B7 !important;  /* Purple */
+        background-color: #7209B7 !important;
     }
     
     /* Project cards */
     .card a {
-        color: #4361EE !important;  /* Royal blue */
+        color: #4361EE !important;
         text-decoration: none;
         font-weight: bold;
     }
@@ -230,14 +230,14 @@ selected = option_menu(
     orientation="horizontal",
     styles={
         "container": {"padding": "0!important", "background-color": "#F8F9FA"},
-        "icon": {"color": "#F72585", "font-size": "16px"},  /* Pink */
+        "icon": {"color": "#F72585", "font-size": "16px"},
         "nav-link": {
             "font-size": "14px",
             "text-align": "center",
             "margin": "0px",
             "--hover-color": "#E9ECEF",
         },
-        "nav-link-selected": {"background-color": "#7209B7"},  /* Purple */
+        "nav-link-selected": {"background-color": "#7209B7"},
     }
 )
 
@@ -538,21 +538,25 @@ elif selected == "Contact":
                 st.error("Please fill all required fields (marked with *)")
             else:
                 if insert_contact(name, email, mobile, project_type, project_description, message):
-                    st.success("Thank you for contacting us! We'll get back to you soon.")
-                    # Show contact options again after submission
-                    st.markdown("""
-                    <div style="margin-top: 20px; text-align: center;">
-                        <p>For immediate assistance, please contact:</p>
-                        <p>📞 <a href="tel:+919876543210">+91 98765 43210</a></p>
-                        <p>📱 <a href="https://wa.me/919876543210" target="_blank">WhatsApp</a></p>
-                    </div>
-                    """, unsafe_allow_html=True)
+                                        st.success("Thank you for contacting us! Our team will get back to you within 24 hours.")
                 else:
-                    st.error("There was an error submitting your form. Please try again or contact us directly.")
+                    st.error("There was an error submitting your request. Please try again or contact us directly.")
 
-# Add WhatsApp floating button for mobile users
+# Floating WhatsApp button for mobile
 st.markdown("""
 <a href="https://wa.me/919876543210" class="floating-button" target="_blank">
     <i class="fab fa-whatsapp"></i>
 </a>
+""", unsafe_allow_html=True)
+
+# Footer
+st.markdown("""
+<div style="text-align: center; margin-top: 50px; padding: 20px; color: #6C757D; font-size: 0.9rem;">
+    <p>© 2023 Orbt-Tech. All rights reserved.</p>
+    <p style="margin-top: 10px;">
+        <a href="https://www.linkedin.com/company/orbt-tech" target="_blank" style="color: #6C757D; margin: 0 10px;"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/bimal-bp" target="_blank" style="color: #6C757D; margin: 0 10px;"><i class="fab fa-github"></i></a>
+        <a href="https://twitter.com/orbt_tech" target="_blank" style="color: #6C757D; margin: 0 10px;"><i class="fab fa-twitter"></i></a>
+    </p>
+</div>
 """, unsafe_allow_html=True)
