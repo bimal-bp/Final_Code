@@ -640,12 +640,12 @@ def show_contact_page():
         <div class="manager-card">
             <b>Reema Samal (Project Manager)</b>
             <p>📞 <a href="tel:+919876543210">+91 98765 43210</a></p>
-            <p>📧 <a href="mailto:heema.samal@orbt-learn.com">heema.samal@orbt-tech.com</a></p>
+            <p>📧 <a href="mailto:heema.samal@orbt-learn.com">heema.samal@orbt-learn.com</a></p>
         </div>
         <div class="manager-card">
             <b>Jasmine Kartik (Project Coordinator)</b>
             <p>📞 <a href="tel:+919876543211">+91 98765 43211</a></p>
-            <p>📧 <a href="mailto:jasmine.kartik@orbt-learn.com">jasmine.kartik@orbt-tech.com</a></p>
+            <p>📧 <a href="mailto:jasmine.kartik@orbt-learn.com">jasmine.kartik@orbt-learn.com</a></p>
         </div>
     </div>
     """, unsafe_allow_html=True)
