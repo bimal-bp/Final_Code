@@ -482,6 +482,7 @@ def admin_dashboard():
                     cur.execute("TRUNCATE TABLE contacts RESTART IDENTITY")
                     conn.commit()
                     st.success("All submissions have been deleted")
+                    st.experimental_rerun()
                 except Exception as e:
                     st.error(f"Error deleting data: {e}")
                 finally:
@@ -493,6 +494,7 @@ def admin_dashboard():
     if st.button("Logout"):
         st.session_state.admin_logged_in = False
         st.session_state.show_admin_login = False
+        st.experimental_rerun()
 
 # Page Content
 if st.session_state.admin_logged_in:
@@ -506,15 +508,6 @@ elif selected == "Home":
         <a href="https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/" class="job-button" target="_blank">
             <i class="fas fa-briefcase"></i> Find Your Perfect Job Career Path
         </a>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # Admin Button at the bottom of the page
-    st.markdown("""
-    <div style="text-align: center; margin-top: 50px;">
-        <button class="admin-button" onclick="window.location.href='?show_admin_login=true'; return false;">
-            <i class="fas fa-lock"></i> Admin Login
-        </button>
     </div>
     """, unsafe_allow_html=True)
     
@@ -565,6 +558,11 @@ elif selected == "Home":
         </ul>
     </div>
     """, unsafe_allow_html=True)
+    
+    # Admin Button at the bottom of the page
+    if st.button("Admin Login", key="admin_button"):
+        st.session_state.show_admin_login = True
+        st.experimental_rerun()
     
 elif selected == "Team":
     st.subheader("Our Team")
@@ -782,7 +780,6 @@ elif selected == "Contact":
                         Please try again or contact us directly via WhatsApp/phone.
                         """)
 
-# Check URL parameters for admin login
-query_params = st.experimental_get_query_params()
-if "show_admin_login" in query_params:
-    st.session_state.show_admin_login = True
+# Check if admin login should be shown (using session state instead of query params)
+if st.session_state.show_admin_login:
+    st.experimental_rerun()
