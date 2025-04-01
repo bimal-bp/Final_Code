@@ -675,7 +675,7 @@ def show_contact_page():
         message = st.text_area("Additional Information", 
                              placeholder="Any other information you'd like to share\n"
                                         "- Reference projects\n"
-                                        "- Budget constraints\n"
+                                        "- Share your Budget \n"
                                         "- Special requirements",
                              height=100)
         
