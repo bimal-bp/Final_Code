@@ -638,7 +638,7 @@ def show_contact_page():
     <div style="margin-bottom: 20px;">
         <h4 style="text-align: center;">Directly Contact Our Project Managers</h4>
         <div class="manager-card">
-            <b>Heema Samal (Project Manager)</b>
+            <b>Reema Samal (Project Manager)</b>
             <p>📞 <a href="tel:+919876543210">+91 98765 43210</a></p>
             <p>📧 <a href="mailto:heema.samal@orbt-tech.com">heema.samal@orbt-tech.com</a></p>
         </div>
