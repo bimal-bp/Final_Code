@@ -722,7 +722,7 @@ def show_contact_page():
 # Main App Logic
 def main():
     # Company Header
-    st.markdown('<div class="header">Orbt-Tech</div>', unsafe_allow_html=True)
+    st.markdown('<div class="header">Orbt-Learn</div>', unsafe_allow_html=True)
     st.markdown('<div class="subheader">Complete your final year projects with excellence</div>', unsafe_allow_html=True)
 
     # Navigation Menu - only show if not in admin views
