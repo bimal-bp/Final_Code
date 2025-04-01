@@ -3,6 +3,7 @@ from streamlit_option_menu import option_menu
 import psycopg2
 from psycopg2 import sql
 import random
+import pandas as pd
 
 # Configure page
 st.set_page_config(
@@ -327,9 +328,7 @@ def init_db():
     if conn:
         try:
             cur = conn.cursor()
-            # Drop existing table if it has old schema
-            cur.execute("DROP TABLE IF EXISTS contacts")
-            # Create new table with updated schema
+            # Create new table if not exists
             cur.execute("""
                 CREATE TABLE IF NOT EXISTS contacts (
                     id SERIAL PRIMARY KEY,
@@ -393,8 +392,14 @@ def get_all_contacts():
 # Initialize database
 init_db()
 
+# Initialize session state
+if 'admin_logged_in' not in st.session_state:
+    st.session_state.admin_logged_in = False
+if 'show_admin_login' not in st.session_state:
+    st.session_state.show_admin_login = False
+
 # Admin login page
-def admin_page():
+def admin_login_page():
     st.title("Admin Login")
     
     with st.form("admin_login"):
@@ -406,15 +411,13 @@ def admin_page():
         if submitted:
             if admin_id == "orbt-tech" and password == "orbtrbi@9":
                 st.session_state.admin_logged_in = True
+                st.session_state.show_admin_login = False
                 st.success("Login successful!")
-                st.experimental_rerun()
             else:
                 st.error("Invalid credentials")
     
-    # Back to home button
-    if st.button("Back to Home", key="admin_back_home"):
-        st.session_state.page = "home"
-        st.experimental_rerun()
+    if st.button("Back to Home"):
+        st.session_state.show_admin_login = False
 
 # Admin dashboard
 def admin_dashboard():
@@ -423,27 +426,79 @@ def admin_dashboard():
     
     columns, data = get_all_contacts()
     if columns and data:
-        st.dataframe(data, use_container_width=True)
+        df = pd.DataFrame(data, columns=columns)
+        
+        # Add filtering options
+        st.subheader("Filter Submissions")
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            filter_project = st.selectbox(
+                "Filter by Project Type",
+                ["All"] + sorted(df['project_type'].unique().tolist())
+            )
+        
+        with col2:
+            date_sort = st.selectbox(
+                "Sort by Date",
+                ["Newest First", "Oldest First"]
+            )
+        
+        with col3:
+            search_term = st.text_input("Search in Messages")
+        
+        # Apply filters
+        if filter_project != "All":
+            df = df[df['project_type'] == filter_project]
+        
+        if search_term:
+            df = df[df['project_description'].str.contains(search_term, case=False) | 
+                   df['message'].str.contains(search_term, case=False, na=False)]
+        
+        if date_sort == "Newest First":
+            df = df.sort_values('created_at', ascending=False)
+        else:
+            df = df.sort_values('created_at', ascending=True)
+        
+        # Show statistics
+        st.markdown(f"""
+        <div class="card" style="border-left-color: #7209B7">
+            <b>📈 Submission Statistics</b>
+            <p>Total Submissions: {len(df)}</p>
+            <p>Last Submission: {df['created_at'].max()}</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Display filtered data
+        st.dataframe(df, use_container_width=True, height=600)
+        
+        # Add bulk actions
+        st.subheader("Bulk Actions")
+        if st.button("Delete All Submissions"):
+            conn = get_db_connection()
+            if conn:
+                try:
+                    cur = conn.cursor()
+                    cur.execute("TRUNCATE TABLE contacts RESTART IDENTITY")
+                    conn.commit()
+                    st.success("All submissions have been deleted")
+                except Exception as e:
+                    st.error(f"Error deleting data: {e}")
+                finally:
+                    if conn:
+                        conn.close()
     else:
-        st.warning("No contact submissions found")
+        st.warning("No contact submissions found in the database")
     
-    # Back to home button
-    if st.button("Back to Home", key="admin_dash_back_home"):
+    if st.button("Logout"):
         st.session_state.admin_logged_in = False
-        st.session_state.page = "home"
-        st.experimental_rerun()
+        st.session_state.show_admin_login = False
 
 # Page Content
-if 'page' not in st.session_state:
-    st.session_state.page = "home"
-    
-if 'admin_logged_in' not in st.session_state:
-    st.session_state.admin_logged_in = False
-
-if st.session_state.page == "admin":
-    admin_page()
-elif st.session_state.admin_logged_in:
+if st.session_state.admin_logged_in:
     admin_dashboard()
+elif st.session_state.show_admin_login:
+    admin_login_page()
 elif selected == "Home":
     # Job Career Button
     st.markdown("""
@@ -454,12 +509,12 @@ elif selected == "Home":
     </div>
     """, unsafe_allow_html=True)
     
-    # Admin Button
+    # Admin Button at the bottom of the page
     st.markdown("""
-    <div style="text-align: center; margin-bottom: 30px;">
-        <a href="#" class="admin-button" onclick="window.location.href='?page=admin'; return false;">
+    <div style="text-align: center; margin-top: 50px;">
+        <button class="admin-button" onclick="window.location.href='?show_admin_login=true'; return false;">
             <i class="fas fa-lock"></i> Admin Login
-        </a>
+        </button>
     </div>
     """, unsafe_allow_html=True)
     
@@ -635,7 +690,6 @@ elif selected == "Projects":
         <p><a href="https://waterqualityproject-fjfw7dmgbjgbzdestmpdsi.streamlit.app/" target="_blank">View Project</a></p>
     </div>
     """, unsafe_allow_html=True)
-# ... [Previous code remains the same until the Contact section] ...
 
 elif selected == "Contact":
     st.subheader("Contact Us")
@@ -710,10 +764,6 @@ elif selected == "Contact":
                         
                         st.balloons()
                         
-                        if st.button("Back to Home", key="contact_success_back"):
-                            st.session_state.page = "home"
-                            st.experimental_rerun()
-                        
                         st.markdown("""
                         <div class="card" style="margin-top: 20px; border-left-color: #4CC9F0">
                             <h4>Next Steps:</h4>
@@ -731,118 +781,8 @@ elif selected == "Contact":
                         
                         Please try again or contact us directly via WhatsApp/phone.
                         """)
-    
-    # Add a separate back button outside the form
-    if st.button("Back to Home", key="contact_back_home"):
-        st.session_state.page = "home"
-        st.experimental_rerun()
 
-# Enhanced Admin Dashboard
-if st.session_state.admin_logged_in:
-    st.sidebar.title("Admin Panel")
-    st.sidebar.markdown(f"Logged in as: **Orbt-Tech Admin**")
-    
-    if st.sidebar.button("🔄 Refresh Data"):
-        st.experimental_rerun()
-    
-    if st.sidebar.button("📤 Export to CSV"):
-        columns, data = get_all_contacts()
-        if columns and data:
-            import pandas as pd
-            df = pd.DataFrame(data, columns=columns)
-            csv = df.to_csv(index=False)
-            st.sidebar.download_button(
-                label="Download CSV",
-                data=csv,
-                file_name="orbt_tech_contacts.csv",
-                mime="text/csv"
-            )
-    
-    if st.sidebar.button("🚪 Logout"):
-        st.session_state.admin_logged_in = False
-        st.session_state.page = "home"
-        st.experimental_rerun()
-    
-    st.title("📊 Contact Form Submissions")
-    st.markdown("""
-    <style>
-    .stDataFrame {
-        font-size: 14px;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-    
-    columns, data = get_all_contacts()
-    if columns and data:
-        import pandas as pd
-        df = pd.DataFrame(data, columns=columns)
-        
-        # Add filtering options
-        st.subheader("Filter Submissions")
-        col1, col2, col3 = st.columns(3)
-        
-        with col1:
-            filter_project = st.selectbox(
-                "Filter by Project Type",
-                ["All"] + sorted(df['project_type'].unique().tolist())
-            )
-        
-        with col2:
-            date_sort = st.selectbox(
-                "Sort by Date",
-                ["Newest First", "Oldest First"]
-            )
-        
-        with col3:
-            search_term = st.text_input("Search in Messages")
-        
-        # Apply filters
-        if filter_project != "All":
-            df = df[df['project_type'] == filter_project]
-        
-        if search_term:
-            df = df[df['project_description'].str.contains(search_term, case=False) | 
-                   df['message'].str.contains(search_term, case=False, na=False)]
-        
-        if date_sort == "Newest First":
-            df = df.sort_values('created_at', ascending=False)
-        else:
-            df = df.sort_values('created_at', ascending=True)
-        
-        # Show statistics
-        st.markdown(f"""
-        <div class="card" style="border-left-color: #7209B7">
-            <b>📈 Submission Statistics</b>
-            <p>Total Submissions: {len(df)}</p>
-            <p>Last Submission: {df['created_at'].max()}</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Display filtered data
-        st.dataframe(df, use_container_width=True, height=600)
-        
-        # Add bulk actions
-        st.subheader("Bulk Actions")
-        if st.button("Delete All Submissions"):
-            if st.warning("Are you sure you want to delete ALL submissions? This cannot be undone!"):
-                conn = get_db_connection()
-                if conn:
-                    try:
-                        cur = conn.cursor()
-                        cur.execute("TRUNCATE TABLE contacts RESTART IDENTITY")
-                        conn.commit()
-                        st.success("All submissions have been deleted")
-                        st.experimental_rerun()
-                    except Exception as e:
-                        st.error(f"Error deleting data: {e}")
-                    finally:
-                        if conn:
-                            conn.close()
-    else:
-        st.warning("No contact submissions found in the database")
-
-# ... [Rest of the code remains the same] ... , AttributeError: This app has encountered an error. The original error message is redacted to prevent data leaks. Full error details have been recorded in the logs (if you're on Streamlit Cloud, click on 'Manage app' in the lower right of your app).
-Traceback:
-File "/mount/src/final_code/app.py", line 738, in <module>
-    st.experimental_rerun()
-    ^^^^^^^^^^^^^^^^^^^^^the admin button keep it beloe of the page and that alos not working check it and check this one also  correctl;y provide th codes
+# Check URL parameters for admin login
+query_params = st.experimental_get_query_params()
+if "show_admin_login" in query_params:
+    st.session_state.show_admin_login = True
