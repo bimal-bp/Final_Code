@@ -12,6 +12,12 @@ st.set_page_config(
     layout="wide"
 )
 
+# Initialize session state at the very beginning
+if 'admin_logged_in' not in st.session_state:
+    st.session_state.admin_logged_in = False
+if 'show_admin_login' not in st.session_state:
+    st.session_state.show_admin_login = False
+
 # Generate random color for project cards
 def get_random_color():
     colors = [
