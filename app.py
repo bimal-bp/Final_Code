@@ -1,4 +1,3 @@
-
 import streamlit as st
 from streamlit_option_menu import option_menu
 import psycopg2
@@ -115,6 +114,44 @@ st.markdown(f"""
         transform: scale(1.05);
         border-color: #ADB5BD;
     }}
+    .admin-button {{
+        display: block;
+        margin: 15px auto;
+        padding: 10px 20px;
+        background-color: #212529;
+        color: white !important;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        text-align: center;
+        transition: all 0.3s;
+        width: 80%;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        text-decoration: none;
+    }}
+    .admin-button:hover {{
+        background-color: #495057;
+        transform: scale(1.05);
+    }}
+    .back-to-home {{
+        display: block;
+        margin: 15px auto;
+        padding: 10px 20px;
+        background-color: #7209B7;
+        color: white !important;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        text-align: center;
+        transition: all 0.3s;
+        width: 80%;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        text-decoration: none;
+    }}
+    .back-to-home:hover {{
+        background-color: #5A08A3;
+        transform: scale(1.05);
+    }}
     
     /* Mobile optimizations */
     @media screen and (max-width: 768px) {{
@@ -220,6 +257,21 @@ st.markdown(f"""
             display: none;
         }}
     }}
+    
+    /* Admin table styling */
+    .dataframe {{
+        width: 100%;
+    }}
+    .dataframe th {{
+        background-color: #7209B7;
+        color: white;
+    }}
+    .dataframe tr:nth-child(even) {{
+        background-color: #F8F9FA;
+    }}
+    .dataframe tr:hover {{
+        background-color: #E9ECEF;
+    }}
     </style>
 """, unsafe_allow_html=True)
 
@@ -320,16 +372,93 @@ def insert_contact(name, email, mobile, project_type, project_description, messa
                 conn.close()
     return False
 
+# Get all contacts from database
+def get_all_contacts():
+    conn = get_db_connection()
+    if conn:
+        try:
+            cur = conn.cursor()
+            cur.execute("SELECT * FROM contacts ORDER BY created_at DESC")
+            columns = [desc[0] for desc in cur.description]
+            data = cur.fetchall()
+            return columns, data
+        except Exception as e:
+            st.error(f"Error fetching data: {e}")
+            return None, None
+        finally:
+            if conn:
+                conn.close()
+    return None, None
+
 # Initialize database
 init_db()
 
+# Admin login page
+def admin_page():
+    st.title("Admin Login")
+    
+    with st.form("admin_login"):
+        admin_id = st.text_input("Admin ID", placeholder="Enter admin ID")
+        password = st.text_input("Password", type="password", placeholder="Enter password")
+        
+        submitted = st.form_submit_button("Login")
+        
+        if submitted:
+            if admin_id == "orbt-tech" and password == "orbtrbi@9":
+                st.session_state.admin_logged_in = True
+                st.success("Login successful!")
+                st.experimental_rerun()
+            else:
+                st.error("Invalid credentials")
+    
+    # Back to home button
+    if st.button("Back to Home", key="admin_back_home"):
+        st.session_state.page = "home"
+        st.experimental_rerun()
+
+# Admin dashboard
+def admin_dashboard():
+    st.title("Admin Dashboard")
+    st.subheader("Contact Form Submissions")
+    
+    columns, data = get_all_contacts()
+    if columns and data:
+        st.dataframe(data, use_container_width=True)
+    else:
+        st.warning("No contact submissions found")
+    
+    # Back to home button
+    if st.button("Back to Home", key="admin_dash_back_home"):
+        st.session_state.admin_logged_in = False
+        st.session_state.page = "home"
+        st.experimental_rerun()
+
 # Page Content
-if selected == "Home":
+if 'page' not in st.session_state:
+    st.session_state.page = "home"
+    
+if 'admin_logged_in' not in st.session_state:
+    st.session_state.admin_logged_in = False
+
+if st.session_state.page == "admin":
+    admin_page()
+elif st.session_state.admin_logged_in:
+    admin_dashboard()
+elif selected == "Home":
     # Job Career Button
     st.markdown("""
     <div style="text-align: center; margin-bottom: 30px;">
         <a href="https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/" class="job-button" target="_blank">
             <i class="fas fa-briefcase"></i> Find Your Perfect Job Career Path
+        </a>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Admin Button
+    st.markdown("""
+    <div style="text-align: center; margin-bottom: 30px;">
+        <a href="#" class="admin-button" onclick="window.location.href='?page=admin'; return false;">
+            <i class="fas fa-lock"></i> Admin Login
         </a>
     </div>
     """, unsafe_allow_html=True)
@@ -506,7 +635,8 @@ elif selected == "Projects":
         <p><a href="https://waterqualityproject-fjfw7dmgbjgbzdestmpdsi.streamlit.app/" target="_blank">View Project</a></p>
     </div>
     """, unsafe_allow_html=True)
-    
+# ... [Previous code remains the same until the Contact section] ...
+
 elif selected == "Contact":
     st.subheader("Contact Us")
     
@@ -518,57 +648,201 @@ elif selected == "Contact":
             <b>Heema Samal (Project Manager)</b>
             <p>📞 <a href="tel:+919876543210">+91 98765 43210</a></p>
             <p>📱 <a href="https://wa.me/919876543210" target="_blank">WhatsApp</a></p>
+            <p>📧 <a href="mailto:heema.samal@orbt-tech.com">heema.samal@orbt-tech.com</a></p>
         </div>
         <div class="manager-card">
             <b>Jasmine Kartik (Project Coordinator)</b>
             <p>📞 <a href="tel:+919876543211">+91 98765 43211</a></p>
             <p>📱 <a href="https://wa.me/919876543211" target="_blank">WhatsApp</a></p>
+            <p>📧 <a href="mailto:jasmine.kartik@orbt-tech.com">jasmine.kartik@orbt-tech.com</a></p>
         </div>
     </div>
     """, unsafe_allow_html=True)
     
-    # Contact Form
-    with st.form("contact_form"):
-        name = st.text_input("Name*", placeholder="Your name")
-        email = st.text_input("Email*", placeholder="Your email address")
-        mobile = st.text_input("Mobile Number*", placeholder="Your WhatsApp number")
-        project_type = st.selectbox("Project Type*", 
-                                  ["Select project type", "AI/ML", "Mobile App", "Web App", "Data Science", "Other"],
-                                  index=0)
-        project_description = st.text_area("Project Description*", 
-                                         placeholder="Detailed description of your project requirements",
-                                         height=150)
-        message = st.text_area("Additional Message", 
-                              placeholder="Any other information you'd like to share",
-                              height=100)
+    # Contact Form with improved validation
+    with st.form("contact_form", clear_on_submit=True):
+        col1, col2 = st.columns(2)
         
-        # Custom styled submit button
-        submitted = st.form_submit_button("Submit Request", type="primary")
+        with col1:
+            name = st.text_input("Full Name*", placeholder="Your full name")
+            email = st.text_input("Email Address*", placeholder="Your email address")
+            
+        with col2:
+            mobile = st.text_input("Mobile Number*", placeholder="Your WhatsApp number")
+            project_type = st.selectbox("Project Type*", 
+                                     ["Select project type", "AI/ML", "Mobile App", "Web App", 
+                                      "Data Science", "IoT", "Blockchain", "Other"],
+                                     index=0)
+        
+        project_description = st.text_area("Project Description*", 
+                                        placeholder="Detailed description of your project requirements\n"
+                                                   "- Specific features needed\n"
+                                                   "- Technologies preferred\n"
+                                                   "- Deadline if any",
+                                        height=150)
+        
+        message = st.text_area("Additional Information", 
+                             placeholder="Any other information you'd like to share\n"
+                                        "- Reference projects\n"
+                                        "- Budget constraints\n"
+                                        "- Special requirements",
+                             height=100)
+        
+        # Enhanced submit button with loading state
+        submitted = st.form_submit_button("Submit Request", type="primary",
+                                        use_container_width=True,
+                                        help="We'll respond within 24 hours")
         
         if submitted:
             if not name or not email or not mobile or project_type == "Select project type" or not project_description:
                 st.error("Please fill all required fields (marked with *)")
+            elif not email.strip().count('@') == 1 or not email.strip().count('.') >= 1:
+                st.error("Please enter a valid email address")
+            elif not mobile.strip().isdigit() or len(mobile.strip()) < 10:
+                st.error("Please enter a valid 10-digit mobile number")
             else:
-                if insert_contact(name, email, mobile, project_type, project_description, message):
-                    st.success("Thank you for contacting us! Our team will get back to you within 24 hours.")
-                else:
-                    st.error("There was an error submitting your request. Please try again or contact us directly.")
+                with st.spinner('Submitting your request...'):
+                    if insert_contact(name, email, mobile, project_type, project_description, message):
+                        st.success("""
+                        ✅ Thank you for contacting us!
+                        
+                        Our team will review your request and get back to you within 24 hours.
+                        """)
+                        
+                        # Confirmation email simulation
+                        st.balloons()
+                        
+                        # Back to home button with improved styling
+                        st.markdown("""
+                        <div style="text-align: center; margin-top: 30px;">
+                            <a href="#" class="back-to-home" 
+                               onclick="window.location.href='?page=home'; return false;">
+                                <i class="fas fa-arrow-left"></i> Return to Home Page
+                            </a>
+                        </div>
+                        """, unsafe_allow_html=True)
+                        
+                        # Suggested next steps
+                        st.markdown("""
+                        <div class="card" style="margin-top: 20px; border-left-color: #4CC9F0">
+                            <h4>Next Steps:</h4>
+                            <ol>
+                                <li>Our project manager will contact you within 24 hours</li>
+                                <li>We'll schedule a free consultation call</li>
+                                <li>You'll receive a project proposal with timeline and cost estimate</li>
+                            </ol>
+                            <p>In the meantime, you can explore our <a href="?page=projects">project portfolio</a>.</p>
+                        </div>
+                        """, unsafe_allow_html=True)
+                    else:
+                        st.error("""
+                        ❌ There was an error submitting your request.
+                        
+                        Please try again or contact us directly via WhatsApp/phone.
+                        """)
 
-# Floating WhatsApp button for mobile
-st.markdown("""
-<a href="https://wa.me/919876543210" class="floating-button" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-</a>
-""", unsafe_allow_html=True)
+# Enhanced Admin Dashboard
+if st.session_state.admin_logged_in:
+    st.sidebar.title("Admin Panel")
+    st.sidebar.markdown(f"Logged in as: **Orbt-Tech Admin**")
+    
+    if st.sidebar.button("🔄 Refresh Data"):
+        st.experimental_rerun()
+    
+    if st.sidebar.button("📤 Export to CSV"):
+        columns, data = get_all_contacts()
+        if columns and data:
+            import pandas as pd
+            df = pd.DataFrame(data, columns=columns)
+            csv = df.to_csv(index=False)
+            st.sidebar.download_button(
+                label="Download CSV",
+                data=csv,
+                file_name="orbt_tech_contacts.csv",
+                mime="text/csv"
+            )
+    
+    if st.sidebar.button("🚪 Logout"):
+        st.session_state.admin_logged_in = False
+        st.session_state.page = "home"
+        st.experimental_rerun()
+    
+    st.title("📊 Contact Form Submissions")
+    st.markdown("""
+    <style>
+    .stDataFrame {
+        font-size: 14px;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    columns, data = get_all_contacts()
+    if columns and data:
+        import pandas as pd
+        df = pd.DataFrame(data, columns=columns)
+        
+        # Add filtering options
+        st.subheader("Filter Submissions")
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            filter_project = st.selectbox(
+                "Filter by Project Type",
+                ["All"] + sorted(df['project_type'].unique().tolist())
+            )
+        
+        with col2:
+            date_sort = st.selectbox(
+                "Sort by Date",
+                ["Newest First", "Oldest First"]
+            )
+        
+        with col3:
+            search_term = st.text_input("Search in Messages")
+        
+        # Apply filters
+        if filter_project != "All":
+            df = df[df['project_type'] == filter_project]
+        
+        if search_term:
+            df = df[df['project_description'].str.contains(search_term, case=False) | 
+                   df['message'].str.contains(search_term, case=False, na=False)]
+        
+        if date_sort == "Newest First":
+            df = df.sort_values('created_at', ascending=False)
+        else:
+            df = df.sort_values('created_at', ascending=True)
+        
+        # Show statistics
+        st.markdown(f"""
+        <div class="card" style="border-left-color: #7209B7">
+            <b>📈 Submission Statistics</b>
+            <p>Total Submissions: {len(df)}</p>
+            <p>Last Submission: {df['created_at'].max()}</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Display filtered data
+        st.dataframe(df, use_container_width=True, height=600)
+        
+        # Add bulk actions
+        st.subheader("Bulk Actions")
+        if st.button("Delete All Submissions"):
+            if st.warning("Are you sure you want to delete ALL submissions? This cannot be undone!"):
+                conn = get_db_connection()
+                if conn:
+                    try:
+                        cur = conn.cursor()
+                        cur.execute("TRUNCATE TABLE contacts RESTART IDENTITY")
+                        conn.commit()
+                        st.success("All submissions have been deleted")
+                        st.experimental_rerun()
+                    except Exception as e:
+                        st.error(f"Error deleting data: {e}")
+                    finally:
+                        if conn:
+                            conn.close()
+    else:
+        st.warning("No contact submissions found in the database")
 
-# Footer
-st.markdown("""
-<div style="text-align: center; margin-top: 50px; padding: 20px; color: #6C757D; font-size: 0.9rem;">
-    <p>© 2023 Orbt-Tech. All rights reserved.</p>
-    <p style="margin-top: 10px;">
-        <a href="https://www.linkedin.com/company/orbt-tech" target="_blank" style="color: #6C757D; margin: 0 10px;"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/bimal-bp" target="_blank" style="color: #6C757D; margin: 0 10px;"><i class="fab fa-github"></i></a>
-        <a href="https://twitter.com/orbt_tech" target="_blank" style="color: #6C757D; margin: 0 10px;"><i class="fab fa-twitter"></i></a>
-    </p>
-</div>
-""", unsafe_allow_html=True)
+# ... [Rest of the code remains the same] ...
