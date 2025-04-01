@@ -505,10 +505,12 @@ elif selected == "Contact":
         <div class="manager-card">
             <b>Hemma Samal (Project Manager)</b>
             <p>📞 <a href="tel:+919876543210">+91 98765 43210</a></p>
+            <p>📱 <a href="https://wa.me/919876543210" target="_blank">WhatsApp</a></p>
         </div>
         <div class="manager-card">
             <b>Jasmine kartik (Project Coordinator)</b>
             <p>📞 <a href="tel:+919876543211">+91 98765 43211</a></p>
+            <p>📱 <a href="https://wa.me/919876543211" target="_blank">WhatsApp</a></p>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -541,7 +543,8 @@ elif selected == "Contact":
                     st.markdown("""
                     <div style="margin-top: 20px; text-align: center;">
                         <p>For immediate assistance, please contact:</p>
-                        <p>📞 <a href="tel:+919876543210">+91 9390930256</a></p>
+                        <p>📞 <a href="tel:+919876543210">+91 98765 43210</a></p>
+                        <p>📱 <a href="https://wa.me/919876543210" target="_blank">WhatsApp</a></p>
                     </div>
                     """, unsafe_allow_html=True)
                 else:
