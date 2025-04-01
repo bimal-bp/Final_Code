@@ -572,6 +572,13 @@ def show_projects_page():
         <p><a href="https://studentperformance-fvqesnqvjzxvjcpx78zheo.streamlit.app/" target="_blank">View Project</a></p>
     </div>
     """, unsafe_allow_html=True)
+    st.markdown(f"""
+    <div class="card" style="border-left-color: {get_random_color()}">
+        <b>PRODIGY_WebDevelopment</b>
+        <p>Analytics dashboard</p>
+        <p><a href="https://github.com/GVMNREDDY/PRODIGY_WebDevelopment">View Project</a></p>
+    </div>
+    """, unsafe_allow_html=True)
     
     st.markdown(f"""
     <div class="card" style="border-left-color: {get_random_color()}">
@@ -623,7 +630,7 @@ def show_team_page():
         
         st.markdown(f"""
         <div class="team-card" style="border-left-color: {get_random_color()}">
-            <b>Ramhari Sasmal</b>
+            <b>Ramhari Samal</b>
             <p>Data Scientist</p>
             <p>Specialized in predictive analytics</p>
         </div>
@@ -633,6 +640,14 @@ def show_team_page():
         <div class="team-card" style="border-left-color: {get_random_color()}">
             <b>Mantu Gouda</b>
             <p>ML Developer</p>
+            <p>Creating intuitive user interfaces</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown(f"""
+        <div class="team-card" style="border-left-color: {get_random_color()}">
+            <b>Udit kakkar</b>
+            <p>web Developer</p>
             <p>Creating intuitive user interfaces</p>
         </div>
         """, unsafe_allow_html=True)
@@ -656,13 +671,13 @@ def show_contact_page():
         <div class="manager-card">
             <b>Heema Samal (Project Manager)</b>
             <p>📞 <a href="tel:+919876543210">+91 98765 43210</a></p>
-            <p>📱 <a href="https://wa.me/919876543210" target="_blank">WhatsApp</a></p>
+
             <p>📧 <a href="mailto:heema.samal@orbt-tech.com">heema.samal@orbt-tech.com</a></p>
         </div>
         <div class="manager-card">
             <b>Jasmine Kartik (Project Coordinator)</b>
             <p>📞 <a href="tel:+919876543211">+91 98765 43211</a></p>
-            <p>📱 <a href="https://wa.me/919876543211" target="_blank">WhatsApp</a></p>
+
             <p>📧 <a href="mailto:jasmine.kartik@orbt-tech.com">jasmine.kartik@orbt-tech.com</a></p>
         </div>
     </div>
