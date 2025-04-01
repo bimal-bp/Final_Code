@@ -10,7 +10,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# CSS styling with mobile optimization
+# CSS styling with random color scheme
 st.markdown("""
     <style>
     /* Base styles */
@@ -19,7 +19,7 @@ st.markdown("""
         text-align: center;
         margin-bottom: 1rem;
         color: white;
-        background-color: #00BFFF;  /* Changed to sky blue */
+        background-color: #FF6B6B;  /* Coral red */
         padding: 15px;
         border-radius: 10px;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -28,27 +28,29 @@ st.markdown("""
         text-align:center; 
         margin-bottom:20px;
         font-size: 1rem;
-        color: #555;
+        color: #6C757D;  /* Gray */
     }
     .card {
         padding: 12px;
         margin: 8px 0;
         border-radius: 8px;
-        background-color: #f5f5f5;
+        background-color: #F8F9FA;  /* Light gray */
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border-left: 4px solid #4CC9F0;  /* Sky blue */
     }
     .team-card {
         padding: 12px;
         margin: 8px 0;
         border-radius: 8px;
-        background-color: #f5f5f5;
+        background-color: #F8F9FA;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border-left: 4px solid #7209B7;  /* Purple */
     }
     .contact-button {
         display: block;
         margin: 15px auto;
         padding: 8px 16px;
-        background-color: #4CAF50;
+        background-color: #4361EE;  /* Royal blue */
         color: white;
         border: none;
         border-radius: 5px;
@@ -58,35 +60,36 @@ st.markdown("""
         transition: all 0.3s;
     }
     .contact-button:hover {
-        background-color: #45a049;
+        background-color: #3A0CA3;  /* Dark blue */
         transform: scale(1.05);
     }
     .github-badge {
         display: inline-block;
-        background-color: white;
-        color: black;
+        background-color: #212529;  /* Dark gray */
+        color: white !important;
         padding: 6px 12px;
         border-radius: 5px;
         margin: 8px 0;
         text-decoration: none;
         font-weight: bold;
         font-size: 0.9rem;
-        border: 1px solid #ddd;
+        border: 1px solid #495057;
     }
     .manager-card {
         padding: 12px;
         margin: 10px 0;
         border-radius: 8px;
-        background-color: #e3f2fd;
+        background-color: #E9ECEF;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border-left: 4px solid #F72585;  /* Pink */
     }
     .job-button {
         display: block;
         margin: 15px auto;
         padding: 10px 20px;
         background-color: white;
-        color: black;
-        border: 1px solid #ddd;
+        color: #212529;
+        border: 1px solid #DEE2E6;
         border-radius: 5px;
         cursor: pointer;
         font-size: 16px;
@@ -96,8 +99,9 @@ st.markdown("""
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     .job-button:hover {
-        background-color: #f5f5f5;
+        background-color: #F8F9FA;
         transform: scale(1.05);
+        border-color: #ADB5BD;
     }
     
     /* Mobile optimizations */
@@ -130,16 +134,16 @@ st.markdown("""
         font-size: 14px !important;
     }
     .st-b7 {
-        background-color: #f0f2f6 !important;
+        background-color: #F8F9FA !important;
         border-radius: 10px;
         padding: 8px;
     }
     .st-c7 {
-        color: #00BFFF !important;  /* Changed to sky blue */
+        color: #4361EE !important;  /* Royal blue */
         font-weight: bold;
     }
     .stButton>button {
-        background-color: #00BFFF;  /* Changed to sky blue */
+        background-color: #7209B7;  /* Purple */
         color: white;
         border-radius: 5px;
         padding: 10px 20px;
@@ -147,6 +151,9 @@ st.markdown("""
         border: none;
         transition: all 0.3s;
         width: 100%;
+    }
+    .stButton>button:hover {
+        background-color: #5A08A3;
     }
     .whatsapp-button {
         background-color: #25D366 !important;
@@ -156,14 +163,62 @@ st.markdown("""
         background-color: #34B7F1 !important;
         color: white !important;
     }
+    
+    /* Navigation menu colors */
+    .st-bx {
+        background-color: #F8F9FA !important;
+    }
+    .st-c0 {
+        color: #495057 !important;
+    }
+    .st-cz {
+        background-color: #7209B7 !important;  /* Purple */
+    }
+    
+    /* Project cards */
+    .card a {
+        color: #4361EE !important;  /* Royal blue */
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .card a:hover {
+        text-decoration: underline;
+    }
+    
+    /* Floating WhatsApp button */
+    .floating-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #25D366;
+        color: white;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+    }
+    @media screen and (min-width: 768px) {
+        .floating-button {
+            display: none;
+        }
+    }
     </style>
+""", unsafe_allow_html=True)
+
+# Add Font Awesome for icons
+st.markdown("""
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 """, unsafe_allow_html=True)
 
 # Company Header
 st.markdown('<div class="header">Orbt-Tech</div>', unsafe_allow_html=True)
 st.markdown('<div class="subheader">Complete your final year projects with excellence</div>', unsafe_allow_html=True)
-
-# GitHub link (removed from home page, will be in projects section only)
 
 # Navigation Menu
 selected = option_menu(
@@ -174,15 +229,15 @@ selected = option_menu(
     default_index=0,
     orientation="horizontal",
     styles={
-        "container": {"padding": "0!important", "background-color": "#f0f2f6"},
-        "icon": {"color": "orange", "font-size": "16px"}, 
+        "container": {"padding": "0!important", "background-color": "#F8F9FA"},
+        "icon": {"color": "#F72585", "font-size": "16px"},  /* Pink */
         "nav-link": {
             "font-size": "14px",
             "text-align": "center",
             "margin": "0px",
-            "--hover-color": "#eee",
+            "--hover-color": "#E9ECEF",
         },
-        "nav-link-selected": {"background-color": "#00BFFF"},  # Changed to sky blue
+        "nav-link-selected": {"background-color": "#7209B7"},  /* Purple */
     }
 )
 
@@ -258,7 +313,7 @@ init_db()
 
 # Page Content
 if selected == "Home":
-    # Job Career Button - now in white box
+    # Job Career Button
     st.markdown("""
     <div style="text-align: center; margin-bottom: 30px;">
         <a href="https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/" class="job-button" target="_blank">
@@ -269,7 +324,7 @@ if selected == "Home":
     
     st.subheader("Our Services")
     
-    col1, col2 = st.columns(2)  # Changed to 2 columns instead of 3
+    col1, col2 = st.columns(2)
     
     with col1:
         st.markdown("""
@@ -381,7 +436,7 @@ elif selected == "Team":
 elif selected == "Projects":
     st.subheader("Our Projects")
     
-    # GitHub button in white box (only in Projects section)
+    # GitHub button in Projects section
     st.markdown("""
     <div style="text-align:center; margin-bottom: 20px;">
         <a href="https://github.com/bimal-bp" class="github-badge" target="_blank">
@@ -450,12 +505,10 @@ elif selected == "Contact":
         <div class="manager-card">
             <b>Hemma Samal (Project Manager)</b>
             <p>📞 <a href="tel:+919876543210">+91 98765 43210</a></p>
-            <p>📱 <a href="https://wa.me/919876543210" target="_blank">WhatsApp</a></p>
         </div>
         <div class="manager-card">
             <b>Jasmine kartik (Project Coordinator)</b>
             <p>📞 <a href="tel:+919876543211">+91 98765 43211</a></p>
-            <p>📱 <a href="https://wa.me/919876543211" target="_blank">WhatsApp</a></p>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -488,44 +541,14 @@ elif selected == "Contact":
                     st.markdown("""
                     <div style="margin-top: 20px; text-align: center;">
                         <p>For immediate assistance, please contact:</p>
-                        <p>📞 <a href="tel:+919876543210">+91 98765 43210</a></p>
-                        <p>📱 <a href="https://wa.me/919876543210" target="_blank">WhatsApp</a></p>
+                        <p>📞 <a href="tel:+919876543210">+91 9390930256</a></p>
                     </div>
                     """, unsafe_allow_html=True)
                 else:
                     st.error("There was an error submitting your form. Please try again or contact us directly.")
 
-# Add Font Awesome for icons
-st.markdown("""
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-""", unsafe_allow_html=True)
-
 # Add WhatsApp floating button for mobile users
 st.markdown("""
-<style>
-.floating-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #25D366;
-    color: white;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-}
-@media screen and (min-width: 768px) {
-    .floating-button {
-        display: none;
-    }
-}
-</style>
 <a href="https://wa.me/919876543210" class="floating-button" target="_blank">
     <i class="fab fa-whatsapp"></i>
 </a>
