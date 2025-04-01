@@ -688,7 +688,6 @@ elif selected == "Contact":
                                         "- Special requirements",
                              height=100)
         
-        # Enhanced submit button with loading state
         submitted = st.form_submit_button("Submit Request", type="primary",
                                         use_container_width=True,
                                         help="We'll respond within 24 hours")
@@ -709,20 +708,12 @@ elif selected == "Contact":
                         Our team will review your request and get back to you within 24 hours.
                         """)
                         
-                        # Confirmation email simulation
                         st.balloons()
                         
-                        # Back to home button with improved styling
-                        st.markdown("""
-                        <div style="text-align: center; margin-top: 30px;">
-                            <a href="#" class="back-to-home" 
-                               onclick="window.location.href='?page=home'; return false;">
-                                <i class="fas fa-arrow-left"></i> Return to Home Page
-                            </a>
-                        </div>
-                        """, unsafe_allow_html=True)
+                        if st.button("Back to Home", key="contact_success_back"):
+                            st.session_state.page = "home"
+                            st.experimental_rerun()
                         
-                        # Suggested next steps
                         st.markdown("""
                         <div class="card" style="margin-top: 20px; border-left-color: #4CC9F0">
                             <h4>Next Steps:</h4>
@@ -731,7 +722,7 @@ elif selected == "Contact":
                                 <li>We'll schedule a free consultation call</li>
                                 <li>You'll receive a project proposal with timeline and cost estimate</li>
                             </ol>
-                            <p>In the meantime, you can explore our <a href="?page=projects">project portfolio</a>.</p>
+                            <p>In the meantime, you can explore our <a href="#projects">project portfolio</a> or check our <a href="https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/" target="_blank">Career Path Finder</a>.</p>
                         </div>
                         """, unsafe_allow_html=True)
                     else:
@@ -740,6 +731,11 @@ elif selected == "Contact":
                         
                         Please try again or contact us directly via WhatsApp/phone.
                         """)
+    
+    # Add a separate back button outside the form
+    if st.button("Back to Home", key="contact_back_home"):
+        st.session_state.page = "home"
+        st.experimental_rerun()
 
 # Enhanced Admin Dashboard
 if st.session_state.admin_logged_in:
