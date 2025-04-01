@@ -11,26 +11,45 @@ st.set_page_config(
     layout="wide"
 )
 
-# Generate random color for project cards
+# Generate random color for project cards and backgrounds
 def get_random_color():
+    # Softer pastel colors that work well as backgrounds
+    colors = [
+        "#FFD6E0", "#C8E7FF", "#E0F9FF", "#FFF2D7", "#E8FFD7",
+        "#F0E6FF", "#FFE6EE", "#E6F9FF", "#FFF0E6", "#F0FFF0",
+        "#F5E6FF", "#FFE6F5", "#E6FFEC", "#FFF9E6", "#E6F5FF",
+        "#FFEDE6", "#E6FFF5", "#F9E6FF", "#FFFAE6", "#E6FFFA"
+    ]
+    return random.choice(colors)
+
+def get_random_accent_color():
+    # Brighter accent colors
     colors = [
         "#FF6B6B", "#4CC9F0", "#7209B7", "#F72585", "#4361EE", 
         "#3A0CA3", "#4895EF", "#3F37C9", "#560BAD", "#B5179E",
-        "#2EC4B6", "#E71D36", "#FF9F1C", "#011627", "#2EC4B6",
-        "#E8F1F2", "#1B98E0", "#247BA0", "#006494", "#13293D"
+        "#2EC4B6", "#E71D36", "#FF9F1C", "#011627", "#2EC4B6"
     ]
     return random.choice(colors)
+
+# Generate a few random colors for the page
+page_bg_color = get_random_color()
+header_color = get_random_accent_color()
+card_bg_color = get_random_color()
+section_bg_color = get_random_color()
 
 # CSS styling with random color scheme
 st.markdown(f"""
     <style>
     /* Base styles */
+    .stApp {{
+        background-color: {page_bg_color};
+    }}
     .header {{
         font-size: 2rem;
         text-align: center;
         margin-bottom: 1rem;
         color: white;
-        background-color: #FF6B6B;
+        background-color: {header_color};
         padding: 15px;
         border-radius: 10px;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -45,23 +64,30 @@ st.markdown(f"""
         padding: 12px;
         margin: 8px 0;
         border-radius: 8px;
-        background-color: #F8F9FA;
+        background-color: {card_bg_color};
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        border-left: 4px solid {get_random_color()};
+        border-left: 4px solid {get_random_accent_color()};
     }}
     .team-card {{
         padding: 12px;
         margin: 8px 0;
         border-radius: 8px;
-        background-color: #F8F9FA;
+        background-color: {get_random_color()};
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        border-left: 4px solid #7209B7;
+        border-left: 4px solid {get_random_accent_color()};
+    }}
+    .section {{
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 10px;
+        background-color: {section_bg_color};
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }}
     .contact-button {{
         display: block;
         margin: 15px auto;
         padding: 8px 16px;
-        background-color: #4361EE;
+        background-color: {get_random_accent_color()};
         color: white;
         border: none;
         border-radius: 5px;
@@ -71,7 +97,7 @@ st.markdown(f"""
         transition: all 0.3s;
     }}
     .contact-button:hover {{
-        background-color: #3A0CA3;
+        background-color: {get_random_accent_color()};
         transform: scale(1.05);
     }}
     .github-badge {{
@@ -90,15 +116,15 @@ st.markdown(f"""
         padding: 12px;
         margin: 10px 0;
         border-radius: 8px;
-        background-color: #E9ECEF;
+        background-color: {get_random_color()};
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        border-left: 4px solid #F72585;
+        border-left: 4px solid {get_random_accent_color()};
     }}
     .job-button {{
         display: block;
         margin: 15px auto;
         padding: 10px 20px;
-        background-color: white;
+        background-color: {get_random_color()};
         color: #212529;
         border: 1px solid #DEE2E6;
         border-radius: 5px;
@@ -110,7 +136,7 @@ st.markdown(f"""
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }}
     .job-button:hover {{
-        background-color: #F8F9FA;
+        background-color: {get_random_color()};
         transform: scale(1.05);
         border-color: #ADB5BD;
     }}
@@ -143,18 +169,19 @@ st.markdown(f"""
     .stSelectbox>div>div>select,
     .stTextArea>div>div>textarea {{
         font-size: 14px !important;
+        background-color: {get_random_color()} !important;
     }}
     .st-b7 {{
-        background-color: #F8F9FA !important;
+        background-color: {get_random_color()} !important;
         border-radius: 10px;
         padding: 8px;
     }}
     .st-c7 {{
-        color: #4361EE !important;
+        color: {get_random_accent_color()} !important;
         font-weight: bold;
     }}
     .stButton>button {{
-        background-color: #7209B7;
+        background-color: {get_random_accent_color()};
         color: white;
         border-radius: 5px;
         padding: 10px 20px;
@@ -164,7 +191,7 @@ st.markdown(f"""
         width: 100%;
     }}
     .stButton>button:hover {{
-        background-color: #5A08A3;
+        background-color: {get_random_accent_color()};
     }}
     .whatsapp-button {{
         background-color: #25D366 !important;
@@ -177,18 +204,18 @@ st.markdown(f"""
     
     /* Navigation menu colors */
     .st-bx {{
-        background-color: #F8F9FA !important;
+        background-color: {get_random_color()} !important;
     }}
     .st-c0 {{
         color: #495057 !important;
     }}
     .st-cz {{
-        background-color: #7209B7 !important;
+        background-color: {get_random_accent_color()} !important;
     }}
     
     /* Project cards */
     .card a {{
-        color: #4361EE !important;
+        color: {get_random_accent_color()} !important;
         text-decoration: none;
         font-weight: bold;
     }}
@@ -240,15 +267,15 @@ selected = option_menu(
     default_index=0,
     orientation="horizontal",
     styles={
-        "container": {"padding": "0!important", "background-color": "#F8F9FA"},
-        "icon": {"color": "#F72585", "font-size": "16px"},
+        "container": {"padding": "0!important", "background-color": get_random_color()},
+        "icon": {"color": get_random_accent_color(), "font-size": "16px"},
         "nav-link": {
             "font-size": "14px",
             "text-align": "center",
             "margin": "0px",
             "--hover-color": "#E9ECEF",
         },
-        "nav-link-selected": {"background-color": "#7209B7"},
+        "nav-link-selected": {"background-color": get_random_accent_color()},
     }
 )
 
@@ -325,21 +352,27 @@ init_db()
 # Page Content
 if selected == "Home":
     # Job Career Button
-    st.markdown("""
-    <div style="text-align: center; margin-bottom: 30px;">
-        <a href="https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/" class="job-button" target="_blank">
-            <i class="fas fa-briefcase"></i> Find Your Perfect Job Career Path
-        </a>
+    st.markdown(f"""
+    <div class="section">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <a href="https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/" class="job-button" target="_blank">
+                <i class="fas fa-briefcase"></i> Find Your Perfect Job Career Path
+            </a>
+        </div>
     </div>
     """, unsafe_allow_html=True)
     
-    st.subheader("Our Services")
+    st.markdown(f"""
+    <div class="section">
+        <h2 style="color: {get_random_accent_color()};">Our Services</h2>
+    </div>
+    """, unsafe_allow_html=True)
     
     col1, col2 = st.columns(2)
     
     with col1:
         st.markdown(f"""
-        <div class="card" style="border-left-color: {get_random_color()}">
+        <div class="card">
             <b>AI/ML Projects</b>
             <ul style="padding-left: 20px;">
                 <li>Predictive Analytics Projects</li>
@@ -355,7 +388,7 @@ if selected == "Home":
     
     with col2:
         st.markdown(f"""
-        <div class="card" style="border-left-color: {get_random_color()}">
+        <div class="card">
             <b>Software Development</b>
             <ul style="padding-left: 20px;">
                 <li>Mobile Applications (Android/iOS)</li>
@@ -367,28 +400,34 @@ if selected == "Home":
         </div>
         """, unsafe_allow_html=True)
     
-    st.subheader("Why Choose Us?")
     st.markdown(f"""
-    <div class="card" style="border-left-color: {get_random_color()}">
-        <ul style="padding-left: 20px;">
-            <li>100% Project Completion</li>
-            <li>Documentation Support</li>
-            <li>Regular Updates</li>
-            <li>Affordable Pricing</li>
-            <li>72+ Completed Projects</li>
-            <li>Direct Project Manager Access</li>
-        </ul>
+    <div class="section">
+        <h2 style="color: {get_random_accent_color()};">Why Choose Us?</h2>
+        <div class="card">
+            <ul style="padding-left: 20px;">
+                <li>100% Project Completion</li>
+                <li>Documentation Support</li>
+                <li>Regular Updates</li>
+                <li>Affordable Pricing</li>
+                <li>72+ Completed Projects</li>
+                <li>Direct Project Manager Access</li>
+            </ul>
+        </div>
     </div>
     """, unsafe_allow_html=True)
     
 elif selected == "Team":
-    st.subheader("Our Team")
+    st.markdown(f"""
+    <div class="section">
+        <h2 style="color: {get_random_accent_color()};">Our Team</h2>
+    </div>
+    """, unsafe_allow_html=True)
     
     col1, col2 = st.columns(2)
     
     with col1:
         st.markdown(f"""
-        <div class="team-card" style="border-left-color: {get_random_color()}">
+        <div class="team-card">
             <b>Bimal Patra</b>
             <p>AI/ML Specialist</p>
             <p>Expert in machine learning and data science</p>
@@ -396,7 +435,7 @@ elif selected == "Team":
         """, unsafe_allow_html=True)
         
         st.markdown(f"""
-        <div class="team-card" style="border-left-color: {get_random_color()}">
+        <div class="team-card">
             <b>Rakesh Behera</b>
             <p>Mobile Developer</p>
             <p>Skilled in Android, iOS and cross-platform development</p>
@@ -404,7 +443,7 @@ elif selected == "Team":
         """, unsafe_allow_html=True)
         
         st.markdown(f"""
-        <div class="team-card" style="border-left-color: {get_random_color()}">
+        <div class="team-card">
             <b>Sravan Sahoo</b>
             <p>Web Developer</p>
             <p>Full stack developer with modern frameworks</p>
@@ -413,7 +452,7 @@ elif selected == "Team":
     
     with col2:
         st.markdown(f"""
-        <div class="team-card" style="border-left-color: {get_random_color()}">
+        <div class="team-card">
             <b>Heema Samal</b>
             <p>Project Manager</p>
             <p>Ensuring smooth project execution</p>
@@ -421,7 +460,7 @@ elif selected == "Team":
         """, unsafe_allow_html=True)
         
         st.markdown(f"""
-        <div class="team-card" style="border-left-color: {get_random_color()}">
+        <div class="team-card">
             <b>Ramhari Sasmal</b>
             <p>Data Scientist</p>
             <p>Specialized in predictive analytics</p>
@@ -429,7 +468,7 @@ elif selected == "Team":
         """, unsafe_allow_html=True)
         
         st.markdown(f"""
-        <div class="team-card" style="border-left-color: {get_random_color()}">
+        <div class="team-card">
             <b>Mantu Gouda</b>
             <p>ML Developer</p>
             <p>Creating intuitive user interfaces</p>
@@ -437,7 +476,7 @@ elif selected == "Team":
         """, unsafe_allow_html=True)
         
         st.markdown(f"""
-        <div class="team-card" style="border-left-color: {get_random_color()}">
+        <div class="team-card">
             <b>Pabitra Jena</b>
             <p>Backend Developer</p>
             <p>Database and server-side expert</p>
@@ -445,19 +484,25 @@ elif selected == "Team":
         """, unsafe_allow_html=True)
     
 elif selected == "Projects":
-    st.subheader("Our Projects")
+    st.markdown(f"""
+    <div class="section">
+        <h2 style="color: {get_random_accent_color()};">Our Projects</h2>
+    </div>
+    """, unsafe_allow_html=True)
     
     # GitHub button in Projects section
-    st.markdown("""
-    <div style="text-align:center; margin-bottom: 20px;">
-        <a href="https://github.com/bimal-bp" class="github-badge" target="_blank">
-            <i class="fab fa-github"></i> View My GitHub (72+ Projects)
-        </a>
+    st.markdown(f"""
+    <div class="section">
+        <div style="text-align:center; margin-bottom: 20px;">
+            <a href="https://github.com/bimal-bp" class="github-badge" target="_blank">
+                <i class="fab fa-github"></i> View My GitHub (72+ Projects)
+            </a>
+        </div>
     </div>
     """, unsafe_allow_html=True)
     
     st.markdown(f"""
-    <div class="card" style="border-left-color: {get_random_color()}">
+    <div class="card">
         <b>Right Education for Perfect Job</b>
         <p>ORBT-LeARN</p>
         <p>This app will help you choosing your right education path for your successful job career</p>
@@ -467,7 +512,7 @@ elif selected == "Projects":
     """, unsafe_allow_html=True)
     
     st.markdown(f"""
-    <div class="card" style="border-left-color: {get_random_color()}">
+    <div class="card">
         <b>Bank Customer Analysis</b>
         <p>Predictive analytics for banking sector</p>
         <p><a href="https://bankattritionprojects-tymyqz4hyygziox37gfttt.streamlit.app/" target="_blank">View Project</a></p>
@@ -475,7 +520,7 @@ elif selected == "Projects":
     """, unsafe_allow_html=True)
     
     st.markdown(f"""
-    <div class="card" style="border-left-color: {get_random_color()}">
+    <div class="card">
         <b>Crime Spot Prediction</b>
         <p>AI system for predicting crime hotspots</p>
         <p><a href="https://crmiespotpredict-zi269clpbwhknp8d3cqqex.streamlit.app/" target="_blank">View Project</a></p>
@@ -483,7 +528,7 @@ elif selected == "Projects":
     """, unsafe_allow_html=True)
     
     st.markdown(f"""
-    <div class="card" style="border-left-color: {get_random_color()}">
+    <div class="card">
         <b>Legal App</b>
         <p>Legal assistance and documentation platform</p>
         <p><a href="https://legal-app-6ovymevnmlyrcasclwtt8u.streamlit.app/" target="_blank">View Project</a></p>
@@ -491,7 +536,7 @@ elif selected == "Projects":
     """, unsafe_allow_html=True)
     
     st.markdown(f"""
-    <div class="card" style="border-left-color: {get_random_color()}">
+    <div class="card">
         <b>Student Performance Tracker</b>
         <p>Educational analytics dashboard</p>
         <p><a href="https://studentperformance-fvqesnqvjzxvjcpx78zheo.streamlit.app/" target="_blank">View Project</a></p>
@@ -499,7 +544,7 @@ elif selected == "Projects":
     """, unsafe_allow_html=True)
     
     st.markdown(f"""
-    <div class="card" style="border-left-color: {get_random_color()}">
+    <div class="card">
         <b>Water Quality Analysis</b>
         <p>Water quality monitoring system</p>
         <p><a href="https://waterqualityproject-fjfw7dmgbjgbzdestmpdsi.streamlit.app/" target="_blank">View Project</a></p>
@@ -507,26 +552,36 @@ elif selected == "Projects":
     """, unsafe_allow_html=True)
     
 elif selected == "Contact":
-    st.subheader("Contact Us")
+    st.markdown(f"""
+    <div class="section">
+        <h2 style="color: {get_random_accent_color()};">Contact Us</h2>
+    </div>
+    """, unsafe_allow_html=True)
     
     # Project Manager Contact Cards
-    st.markdown("""
-    <div style="margin-bottom: 20px;">
-        <h4 style="text-align: center;">Directly Contact Our Project Managers</h4>
-        <div class="manager-card">
-            <b>Heema Samal (Project Manager)</b>
-            <p>📞 <a href="tel:+919876543210">+91 98765 43210</a></p>
-            <p>📱 <a href="https://wa.me/919876543210" target="_blank">WhatsApp</a></p>
-        </div>
-        <div class="manager-card">
-            <b>Jasmine Kartik (Project Coordinator)</b>
-            <p>📞 <a href="tel:+919876543211">+91 98765 43211</a></p>
-            <p>📱 <a href="https://wa.me/919876543211" target="_blank">WhatsApp</a></p>
+    st.markdown(f"""
+    <div class="section">
+        <div style="margin-bottom: 20px;">
+            <h4 style="text-align: center;">Directly Contact Our Project Managers</h4>
+            <div class="manager-card">
+                <b>Heema Samal (Project Manager)</b>
+                <p>📞 <a href="tel:+919876543210">+91 98765 43210</a></p>
+                <p>📱 <a href="https://wa.me/919876543210" target="_blank">WhatsApp</a></p>
+            </div>
+            <div class="manager-card">
+                <b>Jasmine Kartik (Project Coordinator)</b>
+                <p>📞 <a href="tel:+919876543211">+91 98765 43211</a></p>
+                <p>📱 <a href="https://wa.me/919876543211" target="_blank">WhatsApp</a></p>
+            </div>
         </div>
     </div>
     """, unsafe_allow_html=True)
     
     # Contact Form
+    st.markdown(f"""
+    <div class="section">
+    """, unsafe_allow_html=True)
+    
     with st.form("contact_form"):
         name = st.text_input("Name*", placeholder="Your name")
         email = st.text_input("Email*", placeholder="Your email address")
@@ -552,6 +607,8 @@ elif selected == "Contact":
                     st.success("Thank you for contacting us! Our team will get back to you within 24 hours.")
                 else:
                     st.error("There was an error submitting your request. Please try again or contact us directly.")
+    
+    st.markdown("</div>", unsafe_allow_html=True)
 
 # Floating WhatsApp button for mobile
 st.markdown("""
@@ -561,8 +618,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Footer
-st.markdown("""
-<div style="text-align: center; margin-top: 50px; padding: 20px; color: #6C757D; font-size: 0.9rem;">
+st.markdown(f"""
+<div class="section" style="text-align: center; margin-top: 50px; padding: 20px; color: #6C757D; font-size: 0.9rem;">
     <p>© 2023 Orbt-Tech. All rights reserved.</p>
     <p style="margin-top: 10px;">
         <a href="https://www.linkedin.com/company/orbt-tech" target="_blank" style="color: #6C757D; margin: 0 10px;"><i class="fab fa-linkedin"></i></a>
