@@ -841,4 +841,8 @@ if st.session_state.admin_logged_in:
     else:
         st.warning("No contact submissions found in the database")
 
-# ... [Rest of the code remains the same] ...
+# ... [Rest of the code remains the same] ... , AttributeError: This app has encountered an error. The original error message is redacted to prevent data leaks. Full error details have been recorded in the logs (if you're on Streamlit Cloud, click on 'Manage app' in the lower right of your app).
+Traceback:
+File "/mount/src/final_code/app.py", line 738, in <module>
+    st.experimental_rerun()
+    ^^^^^^^^^^^^^^^^^^^^^the admin button keep it beloe of the page and that alos not working check it and check this one also  correctl;y provide th codes
