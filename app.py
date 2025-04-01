@@ -398,12 +398,6 @@ def get_all_contacts():
 # Initialize database
 init_db()
 
-# Initialize session state
-if 'admin_logged_in' not in st.session_state:
-    st.session_state.admin_logged_in = False
-if 'show_admin_login' not in st.session_state:
-    st.session_state.show_admin_login = False
-
 # Admin login page
 def admin_login_page():
     st.title("Admin Login")
@@ -419,6 +413,7 @@ def admin_login_page():
                 st.session_state.admin_logged_in = True
                 st.session_state.show_admin_login = False
                 st.success("Login successful!")
+                st.experimental_rerun()
             else:
                 st.error("Invalid credentials")
     
@@ -504,9 +499,9 @@ def admin_dashboard():
         st.experimental_rerun()
 
 # Page Content
-if st.session_state.admin_logged_in:
+if st.session_state.get('admin_logged_in', False):
     admin_dashboard()
-elif st.session_state.show_admin_login:
+elif st.session_state.get('show_admin_login', False):
     admin_login_page()
 elif selected == "Home":
     # Job Career Button
