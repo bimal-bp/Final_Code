@@ -420,7 +420,7 @@ elif selected == "Team":
         st.markdown("""
         <div class="team-card">
             <b>Mantu Gouda</b>
-            <p>Ml Developer</p>
+            <p>ML Developer</p>
             <p>Creating intuitive user interfaces</p>
         </div>
         """, unsafe_allow_html=True)
@@ -449,7 +449,7 @@ elif selected == "Projects":
     <div class="card">
         <b>Right Education for Perfect Job</b>
         <p>ORBT-LeARN</p>
-        <p>This app will help you choosing your right education path for your sussesful job carrier</p>
+        <p>This app will help you choosing your right education path for your successful job career</p>
         <p>Created by - Bimal Patra</p>
         <p><a href="https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/" target="_blank">View Project</a></p>
     </div>
@@ -503,12 +503,12 @@ elif selected == "Contact":
     <div style="margin-bottom: 20px;">
         <h4 style="text-align: center;">Directly Contact Our Project Managers</h4>
         <div class="manager-card">
-            <b>Hemma Samal (Project Manager)</b>
+            <b>Heema Samal (Project Manager)</b>
             <p>📞 <a href="tel:+919876543210">+91 98765 43210</a></p>
             <p>📱 <a href="https://wa.me/919876543210" target="_blank">WhatsApp</a></p>
         </div>
         <div class="manager-card">
-            <b>Jasmine kartik (Project Coordinator)</b>
+            <b>Jasmine Kartik (Project Coordinator)</b>
             <p>📞 <a href="tel:+919876543211">+91 98765 43211</a></p>
             <p>📱 <a href="https://wa.me/919876543211" target="_blank">WhatsApp</a></p>
         </div>
@@ -538,7 +538,7 @@ elif selected == "Contact":
                 st.error("Please fill all required fields (marked with *)")
             else:
                 if insert_contact(name, email, mobile, project_type, project_description, message):
-                                        st.success("Thank you for contacting us! Our team will get back to you within 24 hours.")
+                    st.success("Thank you for contacting us! Our team will get back to you within 24 hours.")
                 else:
                     st.error("There was an error submitting your request. Please try again or contact us directly.")
 
