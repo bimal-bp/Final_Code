@@ -339,7 +339,7 @@ def admin_login_page():
         submitted = st.form_submit_button("Login")
         
         if submitted:
-            if admin_id == "orbt-tech" and password == "orbtrbi@9":
+            if admin_id == "orbt-learn" and password == "orbtrbi@9":
                 st.session_state.admin_logged_in = True
                 st.session_state.show_admin_login = False
                 st.success("Login successful!")
@@ -640,12 +640,12 @@ def show_contact_page():
         <div class="manager-card">
             <b>Reema Samal (Project Manager)</b>
             <p>📞 <a href="tel:+919876543210">+91 98765 43210</a></p>
-            <p>📧 <a href="mailto:heema.samal@orbt-tech.com">heema.samal@orbt-tech.com</a></p>
+            <p>📧 <a href="mailto:heema.samal@orbt-learn.com">heema.samal@orbt-tech.com</a></p>
         </div>
         <div class="manager-card">
             <b>Jasmine Kartik (Project Coordinator)</b>
             <p>📞 <a href="tel:+919876543211">+91 98765 43211</a></p>
-            <p>📧 <a href="mailto:jasmine.kartik@orbt-tech.com">jasmine.kartik@orbt-tech.com</a></p>
+            <p>📧 <a href="mailto:jasmine.kartik@orbt-learn.com">jasmine.kartik@orbt-tech.com</a></p>
         </div>
     </div>
     """, unsafe_allow_html=True)
