@@ -418,6 +418,7 @@ def admin_login_page():
     
     if st.button("Back to Home"):
         st.session_state.show_admin_login = False
+        st.experimental_rerun()
 
 # Admin dashboard
 def admin_dashboard():
@@ -779,7 +780,15 @@ elif selected == "Contact":
                         
                         Please try again or contact us directly via WhatsApp/phone.
                         """)
+    
+    # Back to Home button in Contact page
+    if st.button("Back to Home", key="back_to_home"):
+        st.session_state.show_admin_login = False
+        st.experimental_rerun()
 
-# Check if admin login should be shown (using session state instead of query params)
-if st.session_state.show_admin_login:
-    st.experimental_rerun()
+# Floating WhatsApp button for mobile
+st.markdown("""
+<a href="https://wa.me/919876543210" class="floating-button" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+""", unsafe_allow_html=True)
