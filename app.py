@@ -637,9 +637,9 @@ def show_contact_page():
             <p>📧 <a href="mailto:heema.samal@orbt-learn.com">heema.samal@orbt-learn.com</a></p>
         </div>
         <div class="manager-card">
-            <b>Jasmine Kartik (Project Coordinator)</b>
+            <b>Bimal Kartik (Project Coordinator)</b>
             <p>📞 <a href="tel:+919348245158">+91 9348245158</a></p>
-            <p>📧 <a href="mailto:jasmine.kartik@orbt-learn.com">jasmine.kartik@orbt-learn.com</a></p>
+            <p>📧 <a href="mailto:bimal.kartik@orbt-learn.com">jasmine.kartik@orbt-learn.com</a></p>
         </div>
     </div>
     """, unsafe_allow_html=True)
