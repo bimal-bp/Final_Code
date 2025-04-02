@@ -426,14 +426,8 @@ def admin_dashboard():
 
 # Home Page
 def show_home_page():
-    # Job Career Button
-    st.markdown("""
-    <div style="text-align: center; margin-bottom: 30px;">
-        <a href="https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/" class="job-button" target="_blank">
-            <i class="fas fa-briefcase"></i> Find Your Perfect Job Career Path
-        </a>
-    </div>
-    """, unsafe_allow_html=True)
+
+
     
     st.subheader("Our Services")
     
@@ -639,12 +633,12 @@ def show_contact_page():
         <h4 style="text-align: center;">Directly Contact Our Project Managers</h4>
         <div class="manager-card">
             <b>Reema Samal (Project Manager)</b>
-            <p>📞 <a href="tel:+919876543210">+91 98765 43210</a></p>
+            <p>📞 <a href="tel:+919390920256">+91 9390920256</a></p>
             <p>📧 <a href="mailto:heema.samal@orbt-learn.com">heema.samal@orbt-learn.com</a></p>
         </div>
         <div class="manager-card">
             <b>Jasmine Kartik (Project Coordinator)</b>
-            <p>📞 <a href="tel:+919876543211">+91 98765 43211</a></p>
+            <p>📞 <a href="tel:+919348245158">+91 9348245158</a></p>
             <p>📧 <a href="mailto:jasmine.kartik@orbt-learn.com">jasmine.kartik@orbt-learn.com</a></p>
         </div>
     </div>
