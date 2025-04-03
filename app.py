@@ -1,3 +1,9 @@
+import streamlit as st
+
+def get_random_color():
+    # This is a placeholder - implement your color generation logic
+    return "#4CC9F0"
+
 def show_home_page():
     st.subheader("Our Services")
     
@@ -25,7 +31,7 @@ def show_home_page():
     # Career Opportunities Section
     if st.session_state.get('show_career_opportunities', False):
         st.markdown("""
-        <div class="card" style="border-left-color: #4CC9F0; margin-top: 20px;">
+        <div style="border-left: 4px solid #4CC9F0; padding: 15px; margin: 20px 0; background-color: #F8F9FA; border-radius: 8px;">
             <h4>🎓 Internship Programs</h4>
             <ul>
                 <li><b>AI/ML Internship</b> - 3 months program with hands-on projects</li>
@@ -34,7 +40,7 @@ def show_home_page():
                 <li><b>Mobile App Development</b> - Build Android/iOS applications</li>
             </ul>
             <p><b>Benefits:</b> Certificate, Letter of Recommendation, Stipend for top performers</p>
-            <p><a href="#contact" style="color: #0077B6;">Apply Now →</a></p>
+            <p><a href="#contact" style="color: #0077B6; text-decoration: none;">Apply Now →</a></p>
         </div>
         """, unsafe_allow_html=True)
         
@@ -44,7 +50,7 @@ def show_home_page():
     # Job Opportunities Section
     elif st.session_state.get('show_job_opportunities', False):
         st.markdown("""
-        <div class="card" style="border-left-color: #4361EE; margin-top: 20px;">
+        <div style="border-left: 4px solid #4361EE; padding: 15px; margin: 20px 0; background-color: #F8F9FA; border-radius: 8px;">
             <h4>💻 Freelance Opportunities</h4>
             <ul>
                 <li><b>AI Model Development</b> - ₹8,000-15,000 per project</li>
@@ -53,10 +59,10 @@ def show_home_page():
                 <li><b>Data Analysis Projects</b> - ₹4,000-12,000 per project</li>
             </ul>
             <p><b>Requirements:</b> Portfolio or GitHub profile, Availability for weekly syncs</p>
-            <p><a href="#contact" style="color: #0077B6;">Apply for Freelance Work →</a></p>
+            <p><a href="#contact" style="color: #0077B6; text-decoration: none;">Apply for Freelance Work →</a></p>
         </div>
         
-        <div class="card" style="border-left-color: #3A0CA3; margin-top: 15px;">
+        <div style="border-left: 4px solid #3A0CA3; padding: 15px; margin: 20px 0; background-color: #F8F9FA; border-radius: 8px;">
             <h4>🏆 Current Openings</h4>
             <ul>
                 <li><b>Python Developer</b> - Part-time (10-15 hrs/week)</li>
@@ -65,7 +71,7 @@ def show_home_page():
                 <li><b>Technical Content Writer</b> - AI/ML topics</li>
             </ul>
             <p><b>Perks:</b> Flexible timing, Remote work, Performance bonuses</p>
-            <p><a href="#contact" style="color: #0077B6;">Submit Your Profile →</a></p>
+            <p><a href="#contact" style="color: #0077B6; text-decoration: none;">Submit Your Profile →</a></p>
         </div>
         """, unsafe_allow_html=True)
         
@@ -78,7 +84,7 @@ def show_home_page():
         
         with col1:
             st.markdown(f"""
-            <div class="card" style="border-left-color: {get_random_color()}">
+            <div style="border-left: 4px solid {get_random_color()}; padding: 15px; margin: 10px 0; background-color: #F8F9FA; border-radius: 8px;">
                 <b>AI/ML Projects</b>
                 <ul style="padding-left: 20px;">
                     <li>Predictive Analytics Projects</li>
@@ -94,7 +100,7 @@ def show_home_page():
         
         with col2:
             st.markdown(f"""
-            <div class="card" style="border-left-color: {get_random_color()}">
+            <div style="border-left: 4px solid {get_random_color()}; padding: 15px; margin: 10px 0; background-color: #F8F9FA; border-radius: 8px;">
                 <b>Software Development</b>
                 <ul style="padding-left: 20px;">
                     <li>Mobile Applications (Android/iOS)</li>
@@ -108,7 +114,7 @@ def show_home_page():
         
         st.subheader("Why Choose Us?")
         st.markdown(f"""
-        <div class="card" style="border-left-color: {get_random_color()}">
+        <div style="border-left: 4px solid {get_random_color()}; padding: 15px; margin: 10px 0; background-color: #F8F9FA; border-radius: 8px;">
             <ul style="padding-left: 20px;">
                 <li>100% Project Completion</li>
                 <li>Documentation Support</li>
@@ -124,52 +130,34 @@ def show_home_page():
     if st.button("Admin Login", key="admin_button"):
         st.session_state.show_admin_login = True
 
-
-/* New button styles */
-.stButton>button[kind="secondary"] {
-    background-color: white !important;
-    color: #212529 !important;
-    border: 1px solid #DEE2E6 !important;
-    height: 80px;
-    font-size: 1.1rem !important;
-    margin: 10px 0;
-}
-
-.stButton>button[kind="secondary"]:hover {
-    background-color: #F8F9FA !important;
-    transform: scale(1.02);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-/* Opportunity cards */
-.opportunity-card {
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 8px;
-    background-color: #F8F9FA;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    border-left: 4px solid #00B4D8;
-}
-
-.opportunity-card h4 {
-    color: #212529;
-    margin-top: 0;
-}
-
-.opportunity-card ul {
-    padding-left: 20px;
-}
-
-.opportunity-badge {
-    display: inline-block;
-    background-color: #E9ECEF;
-    color: #212529 !important;
-    padding: 3px 8px;
-    border-radius: 12px;
-    font-size: 0.8rem;
-    margin-right: 5px;
-    margin-bottom: 5px;
-}
+# CSS Styles
+st.markdown("""
+<style>
+    /* Button styles */
+    .stButton>button {
+        width: 100%;
+        height: 80px;
+        font-size: 1.1rem !important;
+        margin: 10px 0;
+        transition: all 0.3s ease;
+    }
+    
+    .stButton>button:hover {
+        transform: scale(1.02);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    /* Link styles */
+    a {
+        color: #0077B6;
+        text-decoration: none;
+    }
+    
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+""", unsafe_allow_html=True)
 
 def init_session_state():
     if 'admin_logged_in' not in st.session_state:
