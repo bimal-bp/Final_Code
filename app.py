@@ -727,8 +727,8 @@ def show_internship_page():
                     <ul>
                         <li>Focused project work</li>
                         <li>Daily mentorship</li>
-                        <li>Certificate of Completion</li>
-                        <li>Project Report</li>
+                        <li>Get your Certificate of Completion (Online & Offline)</li>
+                        <li>Detailed Project Report</li>
                     </ul>
                 </div>
             </div>
@@ -738,7 +738,7 @@ def show_internship_page():
                     <ul>
                         <li>Multiple project assignments</li>
                         <li>Weekly progress reviews</li>
-                        <li>Certificate with Performance Grading</li>
+                        <li>Get your Certificate with Performance Grading (Online & Offline)</li>
                         <li>Detailed Project Report</li>
                         <li>Letter of Recommendation (for top performers)</li>
                     </ul>
@@ -777,7 +777,7 @@ def show_internship_page():
         </div>
         
         <div style="margin: 20px 0; padding: 15px; background-color: #E9ECEF; border-radius: 8px;">
-            <h4>📞 Contact Our Internship Coordinator:</h4>
+            <h4>📞 Contact Our Project Manager:</h4>
             <p><b>Reema Samal</b> - Internship Program Manager</p>
             <p>📧 <a href="mailto:internship@orbt-learn.com">internship@orbt-learn.com</a></p>
             <p>📞 <a href="tel:+919390920256">+91 9390920256</a> (WhatsApp available)</p>
@@ -790,6 +790,7 @@ def show_internship_page():
         </div>
     </div>
     """, unsafe_allow_html=True)
+
 
 # Job Page
 def show_job_page():
