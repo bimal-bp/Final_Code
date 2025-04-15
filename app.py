@@ -712,86 +712,70 @@ def show_contact_page():
                         """)
 
 # Internship Page
+import streamlit as st
+from streamlit_extras.card import card
+
 def show_internship_page():
-    st.subheader("Internship Opportunities")
-    st.markdown(f"""
-    <div class="card" style="border-left-color: {get_random_color()}">
-        <h3>🚀 Join Our Internship Program</h3>
-        <p>Gain real-world experience working on live projects with our team of professionals.</p>
+    st.header("🎯 Internship Opportunities")
+    
+    # Program Options Section
+    with st.container(border=True):
+        st.subheader("🚀 Internship Programs")
+        col1, col2 = st.columns(2)
         
-        <h4>🏆 Internship Options:</h4>
-        <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
-            <div style="width: 48%; margin-bottom: 15px;">
-                <div class="team-card">
-                    <b>1 Month Intensive Program</b>
-                    <ul>
-                        <li>Focused project work</li>
-                        <li>Daily mentorship</li>
-                        <li>Get your Certificate of Completion (Online & Offline)</li>
-                        <li>Detailed Project Report</li>
-                    </ul>
-                </div>
-            </div>
-            <div style="width: 48%; margin-bottom: 15px;">
-                <div class="team-card">
-                    <b>3 Month Comprehensive Program</b>
-                    <ul>
-                        <li>Multiple project assignments</li>
-                        <li>Weekly progress reviews</li>
-                        <li>Get your Certificate with Performance Grading (Online & Offline)</li>
-                        <li>Detailed Project Report</li>
-                        <li>Letter of Recommendation (for top performers)</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        with col1:
+            card(
+                title="1 Month Intensive",
+                text="""✓ Daily mentorship\n✓ Certificate of Completion\n✓ Project Report\n✓ Online/Offline""",
+                styles={
+                    "card": {
+                        "width": "100%",
+                        "padding": "15px",
+                        "background": "#f0f2f6"
+                    }
+                }
+            )
         
-        <h4>📜 Certification Details:</h4>
-        <ul>
-            <li><b>Digital Certificate</b> - Verifiable online certificate with unique ID</li>
-            <li><b>Hard Copy</b> - Physical certificate available on request</li>
-            <li><b>Project Report</b> - Detailed documentation of your work</li>
-            <li><b>Performance Evaluation</b> - Grading based on your contributions</li>
-        </ul>
-        
-        <h4>🎯 Available Domains:</h4>
-        <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
-            <div style="width: 32%; margin-bottom: 10px;">
-                <div class="card">
-                    <b>AI/ML Intern</b>
-                    <p>Machine Learning, Deep Learning, NLP</p>
-                </div>
-            </div>
-            <div style="width: 32%; margin-bottom: 10px;">
-                <div class="card">
-                    <b>Web Development</b>
-                    <p>Frontend, Backend, Full Stack</p>
-                </div>
-            </div>
-            <div style="width: 32%; margin-bottom: 10px;">
-                <div class="card">
-                    <b>Data Science</b>
-                    <p>Analytics, Visualization, Big Data</p>
-                </div>
-            </div>
-        </div>
-        
-        <div style="margin: 20px 0; padding: 15px; background-color: #E9ECEF; border-radius: 8px;">
-            <h4>📞 Contact Our Project Manager:</h4>
-            <p><b>Reema Samal</b> - Internship Program Manager</p>
-            <p>📧 <a href="mailto:internship@orbt-learn.com">internship@orbt-learn.com</a></p>
-            <p>📞 <a href="tel:+919390920256">+91 9390920256</a> (WhatsApp available)</p>
-            <p>⏰ Office Hours: Mon-Fri, 10AM - 6PM IST</p>
-        </div>
-        
-        <div style="text-align: center; margin-top: 20px;">
-            <a href="#contact" class="contact-button">Apply Now</a>
-            <p style="font-size: 0.9rem; margin-top: 10px;">Application processing time: 3-5 business days</p>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+        with col2:
+            card(
+                title="3 Month Comprehensive",
+                text="""✓ Multiple projects\n✓ Performance Grading\n✓ LOR for top performers\n✓ Detailed Reports""",
+                styles={
+                    "card": {
+                        "width": "100%",
+                        "padding": "15px",
+                        "background": "#f0f2f6"
+                    }
+                }
+            )
+    
+    # What We Provide Section
+    st.subheader("📜 What We Provide")
+    st.markdown("""
+    - **Digital Certificate** (Verifiable online)
+    - **Physical Certificate** (On request)
+    - **Detailed Project Report**
+    - **Performance Evaluation**
+    - **Letter of Recommendation** (For 3-month interns)
+    """)
+    
+    # Contact Section
+    st.subheader("📞 Contact Our Program Manager")
+    contact_container = st.container(border=True)
+    with contact_container:
+        st.markdown("""
+        **Reema Samal**  
+        📧 [internship@orbt-learn.com](mailto:internship@orbt-learn.com)  
+        📞 [+91 9390920256](tel:+919390920256) (WhatsApp available)  
+        ⏰ **Office Hours:** Mon-Fri, 10AM - 6PM IST
+        """)
+    
+    # Apply Now Button
+    st.link_button("✨ Apply Now", "#contact", use_container_width=True)
+    st.caption("Application processing time: 3-5 business days")
 
-
+# Call the function
+show_internship_page()
 # Job Page
 def show_job_page():
     st.subheader("Job Opportunities")
