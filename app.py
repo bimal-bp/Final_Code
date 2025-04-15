@@ -770,7 +770,6 @@ def show_internship_page():
         **Reema Samal**  
         📧 [internship@orbt-learn.com](mailto:internship@orbt-learn.com)  
         📞 [+91 9390920256](tel:+919390920256) (WhatsApp available)  
-        ⏰ **Office Hours:** Mon-Fri, 10AM - 6PM IST
         """)
     
 
