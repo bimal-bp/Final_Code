@@ -905,8 +905,7 @@ def main():
         show_job_page()
     elif selected == "Education":
         show_education_page()
-    elif selected == "Question":
-        show_question_page()
+
     elif selected == "Contact":
         show_contact_page()
 
