@@ -1,3 +1,4 @@
+
 import streamlit as st
 from streamlit_option_menu import option_menu
 import psycopg2
@@ -800,6 +801,22 @@ def show_job_page():
         box-shadow: 0 6px 12px rgba(0,0,0,0.1);
         background: #e9f5ff;
     }
+    .contact-button {
+        display: inline-block;
+        padding: 12px 20px;
+        border-radius: 6px;
+        background: #4361EE;
+        color: white !important;
+        text-align: center;
+        text-decoration: none;
+        font-weight: 500;
+        margin: 5px 0;
+        transition: all 0.3s ease;
+    }
+    .contact-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
     .stButton>button {
         width: 100%;
         border-radius: 8px;
@@ -851,8 +868,130 @@ def show_job_page():
                 if st.button(f"**{title}**\n\nAvg Salary: {salary}", key=f"job_{i}"):
                     st.session_state.selected_job = title
                     st.experimental_rerun()
+    
+    # Resume Builder Section
+    with st.container():
+        st.markdown("""
+        <div class="card" style="border-left-color: #3A0CA3">
+            <h3>📝 Get a Professional Resume</h3>
+            <p>Our experts will help you create an ATS-friendly resume that gets noticed</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        res_col1, res_col2 = st.columns(2)
+        with res_col1:
+            if st.button("📄 Resume Review", key="resume_review"):
+                st.session_state.show_resume_review = True
+        with res_col2:
+            if st.button("✨ Custom Resume Build", key="custom_resume"):
+                st.session_state.show_custom_resume = True
+        
+        st.markdown("""
+        <p style="text-align: center; margin-top: 10px; font-size: 0.9rem;">
+            We analyze 100+ job descriptions to optimize your resume for your target roles
+        </p>
+        """, unsafe_allow_html=True)
+        
+        if st.session_state.get('show_resume_review'):
+            with st.expander("Resume Review Details", expanded=True):
+                st.write("**Our resume review includes:**")
+                st.write("- ATS compatibility analysis")
+                st.write("- Keyword optimization")
+                st.write("- Formatting suggestions")
+                st.write("- Experience highlighting")
+                
+                uploaded_file = st.file_uploader("Upload your resume for review", type=["pdf", "docx"])
+                if uploaded_file:
+                    st.success("Thank you! Our experts will review your resume within 24 hours.")
+        
+        if st.session_state.get('show_custom_resume'):
+            with st.expander("Custom Resume Builder", expanded=True):
+                st.write("**We'll create a resume that:**")
+                st.write("- Matches your target job description")
+                st.write("- Highlights your key achievements")
+                st.write("- Uses industry-specific terminology")
+                
+                with st.form("resume_form"):
+                    name = st.text_input("Full Name")
+                    target_role = st.text_input("Target Job Title")
+                    experience = st.text_area("Your Experience")
+                    skills = st.text_area("Key Skills")
+                    submitted = st.form_submit_button("Submit Requirements")
+                    if submitted:
+                        st.success("Our resume experts will contact you within 24 hours to discuss your custom resume.")
+    
+    # Career Consultation Section
+    with st.container():
+        st.markdown("""
+        <div class="card" style="border-left-color: #4895EF">
+            <h3>👨‍💼 Talk With a Career Expert</h3>
+            <p>30-minute free consultation with our industry professionals</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        if st.button("📅 Schedule Free Session", key="expert_session"):
+            st.session_state.show_expert_session = True
+        
+        if st.session_state.get('show_expert_session'):
+            with st.expander("Schedule Your Consultation", expanded=True):
+                st.write("**What we'll cover:**")
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.write("- Career path analysis")
+                    st.write("- Skill gap assessment")
+                with col2:
+                    st.write("- Interview preparation")
+                    st.write("- Salary negotiation")
+                
+                st.write("**Our experts from:**")
+                col3, col4 = st.columns(2)
+                with col3:
+                    st.write("- FAANG Companies")
+                    st.write("- Top Indian Startups")
+                with col4:
+                    st.write("- Fortune 500 Firms")
+                    st.write("- Specialized Domains")
+                
+                with st.form("expert_form"):
+                    name = st.text_input("Your Name")
+                    email = st.text_input("Email Address")
+                    current_role = st.text_input("Current Role")
+                    target_role = st.text_input("Target Role")
+                    preferred_date = st.date_input("Preferred Date")
+                    preferred_time = st.time_input("Preferred Time")
+                    submitted = st.form_submit_button("Schedule Session")
+                    if submitted:
+                        st.success(f"Session scheduled! We've sent confirmation to {email}")
+    
+    # Contact Section
+    with st.container():
+        st.markdown("""
+        <div class="card" style="border-left-color: #F72585">
+            <h3>📩 Contact Us</h3>
+            <p>Need any help? Contact us for assistance with your career needs.</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        with st.expander("Contact Information", expanded=False):
+            st.write("**Email:** careers@itjobhub.com")
+            st.write("**Phone:** +91 98765 43210")
+            st.write("**Office Hours:** 9:00 AM - 6:00 PM (Mon-Fri)")
+            
+            with st.form("contact_form"):
+                name = st.text_input("Your Name")
+                email = st.text_input("Your Email")
+                message = st.text_area("Your Message")
+                submitted = st.form_submit_button("Send Message")
+                if submitted:
+                    st.success("Thank you! We'll respond within 24 hours.")
 
 # Initialize session state variables
+if 'show_resume_review' not in st.session_state:
+    st.session_state.show_resume_review = False
+if 'show_custom_resume' not in st.session_state:
+    st.session_state.show_custom_resume = False
+if 'show_expert_session' not in st.session_state:
+    st.session_state.show_expert_session = False
 if 'selected_job' not in st.session_state:
     st.session_state.selected_job = None
 
