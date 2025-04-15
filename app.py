@@ -757,5 +757,5 @@ def main():
         elif st.session_state.selected_menu == "Contact":
             show_contact_page()
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()
