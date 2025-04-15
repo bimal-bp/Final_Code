@@ -714,7 +714,6 @@ def show_contact_page():
                         """)
 
 # Main App Logic
-# Main App Logic
 def main():
     # Company Header
     st.markdown('<div class="header">Orbt-Learn</div>', unsafe_allow_html=True)
@@ -742,29 +741,6 @@ def main():
             }
         )
         st.session_state.selected_menu = selected
-        
-        # Add 4 new buttons below the navigation menu
-        col1, col2, col3, col4 = st.columns(4)
-        
-        with col1:
-            if st.button("Internship", key="internship_button", 
-                        help="Explore internship opportunities"):
-                st.session_state.selected_menu = "Internship"
-        
-        with col2:
-            if st.button("Job", key="job_button", 
-                        help="Find job opportunities"):
-                st.session_state.selected_menu = "Job"
-        
-        with col3:
-            if st.button("Education", key="education_button", 
-                        help="Educational resources and guidance"):
-                st.session_state.selected_menu = "Education"
-        
-        with col4:
-            if st.button("Questions", key="questions_button", 
-                        help="Get answers to your questions"):
-                st.session_state.selected_menu = "Questions"
 
     # Page routing
     if st.session_state.admin_logged_in:
@@ -780,59 +756,6 @@ def main():
             show_team_page()
         elif st.session_state.selected_menu == "Contact":
             show_contact_page()
-        elif st.session_state.selected_menu == "Internship":
-            st.subheader("Internship Opportunities")
-            st.markdown("""
-            <div class="card" style="border-left-color: #4CC9F0">
-                <h4>Current Internship Programs:</h4>
-                <ul>
-                    <li>AI/ML Internship (3-6 months)</li>
-                    <li>Web Development Internship</li>
-                    <li>Data Science Internship</li>
-                    <li>Mobile App Development Internship</li>
-                </ul>
-                <p>Contact us for more details about internship programs.</p>
-            </div>
-            """, unsafe_allow_html=True)
-        elif st.session_state.selected_menu == "Job":
-            st.subheader("Job Opportunities")
-            st.markdown("""
-            <div class="card" style="border-left-color: #4CC9F0">
-                <h4>We're Hiring!</h4>
-                <ul>
-                    <li>Junior AI Developer</li>
-                    <li>Full Stack Developer</li>
-                    <li>Data Analyst</li>
-                    <li>UI/UX Designer</li>
-                </ul>
-                <p>Send your resume to careers@orbt-learn.com</p>
-            </div>
-            """, unsafe_allow_html=True)
-        elif st.session_state.selected_menu == "Education":
-            st.subheader("Educational Resources")
-            st.markdown("""
-            <div class="card" style="border-left-color: #4CC9F0">
-                <h4>Learning Resources:</h4>
-                <ul>
-                    <li>Project Guidance</li>
-                    <li>Technical Tutorials</li>
-                    <li>Career Counseling</li>
-                    <li>Workshops</li>
-                </ul>
-                <p>Explore our educational programs to enhance your skills.</p>
-            </div>
-            """, unsafe_allow_html=True)
-        elif st.session_state.selected_menu == "Questions":
-            st.subheader("Frequently Asked Questions")
-            st.markdown("""
-            <div class="card" style="border-left-color: #4CC9F0">
-                <h4>Common Questions:</h4>
-                <ul>
-                    <li>How long does a typical project take?</li>
-                    <li>What technologies do you work with?</li>
-                    <li>Do you provide documentation?</li>
-                    <li>What's your pricing structure?</li>
-                </ul>
-                <p>Contact us for answers to your specific questions.</p>
-            </div>
-            """, unsafe_allow_html=True)
+
+if _name_ == "_main_":
+    main()
