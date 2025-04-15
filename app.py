@@ -552,7 +552,6 @@ def show_projects_page():
 
 # Team Page
 def show_team_page():
-    st.markdown('<div class="header">Orbt-Learn</div>', unsafe_allow_html=True)
     st.subheader("Our Team")
     
     col1, col2 = st.columns(2)
@@ -625,7 +624,7 @@ def show_team_page():
 
 # Contact Page
 def show_contact_page():
-    st.markdown('<div class="header">Orbt-Learn</div>', unsafe_allow_html=True)
+
     st.subheader("Contact Us")
     
     # Project Manager Contact Cards
@@ -716,7 +715,7 @@ def show_contact_page():
 
 # Internship Page
 def show_internship_page():
-    st.markdown('<div class="header">Orbt-Learn</div>', unsafe_allow_html=True)
+
     st.subheader("Internship Opportunities")
     st.markdown(f"""
     <div class="card" style="border-left-color: {get_random_color()}">
@@ -745,7 +744,7 @@ def show_internship_page():
 
 # Job Page
 def show_job_page():
-    st.markdown('<div class="header">Orbt-Learn</div>', unsafe_allow_html=True)
+
     st.subheader("Job Opportunities")
     st.markdown(f"""
     <div class="card" style="border-left-color: {get_random_color()}">
@@ -782,7 +781,7 @@ def show_job_page():
 
 # Education Page
 def show_education_page():
-    st.markdown('<div class="header">Orbt-Learn</div>', unsafe_allow_html=True)
+
     st.subheader("Education Resources")
     st.markdown(f"""
     <div class="card" style="border-left-color: {get_random_color()}">
@@ -816,7 +815,7 @@ def show_education_page():
 
 # Question Page
 def show_question_page():
-    st.markdown('<div class="header">Orbt-Learn</div>', unsafe_allow_html=True)
+
     st.subheader("Frequently Asked Questions")
     st.markdown(f"""
     <div class="card" style="border-left-color: {get_random_color()}">
