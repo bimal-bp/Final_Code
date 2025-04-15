@@ -858,9 +858,7 @@ def show_question_page():
 
 # Main App Logic
 def main():
-    # Display the header in the main content area
-    st.markdown('<div class="header">Orbt-Learn</div>', unsafe_allow_html=True)
-    st.markdown('<div class="subheader">Complete your final year projects with excellence</div>', unsafe_allow_html=True)
+
 
     # Navigation menu
     selected = option_menu(
