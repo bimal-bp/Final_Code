@@ -781,13 +781,23 @@ def show_job_page():
 
 # Education Page
 def show_education_page():
-
-    st.subheader("Education Resources")
+    st.subheader("Education Guidance & Resources")
     st.markdown(f"""
     <div class="card" style="border-left-color: {get_random_color()}">
-        <h3>📚 Learning Resources</h3>
-        <p>Free educational materials to help you in your learning journey.</p>
+        <h3>🚀 The Right Way to Choose Your Education Path</h3>
+        <p>Discover how to select the best learning options for your goals</p>
         
+        <h3>📚 Education Guidance</h3>
+        <p>Confused about what to study after 10th/12th/college? We break down all your options with pros and cons.</p>
+        
+        <h4>Education Roadmaps:</h4>
+        <ul>
+            <li>After 10th Grade - Science/Commerce/Arts/Vocational paths</li>
+            <li>After 12th Grade - Engineering/Medicine/Humanities/Professional courses</li>
+            <li>After College - Higher studies vs Job market preparation</li>
+        </ul>
+        
+        <h3>💡 Practical Learning Resources</h3>
         <h4>Recommended Courses:</h4>
         <ul>
             <li><a href="#" target="_blank">Introduction to Machine Learning</a></li>
@@ -804,6 +814,22 @@ def show_education_page():
             <li>Automated Resume Builder</li>
         </ul>
         
+        <h3>🏆 Education-to-Career Roadmaps</h3>
+        <p>Learn which educational choices lead to your dream jobs</p>
+        <ul>
+            <li>Computer Science → Software Engineer/Data Scientist</li>
+            <li>Commerce → Chartered Accountant/Financial Analyst</li>
+            <li>Biology → Doctor/Biotechnologist</li>
+        </ul>
+        
+        <h3>💼 Job Explorer (200+ career paths)</h3>
+        <p>Discover careers you might not have considered, with real salary ranges and growth potential.</p>
+        <ul>
+            <li>Emerging Tech Roles: AI Specialist, Blockchain Developer</li>
+            <li>Creative Careers: UX Designer, Content Strategist</li>
+            <li>Business Roles: Product Manager, Data Analyst</li>
+        </ul>
+        
         <h4>Research Papers:</h4>
         <ul>
             <li><a href="#" target="_blank">Recent Advances in AI</a></li>
@@ -812,8 +838,6 @@ def show_education_page():
         </ul>
     </div>
     """, unsafe_allow_html=True)
-
-
 
 
 # Main App Logic
