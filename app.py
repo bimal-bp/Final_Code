@@ -105,26 +105,33 @@ st.markdown(f"""
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         border-left: 4px solid #0077B6;
     }}
-    .job-button {{
+    
+    /* Custom button styles for all 8 buttons */
+    .custom-button {{
         display: block;
-        margin: 15px auto;
-        padding: 10px 20px;
-        background-color: white;
-        color: #212529;
-        border: 1px solid #DEE2E6;
+        width: 100%;
+        margin: 5px 0;
+        padding: 10px;
+        background-color: #00B4D8;
+        color: white;
+        border: none;
         border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
+        font-weight: bold;
         text-align: center;
         transition: all 0.3s;
-        width: 80%;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        cursor: pointer;
     }}
-    .job-button:hover {{
-        background-color: #F8F9FA;
-        transform: scale(1.05);
-        border-color: #ADB5BD;
+    
+    .custom-button:hover {{
+        background-color: #0077B6;
+        transform: scale(1.02);
     }}
+    
+    .custom-button.active {{
+        background-color: #000080;  /* Navy blue */
+        box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #000080;
+    }}
+    
     .admin-button {{
         display: block;
         margin: 15px auto;
@@ -240,23 +247,6 @@ st.markdown(f"""
     }}
     
     /* Additional styles for new pages */
-    .stButton>button {{
-        width: 100%;
-        margin: 5px 0;
-        background-color: #00B4D8;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px;
-        font-weight: bold;
-        transition: all 0.3s;
-    }}
-
-    .stButton>button:hover {{
-        background-color: #0077B6;
-        transform: scale(1.02);
-    }}
-
     details {{
         margin-bottom: 10px;
         padding: 10px;
@@ -276,598 +266,8 @@ st.markdown(f"""
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 """, unsafe_allow_html=True)
-       
-# Database connection function
-def get_db_connection():
-    try:
-        conn = psycopg2.connect(
-            dbname="neondb",
-            user="neondb_owner",
-            password="npg_cVaeU8k1ofnZ",
-            host="ep-snowy-bar-a59qktoz-pooler.us-east-2.aws.neon.tech",
-            port="5432",
-            sslmode="require"
-        )
-        return conn
-    except Exception as e:
-        st.error(f"Error connecting to database: {e}")
-        return None
 
-# Create contacts table if not exists (updated schema)
-def init_db():
-    conn = get_db_connection()
-    if conn:
-        try:
-            cur = conn.cursor()
-            # Create new table if not exists
-            cur.execute("""
-                CREATE TABLE IF NOT EXISTS contacts (
-                    id SERIAL PRIMARY KEY,
-                    name VARCHAR(100) NOT NULL,
-                    email VARCHAR(100) NOT NULL,
-                    mobile VARCHAR(20) NOT NULL,
-                    project_type VARCHAR(50) NOT NULL,
-                    project_description TEXT NOT NULL,
-                    message TEXT,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                )
-            """)
-            conn.commit()
-
-        except Exception as e:
-            st.error(f"Error creating table: {e}")
-        finally:
-            if conn:
-                conn.close()
-
-# Insert contact form data (updated)
-def insert_contact(name, email, mobile, project_type, project_description, message):
-    conn = get_db_connection()
-    if conn:
-        try:
-            cur = conn.cursor()
-            cur.execute(
-                """INSERT INTO contacts 
-                (name, email, mobile, project_type, project_description, message) 
-                VALUES (%s, %s, %s, %s, %s, %s)""",
-                (name, email, mobile, project_type, project_description, message)
-            )
-            conn.commit()
-            return True
-        except Exception as e:
-            st.error(f"Error inserting data: {e}")
-            return False
-        finally:
-            if conn:
-                conn.close()
-    return False
-
-# Get all contacts from database
-def get_all_contacts():
-    conn = get_db_connection()
-    if conn:
-        try:
-            cur = conn.cursor()
-            cur.execute("SELECT * FROM contacts ORDER BY created_at DESC")
-            columns = [desc[0] for desc in cur.description]
-            data = cur.fetchall()
-            return columns, data
-        except Exception as e:
-            st.error(f"Error fetching data: {e}")
-            return None, None
-        finally:
-            if conn:
-                conn.close()
-    return None, None
-
-# Initialize database
-init_db()
-
-# Admin login page
-def admin_login_page():
-    st.title("Admin Login")
-    
-    with st.form("admin_login"):
-        admin_id = st.text_input("Admin ID", placeholder="Enter admin ID")
-        password = st.text_input("Password", type="password", placeholder="Enter password")
-        
-        submitted = st.form_submit_button("Login")
-        
-        if submitted:
-            if admin_id == "orbt-learn" and password == "orbtrbi@9":
-                st.session_state.admin_logged_in = True
-                st.session_state.show_admin_login = False
-                st.success("Login successful!")
-            else:
-                st.error("Invalid credentials")
-    
-    if st.button("Back to Home"):
-        st.session_state.show_admin_login = False
-
-# Admin dashboard
-def admin_dashboard():
-    st.title("Admin Dashboard")
-    st.subheader("Contact Form Submissions")
-    
-    columns, data = get_all_contacts()
-    if columns and data:
-        df = pd.DataFrame(data, columns=columns)
-        
-        # Add filtering options
-        st.subheader("Filter Submissions")
-        col1, col2, col3 = st.columns(3)
-        
-        with col1:
-            filter_project = st.selectbox(
-                "Filter by Project Type",
-                ["All"] + sorted(df['project_type'].unique().tolist())
-            )
-        
-        with col2:
-            date_sort = st.selectbox(
-                "Sort by Date",
-                ["Newest First", "Oldest First"]
-            )
-        
-        with col3:
-            search_term = st.text_input("Search in Messages")
-        
-        # Apply filters
-        if filter_project != "All":
-            df = df[df['project_type'] == filter_project]
-        
-        if search_term:
-            df = df[df['project_description'].str.contains(search_term, case=False) | 
-                   df['message'].str.contains(search_term, case=False, na=False)]
-        
-        if date_sort == "Newest First":
-            df = df.sort_values('created_at', ascending=False)
-        else:
-            df = df.sort_values('created_at', ascending=True)
-        
-        # Show statistics
-        st.markdown(f"""
-        <div class="card" style="border-left-color: #7209B7">
-            <b>📈 Submission Statistics</b>
-            <p>Total Submissions: {len(df)}</p>
-            <p>Last Submission: {df['created_at'].max()}</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Display filtered data
-        st.dataframe(df, use_container_width=True, height=600)
-        
-        # Add bulk actions
-        st.subheader("Bulk Actions")
-        if st.button("Delete All Submissions"):
-            conn = get_db_connection()
-            if conn:
-                try:
-                    cur = conn.cursor()
-                    cur.execute("TRUNCATE TABLE contacts RESTART IDENTITY")
-                    conn.commit()
-                    st.success("All submissions have been deleted")
-                except Exception as e:
-                    st.error(f"Error deleting data: {e}")
-                finally:
-                    if conn:
-                        conn.close()
-    else:
-        st.warning("No contact submissions found in the database")
-    
-    if st.button("Logout"):
-        st.session_state.admin_logged_in = False
-        st.session_state.show_admin_login = False
-
-# Home Page
-def show_home_page():
-    st.subheader("Our Services")
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.markdown(f"""
-        <div class="card" style="border-left-color: {get_random_color()}">
-            <b>AI/ML Projects</b>
-            <ul style="padding-left: 20px;">
-                <li>Predictive Analytics Projects</li>
-                <li>Classification Models</li>
-                <li>Recommendation Systems</li>
-                <li>Deep Learning Projects</li>
-                <li>Unsupervised Learning</li>
-                <li>Generative AI Projects</li>
-                <li>Natural Language Processing</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown(f"""
-        <div class="card" style="border-left-color: {get_random_color()}">
-            <b>Software Development</b>
-            <ul style="padding-left: 20px;">
-                <li>Mobile Applications (Android/iOS)</li>
-                <li>Web Applications (Full Stack)</li>
-                <li>MERN/MEAN Stack Development</li>
-                <li>Cross-platform Apps</li>
-                <li>Cloud Integration</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    st.subheader("Why Choose Us?")
-    st.markdown(f"""
-    <div class="card" style="border-left-color: {get_random_color()}">
-        <ul style="padding-left: 20px;">
-            <li>100% Project Completion</li>
-            <li>Documentation Support</li>
-            <li>Regular Updates</li>
-            <li>Affordable Pricing</li>
-            <li>72+ Completed Projects</li>
-            <li>Direct Project Manager Access</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # Admin Button at the bottom of the page
-    if st.button("Admin Login", key="admin_button"):
-        st.session_state.show_admin_login = True
-
-# Projects Page
-def show_projects_page():
-    st.subheader("Our Projects")
-    
-    # GitHub button in Projects section
-    st.markdown("""
-    <div style="text-align:center; margin-bottom: 20px;">
-        <a href="https://github.com/bimal-bp" class="github-badge" target="_blank">
-            <i class="fab fa-github"></i> View My GitHub (72+ Projects)
-        </a>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.markdown(f"""
-    <div class="card" style="border-left-color: {get_random_color()}">
-        <b>Right Education for Perfect Job</b>
-        <p>ORBT-LeARN</p>
-        <p>This app will help you choosing your right education path for your successful job career</p>
-        <p>Created by - Bimal Patra</p>
-        <p><a href="https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/" target="_blank">View Project</a></p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.markdown(f"""
-    <div class="card" style="border-left-color: {get_random_color()}">
-        <b>Bank Customer Analysis</b>
-        <p>Predictive analytics for banking sector</p>
-        <p><a href="https://bankattritionprojects-tymyqz4hyygziox37gfttt.streamlit.app/" target="_blank">View Project</a></p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.markdown(f"""
-    <div class="card" style="border-left-color: {get_random_color()}">
-        <b>Crime Spot Prediction</b>
-        <p>AI system for predicting crime hotspots</p>
-        <p><a href="https://crmiespotpredict-zi269clpbwhknp8d3cqqex.streamlit.app/" target="_blank">View Project</a></p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.markdown(f"""
-    <div class="card" style="border-left-color: {get_random_color()}">
-        <b>Legal App</b>
-        <p>Legal assistance and documentation platform</p>
-        <p><a href="https://legal-app-6ovymevnmlyrcasclwtt8u.streamlit.app/" target="_blank">View Project</a></p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.markdown(f"""
-    <div class="card" style="border-left-color: {get_random_color()}">
-        <b>Student Performance Tracker</b>
-        <p>Educational analytics dashboard</p>
-        <p><a href="https://studentperformance-fvqesnqvjzxvjcpx78zheo.streamlit.app/" target="_blank">View Project</a></p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.markdown(f"""
-    <div class="card" style="border-left-color: {get_random_color()}">
-        <b>PRODIGY_WebDevelopment</b>
-        <p>Analytics dashboard</p>
-        <p><a href="https://github.com/GVMNREDDY/PRODIGY_WebDevelopment">View Project</a></p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.markdown(f"""
-    <div class="card" style="border-left-color: {get_random_color()}">
-        <b>Water Quality Analysis</b>
-        <p>Water quality monitoring system</p>
-        <p><a href="https://waterqualityproject-fjfw7dmgbjgbzdestmpdsi.streamlit.app/" target="_blank">View Project</a></p>
-    </div>
-    """, unsafe_allow_html=True)
-
-# Team Page
-def show_team_page():
-    st.subheader("Our Team")
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.markdown(f"""
-        <div class="team-card" style="border-left-color: {get_random_color()}">
-            <b>Bimal Patra</b>
-            <p>AI/ML Specialist</p>
-            <p>Expert in machine learning and data science</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown(f"""
-        <div class="team-card" style="border-left-color: {get_random_color()}">
-            <b>Rakesh Behera</b>
-            <p>Mobile Developer</p>
-            <p>Skilled in Android, iOS and cross-platform development</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown(f"""
-        <div class="team-card" style="border-left-color: {get_random_color()}">
-            <b>Sravan Sahoo</b>
-            <p>Web Developer</p>
-            <p>Full stack developer with modern frameworks</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown(f"""
-        <div class="team-card" style="border-left-color: {get_random_color()}">
-            <b>Heema Samal</b>
-            <p>Project Manager</p>
-            <p>Ensuring smooth project execution</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown(f"""
-        <div class="team-card" style="border-left-color: {get_random_color()}">
-            <b>Ramhari Samal</b>
-            <p>Data Scientist</p>
-            <p>Specialized in predictive analytics</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown(f"""
-        <div class="team-card" style="border-left-color: {get_random_color()}">
-            <b>Mantu Gouda</b>
-            <p>ML Developer</p>
-            <p>Creating intuitive user interfaces</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown(f"""
-        <div class="team-card" style="border-left-color: {get_random_color()}">
-            <b>Udit kakkar</b>
-            <p>web Developer</p>
-            <p>Creating intuitive user interfaces</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown(f"""
-        <div class="team-card" style="border-left-color: {get_random_color()}">
-            <b>Pabitra Jena</b>
-            <p>Backend Developer</p>
-            <p>Database and server-side expert</p>
-        </div>
-        """, unsafe_allow_html=True)
-
-# Contact Page
-def show_contact_page():
-    st.subheader("Contact Us")
-    
-    # Project Manager Contact Cards
-    st.markdown("""
-    <div style="margin-bottom: 20px;">
-        <h4 style="text-align: center;">Directly Contact Our Project Managers</h4>
-        <div class="manager-card">
-            <b>Reema Samal (Project Manager)</b>
-            <p>📞 <a href="tel:+919390920256">+91 9390920256</a></p>
-            <p>📧 <a href="mailto:heema.samal@orbt-learn.com">heema.samal@orbt-learn.com</a></p>
-        </div>
-        <div class="manager-card">
-            <b>Bimal Kartik (Project Coordinator)</b>
-            <p>📞 <a href="tel:+919348245158">+91 9348245158</a></p>
-            <p>📧 <a href="mailto:bimal.kartik@orbt-learn.com">jasmine.kartik@orbt-learn.com</a></p>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # Contact Form with improved validation
-    with st.form("contact_form", clear_on_submit=True):
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            name = st.text_input("Full Name*", placeholder="Your full name")
-            email = st.text_input("Email Address*", placeholder="Your email address")
-            
-        with col2:
-            mobile = st.text_input("Mobile Number*", placeholder="Your contact number")
-            project_type = st.selectbox("Project Type*", 
-                                     ["Select project type", "AI/ML", "Mobile App", "Web App", 
-                                      "Data Science", "IoT", "Blockchain", "Other"],
-                                     index=0)
-        
-        project_description = st.text_area("Project Description*", 
-                                        placeholder="Detailed description of your project requirements\n"
-                                                   "- Specific features needed\n"
-                                                   "- Technologies preferred\n"
-                                                   "- Deadline if any",
-                                        height=150)
-        
-        message = st.text_area("Additional Information", 
-                             placeholder="Any other information you'd like to share\n"
-                                        "- Reference projects\n"
-                                        "- Share your Budget \n"
-                                        "- Special requirements",
-                             height=100)
-        
-        submitted = st.form_submit_button("Submit Request", type="primary",
-                                        use_container_width=True,
-                                        help="We'll respond within 24 hours")
-        
-        if submitted:
-            if not name or not email or not mobile or project_type == "Select project type" or not project_description:
-                st.error("Please fill all required fields (marked with *)")
-            elif not email.strip().count('@') == 1 or not email.strip().count('.') >= 1:
-                st.error("Please enter a valid email address")
-            elif not mobile.strip().isdigit() or len(mobile.strip()) < 10:
-                st.error("Please enter a valid 10-digit mobile number")
-            else:
-                with st.spinner('Submitting your request...'):
-                    if insert_contact(name, email, mobile, project_type, project_description, message):
-                        st.success("""
-                        ✅ Thank you for contacting us!
-                        
-                        Our team will review your request and get back to you within 24 hours.
-                        """)
-                        
-                        st.balloons()
-                        
-                        st.markdown("""
-                        <div class="card" style="margin-top: 20px; border-left-color: #4CC9F0">
-                            <h4>Next Steps:</h4>
-                            <ol>
-                                <li>Our project manager will contact you within 24 hours</li>
-                                <li>We'll schedule a free consultation call</li>
-                                <li>You'll receive a project proposal with timeline and cost estimate</li>
-                            </ol>
-                            <p>In the meantime, you can explore our <a href="#projects">project portfolio</a>, check our <a href="https://github.com/your-org/your-repo" target="_blank">GitHub page</a>, or try our <a href="https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/" target="_blank">Career Path Finder</a>.</p>
-                        </div>
-                        """, unsafe_allow_html=True)
-                    else:
-                        st.error("""
-                        ❌ There was an error submitting your request.
-                        
-                        Please try again or contact us directly via phone or email.
-                        """)
-
-# Internship Page
-def show_internship_page():
-    st.subheader("Internship Opportunities")
-    st.markdown(f"""
-    <div class="card" style="border-left-color: {get_random_color()}">
-        <h3>🚀 Join Our Internship Program</h3>
-        <p>Gain hands-on experience working on real-world projects with our team.</p>
-        
-        <h4>Available Internships:</h4>
-        <ul>
-            <li>AI/ML Intern</li>
-            <li>Web Development Intern</li>
-            <li>Mobile App Development Intern</li>
-            <li>Data Science Intern</li>
-        </ul>
-        
-        <h4>Benefits:</h4>
-        <ul>
-            <li>Certificate of Completion</li>
-            <li>Letter of Recommendation</li>
-            <li>Stipend for top performers</li>
-            <li>Potential full-time offers</li>
-        </ul>
-        
-        <p>To apply, please contact us through the <a href="#contact">Contact page</a> or email your resume to <a href="mailto:internships@orbt-learn.com">internships@orbt-learn.com</a></p>
-    </div>
-    """, unsafe_allow_html=True)
-
-# Job Page
-def show_job_page():
-    st.subheader("Job Opportunities")
-    st.markdown(f"""
-    <div class="card" style="border-left-color: {get_random_color()}">
-        <h3>💼 Join Our Team</h3>
-        <p>We're always looking for talented individuals to join our growing team.</p>
-        
-        <h4>Current Openings:</h4>
-        <ul>
-            <li>Junior AI/ML Engineer</li>
-            <li>Full Stack Developer</li>
-            <li>Project Manager</li>
-            <li>Technical Writer</li>
-        </ul>
-        
-        <h4>Why Work With Us?</h4>
-        <ul>
-            <li>Flexible working hours</li>
-            <li>Remote work options</li>
-            <li>Continuous learning opportunities</li>
-            <li>Competitive compensation</li>
-        </ul>
-        
-        <p>To apply, please send your resume and portfolio to <a href="mailto:careers@orbt-learn.com">careers@orbt-learn.com</a></p>
-    </div>
-    """, unsafe_allow_html=True)
-
-# Education Page
-def show_education_page():
-    st.subheader("Education Resources")
-    st.markdown(f"""
-    <div class="card" style="border-left-color: {get_random_color()}">
-        <h3>📚 Learning Resources</h3>
-        <p>Enhance your skills with our curated educational resources.</p>
-        
-        <h4>Free Resources:</h4>
-        <ul>
-            <li><a href="#" target="_blank">AI/ML Tutorials</a></li>
-            <li><a href="#" target="_blank">Web Development Guides</a></li>
-            <li><a href="#" target="_blank">Mobile App Development</a></li>
-            <li><a href="#" target="_blank">Data Science Fundamentals</a></li>
-        </ul>
-        
-        <h4>Paid Courses:</h4>
-        <ul>
-            <li>Complete Python Bootcamp</li>
-            <li>Machine Learning Masterclass</li>
-            <li>Full Stack Development</li>
-            <li>Advanced Data Analytics</li>
-        </ul>
-        
-        <p>For more information about our courses, please contact <a href="mailto:education@orbt-learn.com">education@orbt-learn.com</a></p>
-    </div>
-    """, unsafe_allow_html=True)
-
-# FAQ Page
-def show_faq_page():
-    st.subheader("Frequently Asked Questions")
-    st.markdown(f"""
-    <div class="card" style="border-left-color: {get_random_color()}">
-        <h3>❓ Common Questions</h3>
-        
-        <h4>Project Related:</h4>
-        <details>
-            <summary>How long does a typical project take?</summary>
-            <p>Project duration depends on complexity. Simple projects take 2-4 weeks, while complex ones may take 2-3 months.</p>
-        </details>
-        <details>
-            <summary>What's your pricing structure?</summary>
-            <p>We offer customized pricing based on project requirements. Contact us for a free quote.</p>
-        </details>
-        
-        <h4>Internship Related:</h4>
-        <details>
-            <summary>Do you offer paid internships?</summary>
-            <p>We offer stipends for exceptional performers during internships.</p>
-        </details>
-        <details>
-            <summary>What's the internship duration?</summary>
-            <p>Typically 3-6 months, but we can accommodate academic schedules.</p>
-        </details>
-        
-        <h4>General Questions:</h4>
-        <details>
-            <summary>How can I contact support?</summary>
-            <p>Email us at support@orbt-learn.com or call +91 9390920256 during business hours.</p>
-        </details>
-        <details>
-            <summary>Do you provide project documentation?</summary>
-            <p>Yes, all projects include complete documentation and source code.</p>
-        </details>
-    </div>
-    """, unsafe_allow_html=True)
+# Rest of your code remains the same until the main() function
 
 # Main App Logic
 def main():
@@ -877,46 +277,43 @@ def main():
 
     # Navigation Menu - only show if not in admin views
     if not st.session_state.admin_logged_in and not st.session_state.show_admin_login:
-        selected = option_menu(
-            menu_title=None,
-            options=["Home", "Projects", "Team", "Contact"],
-            icons=["house", "folder", "people", "envelope"],
-            menu_icon="cast",
-            default_index=0,
-            orientation="horizontal",
-            styles={
-                "container": {"padding": "0!important", "background-color": "#F8F9FA"},
-                "icon": {"color": "#F72585", "font-size": "16px"},
-                "nav-link": {
-                    "font-size": "14px",
-                    "text-align": "center",
-                    "margin": "0px",
-                    "--hover-color": "#E9ECEF",
-                },
-                "nav-link-selected": {"background-color": "#7209B7"},
-            }
-        )
-        st.session_state.selected_menu = selected
+        # Create a container for our custom navigation
+        nav_container = st.container()
         
-        # Add the new buttons below the navigation menu
-        col1, col2, col3, col4 = st.columns(4)
-        
-        with col1:
-            if st.button("Internship", key="internship_button"):
-                st.session_state.selected_menu = "Internship"
-        
-        with col2:
-            if st.button("Job", key="job_button"):
-                st.session_state.selected_menu = "Job"
-        
-        with col3:
-            if st.button("Education", key="education_button"):
-                st.session_state.selected_menu = "Education"
-        
-        with col4:
-            if st.button("FAQ", key="faq_button"):
-                st.session_state.selected_menu = "FAQ"
-        
+        with nav_container:
+            # Create columns for the navigation
+            cols = st.columns(8)
+            
+            # Define our navigation items
+            nav_items = [
+                ("Home", "house"),
+                ("Projects", "folder"),
+                ("Team", "people"),
+                ("Contact", "envelope"),
+                ("Internship", "briefcase"),
+                ("Job", "suitcase"),
+                ("Education", "book"),
+                ("FAQ", "question-circle")
+            ]
+            
+            # Create each button
+            for i, (item, icon) in enumerate(nav_items):
+                with cols[i]:
+                    # Determine if this is the active button
+                    is_active = st.session_state.selected_menu == item
+                    
+                    # Create the button with appropriate class
+                    button_html = f"""
+                    <button class="custom-button {'active' if is_active else ''}" onclick="window.location.href='?page={item}'">
+                        <i class="fas fa-{icon}"></i> {item}
+                    </button>
+                    """
+                    st.markdown(button_html, unsafe_allow_html=True)
+                    
+                    # Add click handler
+                    if st.button(item, key=f"nav_{item}", help=f"Go to {item}"):
+                        st.session_state.selected_menu = item
+
         # Add some spacing
         st.markdown("<br>", unsafe_allow_html=True)
 
