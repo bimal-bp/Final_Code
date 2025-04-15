@@ -3,3 +3,4 @@ numpy
 streamlit
 streamlit-option-menu
 psycopg2-binary
+streamlit-extras
