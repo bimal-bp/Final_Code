@@ -911,6 +911,7 @@ def show_job_page():
         <p>Need any help? Contact us for assistance with your career needs.</p>
     </div>
     """, unsafe_allow_html=True)
+    
 # Education Page
 def show_education_page():
     st.title("Education & Career Guidance")
