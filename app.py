@@ -426,8 +426,8 @@ def admin_dashboard():
 
 # Home Page
 def show_home_page():
-
-
+    st.markdown('<div class="header">Orbt-Learn</div>', unsafe_allow_html=True)
+    st.markdown('<div class="subheader">Complete your final year projects with excellence</div>', unsafe_allow_html=True)
     
     st.subheader("Our Services")
     
@@ -483,6 +483,7 @@ def show_home_page():
 
 # Projects Page
 def show_projects_page():
+    st.markdown('<div class="header">Orbt-Learn</div>', unsafe_allow_html=True)
     st.subheader("Our Projects")
     
     # GitHub button in Projects section
@@ -553,6 +554,7 @@ def show_projects_page():
 
 # Team Page
 def show_team_page():
+    st.markdown('<div class="header">Orbt-Learn</div>', unsafe_allow_html=True)
     st.subheader("Our Team")
     
     col1, col2 = st.columns(2)
@@ -625,6 +627,7 @@ def show_team_page():
 
 # Contact Page
 def show_contact_page():
+    st.markdown('<div class="header">Orbt-Learn</div>', unsafe_allow_html=True)
     st.subheader("Contact Us")
     
     # Project Manager Contact Cards
@@ -713,35 +716,9 @@ def show_contact_page():
                         Please try again or contact us directly via phone or email.
                         """)
 
-# Main App Logic
-def main():
-    # Company Header
-    st.markdown('<div class="header">Orbt-Learn</div>', unsafe_allow_html=True)
-    st.markdown('<div class="subheader">Complete your final year projects with excellence</div>', unsafe_allow_html=True)
-
-# Update the options and icons list in the option_menu
-selected = option_menu(
-    menu_title=None,
-    options=["Home", "Projects", "Team", "Internship", "Job", "Education", "Question", "Contact"],
-    icons=["house", "folder", "people", "briefcase", "search", "book", "question-circle", "envelope"],
-    menu_icon="cast",
-    default_index=0,
-    orientation="horizontal",
-    styles={
-        "container": {"padding": "0!important", "background-color": "#F8F9FA"},
-        "icon": {"color": "#F72585", "font-size": "16px"},
-        "nav-link": {
-            "font-size": "14px",
-            "text-align": "center",
-            "margin": "0px",
-            "--hover-color": "#E9ECEF",
-        },
-        "nav-link-selected": {"background-color": "#7209B7"},
-    }
-)
-
-# Add corresponding page functions for the new menu items
+# Internship Page
 def show_internship_page():
+    st.markdown('<div class="header">Orbt-Learn</div>', unsafe_allow_html=True)
     st.subheader("Internship Opportunities")
     st.markdown(f"""
     <div class="card" style="border-left-color: {get_random_color()}">
@@ -768,7 +745,9 @@ def show_internship_page():
     </div>
     """, unsafe_allow_html=True)
 
+# Job Page
 def show_job_page():
+    st.markdown('<div class="header">Orbt-Learn</div>', unsafe_allow_html=True)
     st.subheader("Job Opportunities")
     st.markdown(f"""
     <div class="card" style="border-left-color: {get_random_color()}">
@@ -803,7 +782,9 @@ def show_job_page():
     </div>
     """, unsafe_allow_html=True)
 
+# Education Page
 def show_education_page():
+    st.markdown('<div class="header">Orbt-Learn</div>', unsafe_allow_html=True)
     st.subheader("Education Resources")
     st.markdown(f"""
     <div class="card" style="border-left-color: {get_random_color()}">
@@ -835,7 +816,9 @@ def show_education_page():
     </div>
     """, unsafe_allow_html=True)
 
+# Question Page
 def show_question_page():
+    st.markdown('<div class="header">Orbt-Learn</div>', unsafe_allow_html=True)
     st.subheader("Frequently Asked Questions")
     st.markdown(f"""
     <div class="card" style="border-left-color: {get_random_color()}">
@@ -873,20 +856,62 @@ def show_question_page():
     </div>
     """, unsafe_allow_html=True)
 
-# Update the page routing section
-if st.session_state.selected_menu == "Home":
-    show_home_page()
-elif st.session_state.selected_menu == "Projects":
-    show_projects_page()
-elif st.session_state.selected_menu == "Team":
-    show_team_page()
-elif st.session_state.selected_menu == "Internship":
-    show_internship_page()
-elif st.session_state.selected_menu == "Job":
-    show_job_page()
-elif st.session_state.selected_menu == "Education":
-    show_education_page()
-elif st.session_state.selected_menu == "Question":
-    show_question_page()
-elif st.session_state.selected_menu == "Contact":
-    show_contact_page()
+# Main App Logic
+def main():
+    # Display the header in the main content area
+    st.markdown('<div class="header">Orbt-Learn</div>', unsafe_allow_html=True)
+    st.markdown('<div class="subheader">Complete your final year projects with excellence</div>', unsafe_allow_html=True)
+
+    # Navigation menu
+    selected = option_menu(
+        menu_title=None,
+        options=["Home", "Projects", "Team", "Internship", "Job", "Education", "Question", "Contact"],
+        icons=["house", "folder", "people", "briefcase", "search", "book", "question-circle", "envelope"],
+        menu_icon="cast",
+        default_index=0,
+        orientation="horizontal",
+        styles={
+            "container": {"padding": "0!important", "background-color": "#F8F9FA"},
+            "icon": {"color": "#F72585", "font-size": "16px"},
+            "nav-link": {
+                "font-size": "14px",
+                "text-align": "center",
+                "margin": "0px",
+                "--hover-color": "#E9ECEF",
+            },
+            "nav-link-selected": {"background-color": "#7209B7"},
+        }
+    )
+
+    # Update session state with selected menu
+    st.session_state.selected_menu = selected
+
+    # Check for admin login state
+    if st.session_state.show_admin_login:
+        admin_login_page()
+        return
+    
+    if st.session_state.admin_logged_in:
+        admin_dashboard()
+        return
+
+    # Page routing based on selected menu
+    if selected == "Home":
+        show_home_page()
+    elif selected == "Projects":
+        show_projects_page()
+    elif selected == "Team":
+        show_team_page()
+    elif selected == "Internship":
+        show_internship_page()
+    elif selected == "Job":
+        show_job_page()
+    elif selected == "Education":
+        show_education_page()
+    elif selected == "Question":
+        show_question_page()
+    elif selected == "Contact":
+        show_contact_page()
+
+if __name__ == "__main__":
+    main()
