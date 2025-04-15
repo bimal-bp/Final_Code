@@ -481,7 +481,7 @@ def show_home_page():
 
 # Projects Page
 def show_projects_page():
-    st.markdown('<div class="header">Orbt-Learn</div>', unsafe_allow_html=True)
+
     st.subheader("Our Projects")
     
     # GitHub button in Projects section
