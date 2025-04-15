@@ -779,56 +779,97 @@ def show_job_page():
     </div>
     """, unsafe_allow_html=True)
 
-def show_education_page():
-    st.subheader("Education Resources")
-    st.markdown("""
-    <div class="card">
-        <h3>Why spend your time exploring our website? We respect your time and we provide:</h3>
-        
-        <p>🚀 <strong>The Right Way to Choose Your Education Path & Job</strong><br>
-        Discover how to select the best learning options for your goals</p>
-        
-        <p>💡 <strong>Practical Career Advice from Industry Professionals</strong><br>
-        Get real-world insights from experts across various fields</p>
-        
-        <p>🏆 <strong>Education-to-Career Roadmaps</strong><br>
-        Learn which educational choices lead to your dream jobs</p>
-        
-        <p>📚 <strong>Education Guidance</strong><br>
-        Confused about what to study after 10th/12th/college? We break down all your options with pros and cons.</p>
-        
-        <p>💼 <strong>Job Explorer</strong><br>
-        Discover 200+ career paths you might not have considered, with real salary ranges and growth potential.</p>
-        
-        <a href="https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/" target="_blank" class="explore-button">Explore Now</a>
-        
-        <h3>📚 Learning Resources</h3>
-        <p>Free educational materials to help you in your learning journey.</p>
-        
-        <h4>Recommended Courses:</h4>
-        <ul>
-            <li><a href="#" target="_blank">Introduction to Machine Learning</a></li>
-            <li><a href="#" target="_blank">Web Development Bootcamp</a></li>
-            <li><a href="#" target="_blank">Data Science Fundamentals</a></li>
-            <li><a href="#" target="_blank">Mobile App Development</a></li>
-        </ul>
-        
-        <h4>Project Ideas:</h4>
-        <ul>
-            <li>Student Performance Prediction System</li>
-            <li>E-commerce Recommendation Engine</li>
-            <li>Smart Attendance System</li>
-            <li>Automated Resume Builder</li>
-        </ul>
-        
-        <h4>Research Papers:</h4>
-        <ul>
-            <li><a href="#" target="_blank">Recent Advances in AI</a></li>
-            <li><a href="#" target="_blank">Blockchain Applications</a></li>
-            <li><a href="#" target="_blank">IoT Security Challenges</a></li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education & Career Guidance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        .explore-button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        .explore-button:hover {
+            background-color: #45a049;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        h3 {
+            margin-top: 25px;
+            color: #2c3e50;
+        }
+        h4 {
+            color: #34495e;
+        }
+    </style>
+</head>
+<body>
+    <h2>Why spend your time exploring our website?</h2>
+    <p>We respect your time and we provide:</p>
+
+    <p>🚀 <strong>The Right Way to Choose Your Education Path & Job</strong><br>
+    Discover how to select the best learning options for your goals</p>
+
+    <p>💡 <strong>Practical Career Advice from Industry Professionals</strong><br>
+    Get real-world insights from experts across various fields</p>
+
+    <p>🏆 <strong>Education-to-Career Roadmaps</strong><br>
+    Learn which educational choices lead to your dream jobs</p>
+
+    <p>📚 <strong>Education Guidance</strong><br>
+    Confused about what to study after 10th/12th/college? We break down all your options with pros and cons.</p>
+
+    <p>💼 <strong>Job Explorer</strong><br>
+    Discover 200+ career paths you might not have considered, with real salary ranges and growth potential.</p>
+
+    <a href="https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/" target="_blank" class="explore-button">Explore Now</a>
+
+    <h3>📚 Learning Resources</h3>
+    <p>Free educational materials to help you in your learning journey.</p>
+
+    <h4>Recommended Courses:</h4>
+    <ul>
+        <li><a href="#" target="_blank">Introduction to Machine Learning</a></li>
+        <li><a href="#" target="_blank">Web Development Bootcamp</a></li>
+        <li><a href="#" target="_blank">Data Science Fundamentals</a></li>
+        <li><a href="#" target="_blank">Mobile App Development</a></li>
+    </ul>
+
+    <h4>Project Ideas:</h4>
+    <ul>
+        <li>Student Performance Prediction System</li>
+        <li>E-commerce Recommendation Engine</li>
+        <li>Smart Attendance System</li>
+        <li>Automated Resume Builder</li>
+    </ul>
+
+    <h4>Research Papers:</h4>
+    <ul>
+        <li><a href="#" target="_blank">Recent Advances in AI</a></li>
+        <li><a href="#" target="_blank">Blockchain Applications</a></li>
+        <li><a href="#" target="_blank">IoT Security Challenges</a></li>
+    </ul>
+</body>
+</html>
     
 def main():
     # Display the header in the main content area
