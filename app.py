@@ -238,6 +238,16 @@ st.markdown(f"""
     .card a:hover {{
         text-decoration: underline;
     }}
+    
+    /* Internship cards */
+    .internship-card {{
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        background-color: #F8F9FA;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border-left: 4px solid {get_random_color()};
+    }}
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 """, unsafe_allow_html=True)
@@ -712,9 +722,6 @@ def show_contact_page():
                         """)
 
 # Internship Page
-import streamlit as st
-from streamlit_extras.card import card
-
 def show_internship_page():
     st.header("🎯 Internship Opportunities")
     
@@ -724,30 +731,26 @@ def show_internship_page():
         col1, col2 = st.columns(2)
         
         with col1:
-            card(
-                title="1 Month Intensive",
-                text="""✓ Daily mentorship\n✓ Certificate of Completion\n✓ Project Report\n✓ Online/Offline""",
-                styles={
-                    "card": {
-                        "width": "100%",
-                        "padding": "15px",
-                        "background": "#f0f2f6"
-                    }
-                }
-            )
+            st.markdown(f"""
+            <div class="internship-card">
+                <h4>1 Month Intensive</h4>
+                <p>✓ Daily mentorship</p>
+                <p>✓ Certificate of Completion</p>
+                <p>✓ Project Report</p>
+                <p>✓ Online/Offline</p>
+            </div>
+            """, unsafe_allow_html=True)
         
         with col2:
-            card(
-                title="3 Month Comprehensive",
-                text="""✓ Multiple projects\n✓ Performance Grading\n✓ LOR for top performers\n✓ Detailed Reports""",
-                styles={
-                    "card": {
-                        "width": "100%",
-                        "padding": "15px",
-                        "background": "#f0f2f6"
-                    }
-                }
-            )
+            st.markdown(f"""
+            <div class="internship-card">
+                <h4>3 Month Comprehensive</h4>
+                <p>✓ Multiple projects</p>
+                <p>✓ Performance Grading</p>
+                <p>✓ LOR for top performers</p>
+                <p>✓ Detailed Reports</p>
+            </div>
+            """, unsafe_allow_html=True)
     
     # What We Provide Section
     st.subheader("📜 What We Provide")
@@ -770,12 +773,7 @@ def show_internship_page():
         ⏰ **Office Hours:** Mon-Fri, 10AM - 6PM IST
         """)
     
-    # Apply Now Button
-    st.link_button("✨ Apply Now", "#contact", use_container_width=True)
-    st.caption("Application processing time: 3-5 business days")
 
-# Call the function
-show_internship_page()
 # Job Page
 def show_job_page():
     st.subheader("Job Opportunities")
