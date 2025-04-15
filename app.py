@@ -775,40 +775,189 @@ def show_internship_page():
 
 # Job Page
 def show_job_page():
-    st.subheader("Job Opportunities")
-    st.markdown(f"""
-    <div class="card" style="border-left-color: {get_random_color()}">
-        <h3>💼 Join Our Team</h3>
-        <p>We're always looking for talented individuals to join our growing team.</p>
+    st.subheader("🚀 Best IT Job Opportunities")
+    
+    # Job Categories Section
+    st.markdown("""
+    <div class="card" style="border-left-color: #4361EE">
+        <h3>💼 Top 15 High-Demand IT Jobs</h3>
+        <p>Click on any job role to learn more about requirements and career path</p>
         
-        <div class="job-card">
-            <h4>Current Openings:</h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; margin-top: 20px;">
             <div class="job-button">
-                <b>Junior ML Engineer</b>
-                <p>0-2 years experience | Python, TensorFlow</p>
+                <b>AI/ML Engineer</b>
+                <p>Avg Salary: ₹8-15L</p>
+            </div>
+            <div class="job-button">
+                <b>Data Scientist</b>
+                <p>Avg Salary: ₹7-12L</p>
+            </div>
+            <div class="job-button">
+                <b>Cloud Architect</b>
+                <p>Avg Salary: ₹10-18L</p>
+            </div>
+            <div class="job-button">
+                <b>DevOps Engineer</b>
+                <p>Avg Salary: ₹6-12L</p>
             </div>
             <div class="job-button">
                 <b>Full Stack Developer</b>
-                <p>1-3 years experience | React, Node.js</p>
+                <p>Avg Salary: ₹5-10L</p>
             </div>
             <div class="job-button">
-                <b>Data Analyst</b>
-                <p>0-1 years experience | SQL, Python</p>
+                <b>Cybersecurity Analyst</b>
+                <p>Avg Salary: ₹5-9L</p>
+            </div>
+            <div class="job-button">
+                <b>Blockchain Developer</b>
+                <p>Avg Salary: ₹8-15L</p>
+            </div>
+            <div class="job-button">
+                <b>Data Engineer</b>
+                <p>Avg Salary: ₹6-11L</p>
+            </div>
+            <div class="job-button">
+                <b>IoT Solutions Architect</b>
+                <p>Avg Salary: ₹7-13L</p>
+            </div>
+            <div class="job-button">
+                <b>AR/VR Developer</b>
+                <p>Avg Salary: ₹5-10L</p>
+            </div>
+            <div class="job-button">
+                <b>Site Reliability Engineer</b>
+                <p>Avg Salary: ₹8-14L</p>
+            </div>
+            <div class="job-button">
+                <b>Big Data Engineer</b>
+                <p>Avg Salary: ₹7-12L</p>
+            </div>
+            <div class="job-button">
+                <b>Quantum Computing Specialist</b>
+                <p>Avg Salary: ₹12-20L</p>
             </div>
             <div class="job-button">
                 <b>UI/UX Designer</b>
-                <p>1+ years experience | Figma, Adobe XD</p>
+                <p>Avg Salary: ₹4-8L</p>
+            </div>
+            <div class="job-button">
+                <b>Technical Product Manager</b>
+                <p>Avg Salary: ₹10-18L</p>
             </div>
         </div>
-        
-        <p style="text-align: center; margin-top: 20px;">
-            Don't see your perfect role? We still want to hear from you!
-        </p>
-        
-        <a href="#contact" class="contact-button">Submit Your Resume</a>
     </div>
     """, unsafe_allow_html=True)
-
+    
+    # Resume Builder Section
+    st.markdown("""
+    <div class="card" style="border-left-color: #3A0CA3; margin-top: 20px;">
+        <h3>📝 Get a Professional Resume</h3>
+        <p>Our experts will help you create an ATS-friendly resume that gets noticed</p>
+        
+        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; margin-top: 15px;">
+            <a href="#contact" class="contact-button" style="width: 45%;">
+                <i class="fas fa-file-alt"></i> Resume Review
+            </a>
+            <a href="#contact" class="contact-button" style="width: 45%; background-color: #4CC9F0;">
+                <i class="fas fa-magic"></i> Custom Resume Build
+            </a>
+        </div>
+        
+        <p style="text-align: center; margin-top: 10px; font-size: 0.9rem;">
+            We analyze 100+ job descriptions to optimize your resume for your target roles
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Career Consultation Section
+    st.markdown("""
+    <div class="card" style="border-left-color: #4895EF; margin-top: 20px;">
+        <h3>👨‍💼 Talk With a Career Expert</h3>
+        <p>30-minute free consultation with our industry professionals</p>
+        
+        <div style="text-align: center; margin: 20px 0;">
+            <a href="#contact" class="contact-button" style="width: 60%; background-color: #7209B7;">
+                <i class="fas fa-calendar-alt"></i> Schedule Free Session
+            </a>
+        </div>
+        
+        <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+            <div style="width: 48%; padding: 10px;">
+                <h4>What we'll cover:</h4>
+                <ul>
+                    <li>Career path analysis</li>
+                    <li>Skill gap assessment</li>
+                    <li>Interview preparation</li>
+                    <li>Salary negotiation</li>
+                </ul>
+            </div>
+            <div style="width: 48%; padding: 10px;">
+                <h4>Our experts from:</h4>
+                <ul>
+                    <li>FAANG Companies</li>
+                    <li>Top Indian Startups</li>
+                    <li>Fortune 500 Firms</li>
+                    <li>Specialized Domains</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Contact Form Section
+    st.markdown("""
+    <div class="card" style="border-left-color: #F72585; margin-top: 20px;">
+        <h3>📩 Add Your Details</h3>
+        <p>Complete this form and our career team will contact you within 24 hours</p>
+        
+        <form style="margin-top: 15px;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+                <div style="width: 48%; margin-bottom: 10px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Full Name*</label>
+                    <input type="text" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                </div>
+                <div style="width: 48%; margin-bottom: 10px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Email*</label>
+                    <input type="email" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                </div>
+                <div style="width: 48%; margin-bottom: 10px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Mobile*</label>
+                    <input type="tel" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                </div>
+                <div style="width: 48%; margin-bottom: 10px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Target Job Role</label>
+                    <select style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                        <option>Select job role</option>
+                        <option>AI/ML Engineer</option>
+                        <option>Data Scientist</option>
+                        <option>Full Stack Developer</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div style="margin-bottom: 10px;">
+                <label style="display: block; margin-bottom: 5px; font-weight: bold;">Your Current Experience</label>
+                <textarea style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd; height: 80px;" 
+                          placeholder="Current skills, education, projects, etc."></textarea>
+            </div>
+            
+            <div style="margin-bottom: 10px;">
+                <label style="display: block; margin-bottom: 5px; font-weight: bold;">Career Goals</label>
+                <textarea style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd; height: 80px;" 
+                          placeholder="What kind of opportunities are you looking for?"></textarea>
+            </div>
+            
+            <button type="submit" class="contact-button" style="width: 100%; background-color: #4CC9F0;">
+                Submit Details
+            </button>
+            
+            <p style="text-align: center; margin-top: 10px; font-size: 0.8rem;">
+                We respect your privacy. Your information will never be shared with third parties.
+            </p>
+        </form>
+    </div>
+    """, unsafe_allow_html=True)
 # Education Page
 def show_education_page():
     st.title("Education & Career Guidance")
