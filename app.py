@@ -712,8 +712,159 @@ def show_contact_page():
                         
                         Please try again or contact us directly via phone or email.
                         """)
+def show_internship_page():
+    st.subheader("Internship Opportunities")
+    st.markdown(f"""
+    <div class="card" style="border-left-color: {get_random_color()}">
+        <h3>🚀 Join Our Internship Program</h3>
+        <p>Gain hands-on experience working on real-world projects with our team.</p>
+        
+        <h4>Available Internships:</h4>
+        <ul>
+            <li>AI/ML Intern</li>
+            <li>Web Development Intern</li>
+            <li>Mobile App Development Intern</li>
+            <li>Data Science Intern</li>
+        </ul>
+        
+        <h4>Benefits:</h4>
+        <ul>
+            <li>Certificate of Completion</li>
+            <li>Letter of Recommendation</li>
+            <li>Stipend for top performers</li>
+            <li>Potential full-time offers</li>
+        </ul>
+        
+        <p>To apply, please contact us through the <a href="#contact">Contact page</a> or email your resume to <a href="mailto:internships@orbt-learn.com">internships@orbt-learn.com</a></p>
+    </div>
+    """, unsafe_allow_html=True)
 
-# Main App Logic
+def show_job_page():
+    st.subheader("Job Opportunities")
+    st.markdown(f"""
+    <div class="card" style="border-left-color: {get_random_color()}">
+        <h3>💼 Join Our Team</h3>
+        <p>We're always looking for talented individuals to join our growing team.</p>
+        
+        <h4>Current Openings:</h4>
+        <ul>
+            <li>Junior AI/ML Engineer</li>
+            <li>Full Stack Developer</li>
+            <li>Project Manager</li>
+            <li>Technical Writer</li>
+        </ul>
+        
+        <h4>Why Work With Us?</h4>
+        <ul>
+            <li>Flexible working hours</li>
+            <li>Remote work options</li>
+            <li>Continuous learning opportunities</li>
+            <li>Competitive compensation</li>
+        </ul>
+        
+        <p>To apply, please send your resume and portfolio to <a href="mailto:careers@orbt-learn.com">careers@orbt-learn.com</a></p>
+    </div>
+    """, unsafe_allow_html=True)
+
+def show_education_page():
+    st.subheader("Education Resources")
+    st.markdown(f"""
+    <div class="card" style="border-left-color: {get_random_color()}">
+        <h3>📚 Learning Resources</h3>
+        <p>Enhance your skills with our curated educational resources.</p>
+        
+        <h4>Free Resources:</h4>
+        <ul>
+            <li><a href="#" target="_blank">AI/ML Tutorials</a></li>
+            <li><a href="#" target="_blank">Web Development Guides</a></li>
+            <li><a href="#" target="_blank">Mobile App Development</a></li>
+            <li><a href="#" target="_blank">Data Science Fundamentals</a></li>
+        </ul>
+        
+        <h4>Paid Courses:</h4>
+        <ul>
+            <li>Complete Python Bootcamp</li>
+            <li>Machine Learning Masterclass</li>
+            <li>Full Stack Development</li>
+            <li>Advanced Data Analytics</li>
+        </ul>
+        
+        <p>For more information about our courses, please contact <a href="mailto:education@orbt-learn.com">education@orbt-learn.com</a></p>
+    </div>
+    """, unsafe_allow_html=True)
+
+def show_faq_page():
+    st.subheader("Frequently Asked Questions")
+    st.markdown(f"""
+    <div class="card" style="border-left-color: {get_random_color()}">
+        <h3>❓ Common Questions</h3>
+        
+        <h4>Project Related:</h4>
+        <details>
+            <summary>How long does a typical project take?</summary>
+            <p>Project duration depends on complexity. Simple projects take 2-4 weeks, while complex ones may take 2-3 months.</p>
+        </details>
+        <details>
+            <summary>What's your pricing structure?</summary>
+            <p>We offer customized pricing based on project requirements. Contact us for a free quote.</p>
+        </details>
+        
+        <h4>Internship Related:</h4>
+        <details>
+            <summary>Do you offer paid internships?</summary>
+            <p>We offer stipends for exceptional performers during internships.</p>
+        </details>
+        <details>
+            <summary>What's the internship duration?</summary>
+            <p>Typically 3-6 months, but we can accommodate academic schedules.</p>
+        </details>
+        
+        <h4>General Questions:</h4>
+        <details>
+            <summary>How can I contact support?</summary>
+            <p>Email us at support@orbt-learn.com or call +91 9390920256 during business hours.</p>
+        </details>
+        <details>
+            <summary>Do you provide project documentation?</summary>
+            <p>Yes, all projects include complete documentation and source code.</p>
+        </details>
+    </div>
+    """, unsafe_allow_html=True)
+
+/* Add this to your existing CSS */
+.stButton>button {
+    width: 100%;
+    margin: 5px 0;
+    background-color: #00B4D8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.stButton>button:hover {
+    background-color: #0077B6;
+    transform: scale(1.02);
+}
+
+details {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #F8F9FA;
+    border-radius: 5px;
+}
+
+details summary {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+details p {
+    margin-left: 20px;
+    padding-top: 10px;
+}
 # Main App Logic
 def main():
     # Company Header
