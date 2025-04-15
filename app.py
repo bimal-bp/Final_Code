@@ -813,45 +813,8 @@ def show_education_page():
     </div>
     """, unsafe_allow_html=True)
 
-# Question Page
-def show_question_page():
 
-    st.subheader("Frequently Asked Questions")
-    st.markdown(f"""
-    <div class="card" style="border-left-color: {get_random_color()}">
-        <h3>❓ Common Questions</h3>
-        
-        <details>
-            <summary><b>How long does a typical project take?</b></summary>
-            <p>Project timelines vary based on complexity. Simple projects may take 2-4 weeks, while complex ones can take 2-3 months. We'll provide a timeline estimate after discussing your requirements.</p>
-        </details>
-        
-        <details>
-            <summary><b>What technologies do you work with?</b></summary>
-            <p>We work with a wide range of technologies including Python, TensorFlow, React, Node.js, Flutter, and various cloud platforms. See our Projects page for examples.</p>
-        </details>
-        
-        <details>
-            <summary><b>Do you provide documentation?</b></summary>
-            <p>Yes! All projects include complete documentation including system documentation, user manuals, and deployment guides.</p>
-        </details>
-        
-        <details>
-            <summary><b>Can I get help after project completion?</b></summary>
-            <p>We provide 3 months of free support for all completed projects. Extended support plans are also available.</p>
-        </details>
-        
-        <details>
-            <summary><b>How do payments work?</b></summary>
-            <p>We typically work with 50% upfront and 50% on completion. For larger projects, we can arrange milestone-based payments.</p>
-        </details>
-        
-        <div style="margin-top: 20px;">
-            <h4>Still have questions?</h4>
-            <a href="#contact" class="contact-button">Contact Us</a>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+
 
 # Main App Logic
 def main():
@@ -905,7 +868,6 @@ def main():
         show_job_page()
     elif selected == "Education":
         show_education_page()
-
     elif selected == "Contact":
         show_contact_page()
 
