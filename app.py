@@ -715,33 +715,83 @@ def show_contact_page():
 
 # Internship Page
 def show_internship_page():
-
     st.subheader("Internship Opportunities")
     st.markdown(f"""
     <div class="card" style="border-left-color: {get_random_color()}">
         <h3>🚀 Join Our Internship Program</h3>
-        <p>Gain real-world experience working on live projects with our team.</p>
+        <p>Gain real-world experience working on live projects with our team of professionals.</p>
         
-        <h4>Available Internships:</h4>
+        <h4>🏆 Internship Options:</h4>
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+            <div style="width: 48%; margin-bottom: 15px;">
+                <div class="team-card">
+                    <b>1 Month Intensive Program</b>
+                    <ul>
+                        <li>Focused project work</li>
+                        <li>Daily mentorship</li>
+                        <li>Certificate of Completion</li>
+                        <li>Project Report</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="width: 48%; margin-bottom: 15px;">
+                <div class="team-card">
+                    <b>3 Month Comprehensive Program</b>
+                    <ul>
+                        <li>Multiple project assignments</li>
+                        <li>Weekly progress reviews</li>
+                        <li>Certificate with Performance Grading</li>
+                        <li>Detailed Project Report</li>
+                        <li>Letter of Recommendation (for top performers)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <h4>📜 Certification Details:</h4>
         <ul>
-            <li><b>AI/ML Intern</b> - Work on machine learning projects</li>
-            <li><b>Web Development Intern</b> - Build full-stack applications</li>
-            <li><b>Data Science Intern</b> - Analyze real datasets</li>
-            <li><b>Mobile App Intern</b> - Develop cross-platform apps</li>
+            <li><b>Digital Certificate</b> - Verifiable online certificate with unique ID</li>
+            <li><b>Hard Copy</b> - Physical certificate available on request</li>
+            <li><b>Project Report</b> - Detailed documentation of your work</li>
+            <li><b>Performance Evaluation</b> - Grading based on your contributions</li>
         </ul>
         
-        <h4>Benefits:</h4>
-        <ul>
-            <li>Certificate upon completion</li>
-            <li>Letter of recommendation</li>
-            <li>Potential job offers</li>
-            <li>Stipend for top performers</li>
-        </ul>
+        <h4>🎯 Available Domains:</h4>
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+            <div style="width: 32%; margin-bottom: 10px;">
+                <div class="card">
+                    <b>AI/ML Intern</b>
+                    <p>Machine Learning, Deep Learning, NLP</p>
+                </div>
+            </div>
+            <div style="width: 32%; margin-bottom: 10px;">
+                <div class="card">
+                    <b>Web Development</b>
+                    <p>Frontend, Backend, Full Stack</p>
+                </div>
+            </div>
+            <div style="width: 32%; margin-bottom: 10px;">
+                <div class="card">
+                    <b>Data Science</b>
+                    <p>Analytics, Visualization, Big Data</p>
+                </div>
+            </div>
+        </div>
         
-        <a href="#contact" class="contact-button">Apply Now</a>
+        <div style="margin: 20px 0; padding: 15px; background-color: #E9ECEF; border-radius: 8px;">
+            <h4>📞 Contact Our Internship Coordinator:</h4>
+            <p><b>Reema Samal</b> - Internship Program Manager</p>
+            <p>📧 <a href="mailto:internship@orbt-learn.com">internship@orbt-learn.com</a></p>
+            <p>📞 <a href="tel:+919390920256">+91 9390920256</a> (WhatsApp available)</p>
+            <p>⏰ Office Hours: Mon-Fri, 10AM - 6PM IST</p>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="#contact" class="contact-button">Apply Now</a>
+            <p style="font-size: 0.9rem; margin-top: 10px;">Application processing time: 3-5 business days</p>
+        </div>
     </div>
     """, unsafe_allow_html=True)
-
 # Job Page
 def show_job_page():
 
@@ -920,6 +970,8 @@ st.markdown("""
 - [Blockchain Applications](#)
 - [IoT Security Challenges](#)
 """)
+
+
     
 def main():
     # Display the header in the main content area
