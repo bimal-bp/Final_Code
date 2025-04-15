@@ -851,32 +851,6 @@ def show_education_page():
 
     st.link_button("Explore Now", "https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/")
 
-    st.subheader("📚 Learning Resources")
-    st.write("Free educational materials to help you in your learning journey.")
-
-    st.markdown("**Recommended Courses:**")
-    st.markdown("""
-    - [Introduction to Machine Learning](#)
-    - [Web Development Bootcamp](#)
-    - [Data Science Fundamentals](#)
-    - [Mobile App Development](#)
-    """)
-
-    st.markdown("**Project Ideas:**")
-    st.markdown("""
-    - Student Performance Prediction System
-    - E-commerce Recommendation Engine
-    - Smart Attendance System
-    - Automated Resume Builder
-    """)
-
-    st.markdown("**Research Papers:**")
-    st.markdown("""
-    - [Recent Advances in AI](#)
-    - [Blockchain Applications](#)
-    - [IoT Security Challenges](#)
-    """)
-
     
 def main():
     # Display the header in the main content area
