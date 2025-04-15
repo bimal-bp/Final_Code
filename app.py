@@ -825,8 +825,8 @@ def main():
     # Navigation menu
     selected = option_menu(
         menu_title=None,
-        options=["Home", "Projects", "Team", "Internship", "Job", "Education", "Question", "Contact"],
-        icons=["house", "folder", "people", "briefcase", "search", "book", "question-circle", "envelope"],
+        options=["Home", "Projects", "Team", "Internship", "Job", "Education","Contact"],
+        icons=["house", "folder", "people", "briefcase", "search", "book","envelope"],
         menu_icon="cast",
         default_index=0,
         orientation="horizontal",
