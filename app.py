@@ -714,6 +714,7 @@ def show_contact_page():
                         """)
 
 # Main App Logic
+# Main App Logic
 def main():
     # Company Header
     st.markdown('<div class="header">Orbt-Learn</div>', unsafe_allow_html=True)
@@ -741,6 +742,28 @@ def main():
             }
         )
         st.session_state.selected_menu = selected
+        
+        # Add the new buttons below the navigation menu
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
+            if st.button("Internship", key="internship_button"):
+                st.session_state.selected_menu = "Internship"
+        
+        with col2:
+            if st.button("Job", key="job_button"):
+                st.session_state.selected_menu = "Job"
+        
+        with col3:
+            if st.button("Education", key="education_button"):
+                st.session_state.selected_menu = "Education"
+        
+        with col4:
+            if st.button("FAQ", key="faq_button"):
+                st.session_state.selected_menu = "FAQ"
+        
+        # Add some spacing
+        st.markdown("<br>", unsafe_allow_html=True)
 
     # Page routing
     if st.session_state.admin_logged_in:
@@ -756,6 +779,11 @@ def main():
             show_team_page()
         elif st.session_state.selected_menu == "Contact":
             show_contact_page()
-
-if __name__ == "__main__":
-    main()
+        elif st.session_state.selected_menu == "Internship":
+            show_internship_page()
+        elif st.session_state.selected_menu == "Job":
+            show_job_page()
+        elif st.session_state.selected_menu == "Education":
+            show_education_page()
+        elif st.session_state.selected_menu == "FAQ":
+            show_faq_page()
