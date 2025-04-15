@@ -719,43 +719,174 @@ def main():
     st.markdown('<div class="header">Orbt-Learn</div>', unsafe_allow_html=True)
     st.markdown('<div class="subheader">Complete your final year projects with excellence</div>', unsafe_allow_html=True)
 
-    # Navigation Menu - only show if not in admin views
-    if not st.session_state.admin_logged_in and not st.session_state.show_admin_login:
-        selected = option_menu(
-            menu_title=None,
-            options=["Home", "Projects", "Team", "Contact"],
-            icons=["house", "folder", "people", "envelope"],
-            menu_icon="cast",
-            default_index=0,
-            orientation="horizontal",
-            styles={
-                "container": {"padding": "0!important", "background-color": "#F8F9FA"},
-                "icon": {"color": "#F72585", "font-size": "16px"},
-                "nav-link": {
-                    "font-size": "14px",
-                    "text-align": "center",
-                    "margin": "0px",
-                    "--hover-color": "#E9ECEF",
-                },
-                "nav-link-selected": {"background-color": "#7209B7"},
-            }
-        )
-        st.session_state.selected_menu = selected
+# Update the options and icons list in the option_menu
+selected = option_menu(
+    menu_title=None,
+    options=["Home", "Projects", "Team", "Internship", "Job", "Education", "Question", "Contact"],
+    icons=["house", "folder", "people", "briefcase", "search", "book", "question-circle", "envelope"],
+    menu_icon="cast",
+    default_index=0,
+    orientation="horizontal",
+    styles={
+        "container": {"padding": "0!important", "background-color": "#F8F9FA"},
+        "icon": {"color": "#F72585", "font-size": "16px"},
+        "nav-link": {
+            "font-size": "14px",
+            "text-align": "center",
+            "margin": "0px",
+            "--hover-color": "#E9ECEF",
+        },
+        "nav-link-selected": {"background-color": "#7209B7"},
+    }
+)
 
-    # Page routing
-    if st.session_state.admin_logged_in:
-        admin_dashboard()
-    elif st.session_state.show_admin_login:
-        admin_login_page()
-    else:
-        if st.session_state.selected_menu == "Home":
-            show_home_page()
-        elif st.session_state.selected_menu == "Projects":
-            show_projects_page()
-        elif st.session_state.selected_menu == "Team":
-            show_team_page()
-        elif st.session_state.selected_menu == "Contact":
-            show_contact_page()
+# Add corresponding page functions for the new menu items
+def show_internship_page():
+    st.subheader("Internship Opportunities")
+    st.markdown(f"""
+    <div class="card" style="border-left-color: {get_random_color()}">
+        <h3>🚀 Join Our Internship Program</h3>
+        <p>Gain real-world experience working on live projects with our team.</p>
+        
+        <h4>Available Internships:</h4>
+        <ul>
+            <li><b>AI/ML Intern</b> - Work on machine learning projects</li>
+            <li><b>Web Development Intern</b> - Build full-stack applications</li>
+            <li><b>Data Science Intern</b> - Analyze real datasets</li>
+            <li><b>Mobile App Intern</b> - Develop cross-platform apps</li>
+        </ul>
+        
+        <h4>Benefits:</h4>
+        <ul>
+            <li>Certificate upon completion</li>
+            <li>Letter of recommendation</li>
+            <li>Potential job offers</li>
+            <li>Stipend for top performers</li>
+        </ul>
+        
+        <a href="#contact" class="contact-button">Apply Now</a>
+    </div>
+    """, unsafe_allow_html=True)
 
-if __name__ == "__main__":
-    main()
+def show_job_page():
+    st.subheader("Job Opportunities")
+    st.markdown(f"""
+    <div class="card" style="border-left-color: {get_random_color()}">
+        <h3>💼 Join Our Team</h3>
+        <p>We're always looking for talented individuals to join our growing team.</p>
+        
+        <div class="job-card">
+            <h4>Current Openings:</h4>
+            <div class="job-button">
+                <b>Junior ML Engineer</b>
+                <p>0-2 years experience | Python, TensorFlow</p>
+            </div>
+            <div class="job-button">
+                <b>Full Stack Developer</b>
+                <p>1-3 years experience | React, Node.js</p>
+            </div>
+            <div class="job-button">
+                <b>Data Analyst</b>
+                <p>0-1 years experience | SQL, Python</p>
+            </div>
+            <div class="job-button">
+                <b>UI/UX Designer</b>
+                <p>1+ years experience | Figma, Adobe XD</p>
+            </div>
+        </div>
+        
+        <p style="text-align: center; margin-top: 20px;">
+            Don't see your perfect role? We still want to hear from you!
+        </p>
+        
+        <a href="#contact" class="contact-button">Submit Your Resume</a>
+    </div>
+    """, unsafe_allow_html=True)
+
+def show_education_page():
+    st.subheader("Education Resources")
+    st.markdown(f"""
+    <div class="card" style="border-left-color: {get_random_color()}">
+        <h3>📚 Learning Resources</h3>
+        <p>Free educational materials to help you in your learning journey.</p>
+        
+        <h4>Recommended Courses:</h4>
+        <ul>
+            <li><a href="#" target="_blank">Introduction to Machine Learning</a></li>
+            <li><a href="#" target="_blank">Web Development Bootcamp</a></li>
+            <li><a href="#" target="_blank">Data Science Fundamentals</a></li>
+            <li><a href="#" target="_blank">Mobile App Development</a></li>
+        </ul>
+        
+        <h4>Project Ideas:</h4>
+        <ul>
+            <li>Student Performance Prediction System</li>
+            <li>E-commerce Recommendation Engine</li>
+            <li>Smart Attendance System</li>
+            <li>Automated Resume Builder</li>
+        </ul>
+        
+        <h4>Research Papers:</h4>
+        <ul>
+            <li><a href="#" target="_blank">Recent Advances in AI</a></li>
+            <li><a href="#" target="_blank">Blockchain Applications</a></li>
+            <li><a href="#" target="_blank">IoT Security Challenges</a></li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+def show_question_page():
+    st.subheader("Frequently Asked Questions")
+    st.markdown(f"""
+    <div class="card" style="border-left-color: {get_random_color()}">
+        <h3>❓ Common Questions</h3>
+        
+        <details>
+            <summary><b>How long does a typical project take?</b></summary>
+            <p>Project timelines vary based on complexity. Simple projects may take 2-4 weeks, while complex ones can take 2-3 months. We'll provide a timeline estimate after discussing your requirements.</p>
+        </details>
+        
+        <details>
+            <summary><b>What technologies do you work with?</b></summary>
+            <p>We work with a wide range of technologies including Python, TensorFlow, React, Node.js, Flutter, and various cloud platforms. See our Projects page for examples.</p>
+        </details>
+        
+        <details>
+            <summary><b>Do you provide documentation?</b></summary>
+            <p>Yes! All projects include complete documentation including system documentation, user manuals, and deployment guides.</p>
+        </details>
+        
+        <details>
+            <summary><b>Can I get help after project completion?</b></summary>
+            <p>We provide 3 months of free support for all completed projects. Extended support plans are also available.</p>
+        </details>
+        
+        <details>
+            <summary><b>How do payments work?</b></summary>
+            <p>We typically work with 50% upfront and 50% on completion. For larger projects, we can arrange milestone-based payments.</p>
+        </details>
+        
+        <div style="margin-top: 20px;">
+            <h4>Still have questions?</h4>
+            <a href="#contact" class="contact-button">Contact Us</a>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+# Update the page routing section
+if st.session_state.selected_menu == "Home":
+    show_home_page()
+elif st.session_state.selected_menu == "Projects":
+    show_projects_page()
+elif st.session_state.selected_menu == "Team":
+    show_team_page()
+elif st.session_state.selected_menu == "Internship":
+    show_internship_page()
+elif st.session_state.selected_menu == "Job":
+    show_job_page()
+elif st.session_state.selected_menu == "Education":
+    show_education_page()
+elif st.session_state.selected_menu == "Question":
+    show_question_page()
+elif st.session_state.selected_menu == "Contact":
+    show_contact_page()
