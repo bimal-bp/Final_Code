@@ -904,58 +904,11 @@ def show_job_page():
     </div>
     """, unsafe_allow_html=True)
     
-    # Contact Form Section
+    # Contact Section (simplified)
     st.markdown("""
     <div class="card" style="border-left-color: #F72585; margin-top: 20px;">
-        <h3>📩 Add Your Details</h3>
-        <p>Complete this form and our career team will contact you within 24 hours</p>
-        
-        <form style="margin-top: 15px;">
-            <div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
-                <div style="width: 48%; margin-bottom: 10px;">
-                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Full Name*</label>
-                    <input type="text" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
-                </div>
-                <div style="width: 48%; margin-bottom: 10px;">
-                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Email*</label>
-                    <input type="email" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
-                </div>
-                <div style="width: 48%; margin-bottom: 10px;">
-                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Mobile*</label>
-                    <input type="tel" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
-                </div>
-                <div style="width: 48%; margin-bottom: 10px;">
-                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Target Job Role</label>
-                    <select style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
-                        <option>Select job role</option>
-                        <option>AI/ML Engineer</option>
-                        <option>Data Scientist</option>
-                        <option>Full Stack Developer</option>
-                        <option>Other</option>
-                    </select>
-                </div>
-            </div>
-            
-            <div style="margin-bottom: 10px;">
-                <label style="display: block; margin-bottom: 5px; font-weight: bold;">Your Current Experience</label>
-                <textarea style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd; height: 80px;" 
-                          placeholder="Current skills, education, projects, etc."></textarea>
-            </div>
-            
-            <div style="margin-bottom: 10px;">
-                <label style="display: block; margin-bottom: 5px; font-weight: bold;">Career Goals</label>
-                <textarea style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd; height: 80px;" 
-                          placeholder="What kind of opportunities are you looking for?"></textarea>
-            </div>
-            
-            <button type="submit" class="contact-button" style="width: 100%; background-color: #4CC9F0;">
-                Submit Details
-            </button>
-            
-            <p style="text-align: center; margin-top: 10px; font-size: 0.8rem;">
-                We respect your privacy. Your information will never be shared with third parties.
-            </p>
-        </form>
+        <h3>📩 Contact Us</h3>
+        <p>Need any help? Contact us for assistance with your career needs.</p>
     </div>
     """, unsafe_allow_html=True)
 # Education Page
