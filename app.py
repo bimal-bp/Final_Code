@@ -238,6 +238,41 @@ st.markdown(f"""
     .card a:hover {{
         text-decoration: underline;
     }}
+    
+    /* Additional styles for new pages */
+    .stButton>button {{
+        width: 100%;
+        margin: 5px 0;
+        background-color: #00B4D8;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        font-weight: bold;
+        transition: all 0.3s;
+    }}
+
+    .stButton>button:hover {{
+        background-color: #0077B6;
+        transform: scale(1.02);
+    }}
+
+    details {{
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #F8F9FA;
+        border-radius: 5px;
+    }}
+
+    details summary {{
+        font-weight: bold;
+        cursor: pointer;
+    }}
+
+    details p {{
+        margin-left: 20px;
+        padding-top: 10px;
+    }}
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 """, unsafe_allow_html=True)
@@ -426,9 +461,6 @@ def admin_dashboard():
 
 # Home Page
 def show_home_page():
-
-
-    
     st.subheader("Our Services")
     
     col1, col2 = st.columns(2)
@@ -535,6 +567,7 @@ def show_projects_page():
         <p><a href="https://studentperformance-fvqesnqvjzxvjcpx78zheo.streamlit.app/" target="_blank">View Project</a></p>
     </div>
     """, unsafe_allow_html=True)
+    
     st.markdown(f"""
     <div class="card" style="border-left-color: {get_random_color()}">
         <b>PRODIGY_WebDevelopment</b>
@@ -712,6 +745,8 @@ def show_contact_page():
                         
                         Please try again or contact us directly via phone or email.
                         """)
+
+# Internship Page
 def show_internship_page():
     st.subheader("Internship Opportunities")
     st.markdown(f"""
@@ -739,6 +774,7 @@ def show_internship_page():
     </div>
     """, unsafe_allow_html=True)
 
+# Job Page
 def show_job_page():
     st.subheader("Job Opportunities")
     st.markdown(f"""
@@ -766,6 +802,7 @@ def show_job_page():
     </div>
     """, unsafe_allow_html=True)
 
+# Education Page
 def show_education_page():
     st.subheader("Education Resources")
     st.markdown(f"""
@@ -793,6 +830,7 @@ def show_education_page():
     </div>
     """, unsafe_allow_html=True)
 
+# FAQ Page
 def show_faq_page():
     st.subheader("Frequently Asked Questions")
     st.markdown(f"""
@@ -831,40 +869,6 @@ def show_faq_page():
     </div>
     """, unsafe_allow_html=True)
 
-/* Add this to your existing CSS */
-.stButton>button {
-    width: 100%;
-    margin: 5px 0;
-    background-color: #00B4D8;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    font-weight: bold;
-    transition: all 0.3s;
-}
-
-.stButton>button:hover {
-    background-color: #0077B6;
-    transform: scale(1.02);
-}
-
-details {
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #F8F9FA;
-    border-radius: 5px;
-}
-
-details summary {
-    font-weight: bold;
-    cursor: pointer;
-}
-
-details p {
-    margin-left: 20px;
-    padding-top: 10px;
-}
 # Main App Logic
 def main():
     # Company Header
@@ -938,3 +942,6 @@ def main():
             show_education_page()
         elif st.session_state.selected_menu == "FAQ":
             show_faq_page()
+
+if __name__ == "__main__":
+    main()
