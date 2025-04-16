@@ -862,8 +862,6 @@ if 'show_resume_upload' not in st.session_state:
 if 'show_contact' not in st.session_state:
     st.session_state.show_contact = False
 
-# Call the function
-show_job_page()
 
     
 def main():
