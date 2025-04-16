@@ -742,7 +742,10 @@ def show_education_page():
     st.write("💼 **Job Explorer**  \n"
              "Discover 200+ career paths you might not have considered, with real salary ranges and growth potential.")
 
-    st.link_button("Explore Now", "https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/")
+    st.link_button("Explore Now", "https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/", 
+                   help="Click to explore education and career options", 
+                   type="primary")  # This makes the button blue
+
 
 # Internship Page
 def show_internship_page():
@@ -840,48 +843,30 @@ def show_job_page():
     st.write("### 👨‍💼 Career Consultation Sessions")
     st.write("Book paid 1-on-1 sessions with industry experts:")
     
-    consultation_options = {
-        "30-min Session (₹700)": [
-            "Basic resume review",
-            "Quick LinkedIn profile tips",
-            "Cover letter essentials",
-            "Job search quick wins"
-        ],
-        "1-hour Session (₹1500)": [
-            "Comprehensive resume building",
-            "LinkedIn profile optimization",
-            "Personalized cover letter writing",
-            "Job application strategy",
-            "Interview preparation techniques",
-            "Salary negotiation guidance"
-        ]
-    }
+    st.write("**1-hour Session (₹1500) includes:**")
+    consultation_points = [
+        "Comprehensive resume building",
+        "LinkedIn profile optimization",
+        "Personalized cover letter writing",
+        "Job application strategy",
+        "Interview preparation techniques",
+        "Salary negotiation guidance"
+    ]
     
-    selected_session = st.radio(
-        "Choose session type:",
-        list(consultation_options.keys()),
-        index=0  # Changed from None to 0 to show first option by default
-    )
-    
-    st.write(f"**{selected_session} includes:**")
-    for point in consultation_options[selected_session]:
+    for point in consultation_points:
         st.write(f"- {point}")
     
-    if st.button("📅 Book Now", key="book_session"):
-        st.session_state.show_contact = True
+
     
     # Contact Section
     st.markdown("---")
     st.write("### 📩 Contact Us")
-    if st.button("✉️ Contact for Assistance", key="contact_button"):
-        st.session_state.show_contact = True
     
     if st.session_state.show_contact:
         st.write("Please reach us at:")
         st.write("📧 Email: careers@itjobhub.com")
         st.write("📞 Phone: +91 98765 43210")
         st.write("🕒 Available: Mon-Sat, 9AM-8PM")
-
     
 def main():
     # Display the header in the main content area
