@@ -798,9 +798,13 @@ def show_internship_page():
 # Job Page
 
 def show_job_page():
+    # Initialize session state variables
+    if 'show_contact' not in st.session_state:
+        st.session_state.show_contact = False
+
     st.subheader("🚀 Best IT Job Opportunities")
     
-    # Job Categories Section (Simplified)
+    # Job Categories Section
     st.write("### Top 15 High-Demand IT Jobs:")
     jobs = [
         "1. AI/ML Engineer",
@@ -855,16 +859,15 @@ def show_job_page():
     selected_session = st.radio(
         "Choose session type:",
         list(consultation_options.keys()),
-        index=None
+        index=0  # Changed from None to 0 to show first option by default
     )
     
-    if selected_session:
-        st.write(f"**{selected_session} includes:**")
-        for point in consultation_options[selected_session]:
-            st.write(f"- {point}")
-        
-        if st.button("📅 Book Now", key="book_session"):
-            st.session_state.show_contact = True
+    st.write(f"**{selected_session} includes:**")
+    for point in consultation_options[selected_session]:
+        st.write(f"- {point}")
+    
+    if st.button("📅 Book Now", key="book_session"):
+        st.session_state.show_contact = True
     
     # Contact Section
     st.markdown("---")
@@ -872,15 +875,11 @@ def show_job_page():
     if st.button("✉️ Contact for Assistance", key="contact_button"):
         st.session_state.show_contact = True
     
-    if st.session_state.get('show_contact'):
+    if st.session_state.show_contact:
         st.write("Please reach us at:")
         st.write("📧 Email: careers@itjobhub.com")
         st.write("📞 Phone: +91 98765 43210")
         st.write("🕒 Available: Mon-Sat, 9AM-8PM")
-
-# Initialize session state variables
-if 'show_contact' not in st.session_state:
-    st.session_state.show_contact = False
 
     
 def main():
