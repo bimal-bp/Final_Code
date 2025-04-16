@@ -801,18 +801,12 @@ def show_job_page():
     for job in jobs:
         st.write(job)
     
-    # Resume Builder Section
+    # Resume Link Section
     st.markdown("---")
-    st.write("### 📝 Professional Resume Services")
-    st.write("Get expert help with:")
-    col1, col2 = st.columns(2)
-    with col1:
-        st.write("- Resume Building")
-        st.write("- LinkedIn Optimization")
-    with col2:
-        st.write("- Cover Letter Writing")
-        st.write("- Job Application Strategy")
-    
+    st.write("### 📝 My Resume")
+    st.write("View my professional resume:")
+    resume_url = "https://drive.google.com/file/d/1C9JuG5zdpdqam93NNUZVOEucvt6WyEVn/view?pli=1"
+    st.markdown(f'<a href="{resume_url}" target="_blank"><button style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">View My Resume</button></a>', unsafe_allow_html=True)
     
     # Career Consultation Section
     st.markdown("---")
@@ -820,8 +814,20 @@ def show_job_page():
     st.write("Book paid 1-on-1 sessions with industry experts:")
     
     consultation_options = {
-        "30-min Session (₹700)": "Basic resume review and quick tips",
-        "1-hour Session (₹1500)": "Comprehensive career guidance including:\n- Resume building\n- LinkedIn optimization\n- Job search strategy\n- Interview preparation"
+        "30-min Session (₹700)": [
+            "Basic resume review",
+            "Quick LinkedIn profile tips",
+            "Cover letter essentials",
+            "Job search quick wins"
+        ],
+        "1-hour Session (₹1500)": [
+            "Comprehensive resume building",
+            "LinkedIn profile optimization",
+            "Personalized cover letter writing",
+            "Job application strategy",
+            "Interview preparation techniques",
+            "Salary negotiation guidance"
+        ]
     }
     
     selected_session = st.radio(
@@ -831,7 +837,10 @@ def show_job_page():
     )
     
     if selected_session:
-        st.write(consultation_options[selected_session])
+        st.write(f"**{selected_session} includes:**")
+        for point in consultation_options[selected_session]:
+            st.write(f"- {point}")
+        
         if st.button("📅 Book Now", key="book_session"):
             st.session_state.show_contact = True
     
@@ -848,8 +857,6 @@ def show_job_page():
         st.write("🕒 Available: Mon-Sat, 9AM-8PM")
 
 # Initialize session state variables
-if 'show_resume_upload' not in st.session_state:
-    st.session_state.show_resume_upload = False
 if 'show_contact' not in st.session_state:
     st.session_state.show_contact = False
 
