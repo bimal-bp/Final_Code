@@ -941,15 +941,9 @@ def show_job_page():
         with st.expander("Contact Information", expanded=False):
             st.write("**Email:** careers@itjobhub.com")
             st.write("**Phone:** +91 98765 43210")
-            st.write("**Office Hours:** 9:00 AM - 6:00 PM (Mon-Fri)")
+            st.write("**Office Hours:** 8:00 AM - 9:00 PM ")
             
-            with st.form("contact_form"):
-                name = st.text_input("Your Name")
-                email = st.text_input("Your Email")
-                message = st.text_area("Your Message")
-                submitted = st.form_submit_button("Send Message")
-                if submitted:
-                    st.success("Thank you! We'll respond within 24 hours.")
+
 
 # Initialize session state variables
 if 'show_resume_review' not in st.session_state:
@@ -961,33 +955,6 @@ if 'show_expert_session' not in st.session_state:
 if 'selected_job' not in st.session_state:
     st.session_state.selected_job = None
 
-# Show the page
-show_job_page()
-
-# Show job details if a job is selected
-if st.session_state.selected_job:
-    st.subheader(f"Job Details: {st.session_state.selected_job}")
-    st.write(f"Here are complete details about the {st.session_state.selected_job} role:")
-    
-    # You would add specific job details here
-    if st.session_state.selected_job == "AI/ML Engineer":
-        st.write("""
-        **Requirements:**
-        - Bachelor's/Master's in Computer Science or related field
-        - Strong programming skills in Python
-        - Experience with ML frameworks (TensorFlow, PyTorch)
-        - Knowledge of NLP, Computer Vision, or Deep Learning
-        
-        **Career Path:**
-        1. Junior AI Engineer (0-2 years)
-        2. AI Engineer (2-5 years)
-        3. Senior AI Engineer (5-8 years)
-        4. AI Architect/Lead (8+ years)
-        """)
-    
-    if st.button("Back to Job Listings"):
-        st.session_state.selected_job = None
-        st.experimental_rerun()
     
 # Education Page
 def show_education_page():
