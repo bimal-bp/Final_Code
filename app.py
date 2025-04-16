@@ -798,98 +798,58 @@ def show_internship_page():
         """)
 
 # Job Page
+import streamlit as st
+
 def show_job_page():
     st.header("💼 Job Opportunities")
-    
+
     # Introduction
     st.markdown("""
     <div class="card" style="border-left-color: #4361EE">
         <p>Explore exciting career opportunities in the tech industry. We partner with top companies to bring you the best job openings.</p>
     </div>
     """, unsafe_allow_html=True)
-    
-    # Job Listings
+
+    # Job Listings (Only job titles)
     st.subheader("Current Openings")
-    
     jobs = [
-        {
-            "title": "AI/ML Engineer",
-            "salary": "₹8-15 LPA",
-            "description": "Develop and implement machine learning models, work on NLP and computer vision projects.",
-            "requirements": "Python, TensorFlow/PyTorch, ML algorithms"
-        },
-        {
-            "title": "Full Stack Developer",
-            "salary": "₹5-10 LPA",
-            "description": "Build end-to-end web applications using modern frameworks.",
-            "requirements": "JavaScript, React, Node.js, MongoDB"
-        },
-        {
-            "title": "Data Scientist",
-            "salary": "₹7-12 LPA",
-            "description": "Analyze complex data and build predictive models.",
-            "requirements": "Python, SQL, statistics, data visualization"
-        },
-        {
-            "title": "DevOps Engineer",
-            "salary": "₹6-12 LPA",
-            "description": "Implement CI/CD pipelines and manage cloud infrastructure.",
-            "requirements": "AWS/GCP, Docker, Kubernetes, Terraform"
-        },
-        {
-            "title": "Mobile App Developer",
-            "salary": "₹5-9 LPA",
-            "description": "Develop cross-platform mobile applications.",
-            "requirements": "Flutter/React Native, Dart/JavaScript"
-        },
-        {
-            "title": "Cloud Architect",
-            "salary": "₹10-18 LPA",
-            "description": "Design and implement cloud solutions for enterprises.",
-            "requirements": "AWS/Azure, cloud security, networking"
-        }
+        "AI/ML Engineer",
+        "Full Stack Developer",
+        "Data Scientist",
+        "DevOps Engineer",
+        "Mobile App Developer",
+        "Cloud Architect"
     ]
-    
+
     for job in jobs:
-        st.markdown(f"""
-        <div class="job-card">
-            <div class="job-title">{job['title']}</div>
-            <div class="job-salary">Salary: {job['salary']}</div>
-            <div class="job-description">
-                <p><b>Description:</b> {job['description']}</p>
-                <p><b>Requirements:</b> {job['requirements']}</p>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    # How to Apply
-    st.subheader("How to Apply")
+        st.markdown(f"- {job}")
+
+    # Button for CV Review
+    st.subheader("Get Your CV Reviewed")
+    if st.button("Review My CV"):
+        st.markdown("""
+        **Next Steps**:  
+        Our team will review your CV and get back to you with personalized feedback.  
+        You can also email us at **careers@orbt-learn.com** to submit your CV for review.
+        """)
+
+    # Expert Consultation for Resume and LinkedIn Profile
+    st.subheader("Talk to an Expert")
     st.markdown("""
-    - Send your resume to careers@orbt-learn.com
-    - Mention the job title in the subject line
-    - Include a brief cover letter in the email body
-    - Our HR team will contact shortlisted candidates within 7 working days
+    Our experts can help you with:
+    - **Resume Building**: Tailor your resume to stand out in the competitive job market.
+    - **LinkedIn Profile Optimization**: Optimize your profile to attract recruiters and hiring managers.
+
+    Get in touch with our experts for personalized guidance.
     """)
-    
-    # Benefits Section
-    st.subheader("Employee Benefits")
-    col1, col2 = st.columns(2)
-    
-    with col1:
+
+    if st.button("Connect with an Expert"):
         st.markdown("""
-        - 🏠 Flexible work arrangements
-        - 💰 Competitive salaries
-        - 📈 Performance bonuses
-        - 🏥 Health insurance
+        We'll reach out to you shortly for a consultation. You can also email us at **careers@orbt-learn.com** to schedule a one-on-one session.
         """)
-    
-    with col2:
-        st.markdown("""
-        - 📚 Learning stipend
-        - 🏖️ Paid time off
-        - 🚀 Career growth opportunities
-        - 🧑‍💻 Modern tech stack
-        """)
+
+# Call function to display the job page
+show_job_page()
 
 # Education Page
 def show_education_page():
