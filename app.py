@@ -774,186 +774,43 @@ def show_internship_page():
     
 
 # Job Page
-def show_job_page():
-    # Custom CSS styling
-    st.markdown("""
-    <style>
-    .card {
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        margin-bottom: 25px;
-        border-left: 5px solid;
-    }
-    .job-button {
-        padding: 15px;
-        border-radius: 8px;
-        background: #f8f9fa;
-        margin-bottom: 10px;
-        transition: all 0.3s ease;
-        border: 1px solid #e0e0e0;
-    }
-    .job-button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-        background: #e9f5ff;
-    }
-    .contact-button {
-        display: inline-block;
-        padding: 12px 20px;
-        border-radius: 6px;
-        background: #4361EE;
-        color: white !important;
-        text-align: center;
-        text-decoration: none;
-        font-weight: 500;
-        margin: 5px 0;
-        transition: all 0.3s ease;
-    }
-    .contact-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    .stButton>button {
-        width: 100%;
-        border-radius: 8px;
-        padding: 12px;
-        font-weight: 500;
-        transition: all 0.3s ease;
-    }
-    .stButton>button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    </style>
-    """, unsafe_allow_html=True)
+import streamlit as st
 
+def show_job_page():
     st.subheader("🚀 Best IT Job Opportunities")
     
     # Job Categories Section
-    with st.container():
-        st.markdown("""
-        <div class="card" style="border-left-color: #4361EE">
-            <h3>💼 Top 15 High-Demand IT Jobs</h3>
-            <p>Click on any job role to learn more about requirements and career path</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Create job cards in 3 columns
-        col1, col2, col3 = st.columns(3)
-        
-        jobs = [
-            ("AI/ML Engineer", "₹8-15L"),
-            ("Data Scientist", "₹7-12L"),
-            ("Cloud Architect", "₹10-18L"),
-            ("DevOps Engineer", "₹6-12L"),
-            ("Full Stack Developer", "₹5-10L"),
-            ("Cybersecurity Analyst", "₹5-9L"),
-            ("Blockchain Developer", "₹8-15L"),
-            ("Data Engineer", "₹6-11L"),
-            ("IoT Solutions Architect", "₹7-13L"),
-            ("AR/VR Developer", "₹5-10L"),
-            ("Site Reliability Engineer", "₹8-14L"),
-            ("Big Data Engineer", "₹7-12L"),
-            ("Quantum Computing Specialist", "₹12-20L"),
-            ("UI/UX Designer", "₹4-8L"),
-            ("Technical Product Manager", "₹10-18L")
-        ]
-        
-        for i, (title, salary) in enumerate(jobs):
-            with col1 if i % 3 == 0 else col2 if i % 3 == 1 else col3:
-                if st.button(f"**{title}**\n\nAvg Salary: {salary}", key=f"job_{i}"):
-                    st.session_state.selected_job = title
-                    st.experimental_rerun()
+    st.write("### Top 15 High-Demand IT Jobs:")
+    jobs = [
+        "1. AI/ML Engineer",
+        "2. Data Scientist",
+        "3. Cloud Architect",
+        "4. DevOps Engineer",
+        "5. Full Stack Developer",
+        "6. Cybersecurity Analyst",
+        "7. Blockchain Developer",
+        "8. Data Engineer",
+        "9. IoT Solutions Architect",
+        "10. AR/VR Developer",
+        "11. Site Reliability Engineer",
+        "12. Big Data Engineer",
+        "13. Quantum Computing Specialist",
+        "14. UI/UX Designer",
+        "15. Technical Product Manager"
+    ]
     
-    # Resume Builder Section
-    with st.container():
-        st.markdown("""
-        <div class="card" style="border-left-color: #3A0CA3">
-            <h3>📝 Get a Professional Resume</h3>
-            <p>Our experts will help you create an ATS-friendly resume that gets noticed</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        res_col1, res_col2 = st.columns(2)
-        with res_col1:
-            if st.button("📄 Resume Review", key="resume_review"):
-                st.session_state.show_resume_review = True
-        st.markdown("""
-        <p style="text-align: center; margin-top: 10px; font-size: 0.9rem;">
-            We analyze 100+ job descriptions to optimize your resume for your target roles
-        </p>
-        """, unsafe_allow_html=True)
-        
-        
-
-    
-    # Career Consultation Section
-    with st.container():
-        st.markdown("""
-        <div class="card" style="border-left-color: #4895EF">
-            <h3>👨‍💼 Talk With a Career Expert</h3>
-            <p>30-minute Paid Consultation with our industry professionals</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        if st.button("📅 Schedule Session", key="expert_session"):
-            st.session_state.show_expert_session = True
-        
-        if st.session_state.get('show_expert_session'):
-            with st.expander("Schedule Your Consultation", expanded=True):
-                st.write("**What we'll cover:**")
-                col1, col2 = st.columns(2)
-                with col1:
-                    st.write("- Career path analysis")
-                    st.write("- Skill gap assessment")
-                with col2:
-                    st.write("- Interview preparation")
-                    st.write("- Salary negotiation")
-                
-                st.write("**Our experts from:**")
-                col3, col4 = st.columns(2)
-                with col3:
-                    st.write("- Top Indian Startups")
-                with col4:
-                    st.write("- Specialized Domains")
-                
-                with st.form("expert_form"):
-                    name = st.text_input("Your Name")
-                    email = st.text_input("Email Address")
-                    current_role = st.text_input("Current Role")
-                    target_role = st.text_input("Target Role")
-                    preferred_date = st.date_input("Preferred Date")
-                    preferred_time = st.time_input("Preferred Time")
-                    submitted = st.form_submit_button("Schedule Session")
-                    if submitted:
-                        st.success(f"Session scheduled! We've sent confirmation to {email}")
+    for job in jobs:
+        st.write(job)
     
     # Contact Section
-    with st.container():
-        st.markdown("""
-        <div class="card" style="border-left-color: #F72585">
-            <h3>📩 Contact Us</h3>
-            <p>Need any help? Contact us for assistance with your career needs.</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        with st.expander("Contact Information", expanded=False):
-            st.write("**Email:** careers@itjobhub.com")
-            st.write("**Phone:** +91 98765 43210")
-            st.write("**Office Hours:** 8:00 AM - 9:00 PM ")
-            
-
+    st.write("\n### Contact Us")
 
 # Initialize session state variables
-if 'show_resume_review' not in st.session_state:
-    st.session_state.show_resume_review = False
-if 'show_custom_resume' not in st.session_state:
-    st.session_state.show_custom_resume = False
-if 'show_expert_session' not in st.session_state:
-    st.session_state.show_expert_session = False
 if 'selected_job' not in st.session_state:
     st.session_state.selected_job = None
+
+# Call the function
+show_job_page()
 
     
 # Education Page
