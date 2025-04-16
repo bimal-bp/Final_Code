@@ -779,7 +779,7 @@ import streamlit as st
 def show_job_page():
     st.subheader("🚀 Best IT Job Opportunities")
     
-    # Job Categories Section
+    # Job Categories Section (Simplified)
     st.write("### Top 15 High-Demand IT Jobs:")
     jobs = [
         "1. AI/ML Engineer",
@@ -802,40 +802,68 @@ def show_job_page():
     for job in jobs:
         st.write(job)
     
+    # Resume Builder Section
+    st.markdown("---")
+    st.write("### 📝 Professional Resume Services")
+    st.write("Get expert help with:")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.write("- Resume Building")
+        st.write("- LinkedIn Optimization")
+    with col2:
+        st.write("- Cover Letter Writing")
+        st.write("- Job Application Strategy")
+    
+    if st.button("🔗 Upload Your CV for Review"):
+        st.session_state.show_resume_upload = True
+    
+    if st.session_state.get('show_resume_upload'):
+        st.write("Please share your CV link:")
+        cv_link = st.text_input("Drop your Google Drive or LinkedIn URL")
+        if cv_link:
+            st.success("Thanks! Our experts will review and contact you within 24 hours.")
+    
+    # Career Consultation Section
+    st.markdown("---")
+    st.write("### 👨‍💼 Career Consultation Sessions")
+    st.write("Book paid 1-on-1 sessions with industry experts:")
+    
+    consultation_options = {
+        "30-min Session (₹500)": "Basic resume review and quick tips",
+        "1-hour Session (₹1500)": "Comprehensive career guidance including:\n- Resume building\n- LinkedIn optimization\n- Job search strategy\n- Interview preparation"
+    }
+    
+    selected_session = st.radio(
+        "Choose session type:",
+        list(consultation_options.keys()),
+        index=None
+    )
+    
+    if selected_session:
+        st.write(consultation_options[selected_session])
+        if st.button("📅 Book Now", key="book_session"):
+            st.session_state.show_contact = True
+    
     # Contact Section
-    st.write("\n### Contact Us")
+    st.markdown("---")
+    st.write("### 📩 Contact Us")
+    if st.button("✉️ Contact for Assistance", key="contact_button"):
+        st.session_state.show_contact = True
+    
+    if st.session_state.get('show_contact'):
+        st.write("Please reach us at:")
+        st.write("📧 Email: careers@itjobhub.com")
+        st.write("📞 Phone: +91 98765 43210")
+        st.write("🕒 Available: Mon-Sat, 9AM-8PM")
 
 # Initialize session state variables
-if 'selected_job' not in st.session_state:
-    st.session_state.selected_job = None
+if 'show_resume_upload' not in st.session_state:
+    st.session_state.show_resume_upload = False
+if 'show_contact' not in st.session_state:
+    st.session_state.show_contact = False
 
 # Call the function
 show_job_page()
-
-    
-# Education Page
-def show_education_page():
-    st.title("Education & Career Guidance")
-
-    st.header("Why spend your time exploring our website?")
-    st.write("We respect your time and we provide:")
-
-    st.write("🚀 **The Right Way to Choose Your Education Path & Job**  \n"
-             "Discover how to select the best learning options for your goals")
-
-    st.write("💡 **Practical Career Advice from Industry Professionals**  \n"
-             "Get real-world insights from experts across various fields")
-
-    st.write("🏆 **Education-to-Career Roadmaps**  \n"
-             "Learn which educational choices lead to your dream jobs")
-
-    st.write("📚 **Education Guidance**  \n"
-             "Confused about what to study after 10th/12th/college? We break down all your options with pros and cons.")
-
-    st.write("💼 **Job Explorer**  \n"
-             "Discover 200+ career paths you might not have considered, with real salary ranges and growth potential.")
-
-    st.link_button("Explore Now", "https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/")
 
     
 def main():
