@@ -720,6 +720,28 @@ def show_contact_page():
                         
                         Please try again or contact us directly via phone or email.
                         """)
+def show_education_page():
+    st.title("Education & Career Guidance")
+
+    st.header("Why spend your time exploring our website?")
+    st.write("We respect your time and we provide:")
+
+    st.write("🚀 **The Right Way to Choose Your Education Path & Job**  \n"
+             "Discover how to select the best learning options for your goals")
+
+    st.write("💡 **Practical Career Advice from Industry Professionals**  \n"
+             "Get real-world insights from experts across various fields")
+
+    st.write("🏆 **Education-to-Career Roadmaps**  \n"
+             "Learn which educational choices lead to your dream jobs")
+
+    st.write("📚 **Education Guidance**  \n"
+             "Confused about what to study after 10th/12th/college? We break down all your options with pros and cons.")
+
+    st.write("💼 **Job Explorer**  \n"
+             "Discover 200+ career paths you might not have considered, with real salary ranges and growth potential.")
+
+    st.link_button("Explore Now", "https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/")
 
 # Internship Page
 def show_internship_page():
