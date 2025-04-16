@@ -1,5 +1,3 @@
-
-
 import streamlit as st
 from streamlit_option_menu import option_menu
 import psycopg2
@@ -776,8 +774,6 @@ def show_internship_page():
     
 
 # Job Page
-import streamlit as st
-
 def show_job_page():
     # Custom CSS styling
     st.markdown("""
@@ -883,54 +879,25 @@ def show_job_page():
         with res_col1:
             if st.button("📄 Resume Review", key="resume_review"):
                 st.session_state.show_resume_review = True
-        with res_col2:
-            if st.button("✨ Custom Resume Build", key="custom_resume"):
-                st.session_state.show_custom_resume = True
-        
         st.markdown("""
         <p style="text-align: center; margin-top: 10px; font-size: 0.9rem;">
             We analyze 100+ job descriptions to optimize your resume for your target roles
         </p>
         """, unsafe_allow_html=True)
         
-        if st.session_state.get('show_resume_review'):
-            with st.expander("Resume Review Details", expanded=True):
-                st.write("**Our resume review includes:**")
-                st.write("- ATS compatibility analysis")
-                st.write("- Keyword optimization")
-                st.write("- Formatting suggestions")
-                st.write("- Experience highlighting")
-                
-                uploaded_file = st.file_uploader("Upload your resume for review", type=["pdf", "docx"])
-                if uploaded_file:
-                    st.success("Thank you! Our experts will review your resume within 24 hours.")
         
-        if st.session_state.get('show_custom_resume'):
-            with st.expander("Custom Resume Builder", expanded=True):
-                st.write("**We'll create a resume that:**")
-                st.write("- Matches your target job description")
-                st.write("- Highlights your key achievements")
-                st.write("- Uses industry-specific terminology")
-                
-                with st.form("resume_form"):
-                    name = st.text_input("Full Name")
-                    target_role = st.text_input("Target Job Title")
-                    experience = st.text_area("Your Experience")
-                    skills = st.text_area("Key Skills")
-                    submitted = st.form_submit_button("Submit Requirements")
-                    if submitted:
-                        st.success("Our resume experts will contact you within 24 hours to discuss your custom resume.")
+
     
     # Career Consultation Section
     with st.container():
         st.markdown("""
         <div class="card" style="border-left-color: #4895EF">
             <h3>👨‍💼 Talk With a Career Expert</h3>
-            <p>30-minute free consultation with our industry professionals</p>
+            <p>30-minute Paid Consultation with our industry professionals</p>
         </div>
         """, unsafe_allow_html=True)
         
-        if st.button("📅 Schedule Free Session", key="expert_session"):
+        if st.button("📅 Schedule Session", key="expert_session"):
             st.session_state.show_expert_session = True
         
         if st.session_state.get('show_expert_session'):
@@ -947,10 +914,8 @@ def show_job_page():
                 st.write("**Our experts from:**")
                 col3, col4 = st.columns(2)
                 with col3:
-                    st.write("- FAANG Companies")
                     st.write("- Top Indian Startups")
                 with col4:
-                    st.write("- Fortune 500 Firms")
                     st.write("- Specialized Domains")
                 
                 with st.form("expert_form"):
