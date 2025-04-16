@@ -843,7 +843,7 @@ def show_job_page():
     st.write("### 👨‍💼 Career Consultation Sessions")
     st.write("Book paid 1-on-1 sessions with industry experts:")
     
-    st.write("**1-hour Session (₹1500) includes:**")
+    st.write("**1-hour Session (₹850) includes:**")
     consultation_points = [
         "Comprehensive resume building",
         "LinkedIn profile optimization",
@@ -861,12 +861,7 @@ def show_job_page():
     # Contact Section
     st.markdown("---")
     st.write("### 📩 Contact Us")
-    
-    if st.session_state.show_contact:
-        st.write("Please reach us at:")
-        st.write("📧 Email: careers@itjobhub.com")
-        st.write("📞 Phone: +91 98765 43210")
-        st.write("🕒 Available: Mon-Sat, 9AM-8PM")
+    st.write("9348245158")
     
 def main():
     # Display the header in the main content area
