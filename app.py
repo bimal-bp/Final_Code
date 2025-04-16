@@ -774,7 +774,6 @@ def show_internship_page():
     
 
 # Job Page
-import streamlit as st
 
 def show_job_page():
     st.subheader("🚀 Best IT Job Opportunities")
@@ -814,14 +813,6 @@ def show_job_page():
         st.write("- Cover Letter Writing")
         st.write("- Job Application Strategy")
     
-    if st.button("🔗 Upload Your CV for Review"):
-        st.session_state.show_resume_upload = True
-    
-    if st.session_state.get('show_resume_upload'):
-        st.write("Please share your CV link:")
-        cv_link = st.text_input("Drop your Google Drive or LinkedIn URL")
-        if cv_link:
-            st.success("Thanks! Our experts will review and contact you within 24 hours.")
     
     # Career Consultation Section
     st.markdown("---")
@@ -829,7 +820,7 @@ def show_job_page():
     st.write("Book paid 1-on-1 sessions with industry experts:")
     
     consultation_options = {
-        "30-min Session (₹500)": "Basic resume review and quick tips",
+        "30-min Session (₹700)": "Basic resume review and quick tips",
         "1-hour Session (₹1500)": "Comprehensive career guidance including:\n- Resume building\n- LinkedIn optimization\n- Job search strategy\n- Interview preparation"
     }
     
@@ -861,7 +852,6 @@ if 'show_resume_upload' not in st.session_state:
     st.session_state.show_resume_upload = False
 if 'show_contact' not in st.session_state:
     st.session_state.show_contact = False
-
 
     
 def main():
