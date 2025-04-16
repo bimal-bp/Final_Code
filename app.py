@@ -750,7 +750,7 @@ def show_education_page():
 # Internship Page
 def show_internship_page():
     st.header("🎯 Internship Opportunities")
-    st.write("****-----Its a paid internship you have to pay to learn skills and Projects----***** ")
+    st.write("****-----Its a paid internship you have to pay to learn skills and Projects----**** ")
 
     
     # Program Options Section
