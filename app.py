@@ -709,11 +709,10 @@ def show_contact_page():
                             <h4>Next Steps:</h4>
                             <ol>
                                 <li>Our project manager will contact you within 24 hours</li>
-                                <li>We'll schedule a free consultation call</li>
+                                <li>If you have any emergency contact our manager in the above numbers </li>
                                 <li>You'll receive a project proposal with timeline and cost estimate</li>
                             </ol>
-                            <p>In the meantime, you can explore our <a href="#projects">project portfolio</a>, check our <a href="https://github.com/your-org/your-repo" target="_blank">GitHub page</a>, or try our <a href="https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/" target="_blank">Career Path Finder</a>.</p>
-                        </div>
+                           <p>In the meantime, you can explore our <a href="https://bimal-bp.github.io/Portfolio/" target="_blank">project portfolio</a>, check our <a href="https://github.com/bimal-bp" target="_blank">GitHub page</a>, or try our <a href="https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/" target="_blank">Career Path Finder</a>.</p>
                         """, unsafe_allow_html=True)
                     else:
                         st.error("""
@@ -750,7 +749,7 @@ def show_education_page():
 # Internship Page
 def show_internship_page():
     st.header("🎯 Internship Opportunities")
-    st.write("****-------------------------------------Its a paid internship you have to pay to learn skills and Projects-----------------------------------------**** ")
+    st.write("****-------------------------------------------------------Its a paid internship you have to pay to learn skills and Projects-----------------------------------------**** ")
 
     
     # Program Options Section
