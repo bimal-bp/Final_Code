@@ -1,4 +1,3 @@
-
 import streamlit as st
 from streamlit_option_menu import option_menu
 import psycopg2
@@ -248,6 +247,31 @@ st.markdown(f"""
         background-color: #F8F9FA;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         border-left: 4px solid {get_random_color()};
+    }}
+    
+    /* Job cards */
+    .job-card {{
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        background-color: #F8F9FA;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border-left: 4px solid #4361EE;
+    }}
+    .job-title {{
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #212529;
+        margin-bottom: 5px;
+    }}
+    .job-salary {{
+        font-size: 0.9rem;
+        color: #495057;
+        margin-bottom: 10px;
+    }}
+    .job-description {{
+        font-size: 0.95rem;
+        color: #6C757D;
     }}
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -772,257 +796,101 @@ def show_internship_page():
         📧 [internship@orbt-learn.com](mailto:internship@orbt-learn.com)  
         📞 [+91 9390920256](tel:+919390920256) (WhatsApp available)  
         """)
-    
 
 # Job Page
-import streamlit as st
-
 def show_job_page():
-    # Custom CSS styling
+    st.header("💼 Job Opportunities")
+    
+    # Introduction
     st.markdown("""
-    <style>
-    .card {
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        margin-bottom: 25px;
-        border-left: 5px solid;
-    }
-    .job-button {
-        padding: 15px;
-        border-radius: 8px;
-        background: #f8f9fa;
-        margin-bottom: 10px;
-        transition: all 0.3s ease;
-        border: 1px solid #e0e0e0;
-    }
-    .job-button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-        background: #e9f5ff;
-    }
-    .contact-button {
-        display: inline-block;
-        padding: 12px 20px;
-        border-radius: 6px;
-        background: #4361EE;
-        color: white !important;
-        text-align: center;
-        text-decoration: none;
-        font-weight: 500;
-        margin: 5px 0;
-        transition: all 0.3s ease;
-    }
-    .contact-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    .stButton>button {
-        width: 100%;
-        border-radius: 8px;
-        padding: 12px;
-        font-weight: 500;
-        transition: all 0.3s ease;
-    }
-    .stButton>button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    </style>
+    <div class="card" style="border-left-color: #4361EE">
+        <p>Explore exciting career opportunities in the tech industry. We partner with top companies to bring you the best job openings.</p>
+    </div>
     """, unsafe_allow_html=True)
-
-    st.subheader("🚀 Best IT Job Opportunities")
     
-    # Job Categories Section
-    with st.container():
-        st.markdown("""
-        <div class="card" style="border-left-color: #4361EE">
-            <h3>💼 Top 15 High-Demand IT Jobs</h3>
-            <p>Click on any job role to learn more about requirements and career path</p>
+    # Job Listings
+    st.subheader("Current Openings")
+    
+    jobs = [
+        {
+            "title": "AI/ML Engineer",
+            "salary": "₹8-15 LPA",
+            "description": "Develop and implement machine learning models, work on NLP and computer vision projects.",
+            "requirements": "Python, TensorFlow/PyTorch, ML algorithms"
+        },
+        {
+            "title": "Full Stack Developer",
+            "salary": "₹5-10 LPA",
+            "description": "Build end-to-end web applications using modern frameworks.",
+            "requirements": "JavaScript, React, Node.js, MongoDB"
+        },
+        {
+            "title": "Data Scientist",
+            "salary": "₹7-12 LPA",
+            "description": "Analyze complex data and build predictive models.",
+            "requirements": "Python, SQL, statistics, data visualization"
+        },
+        {
+            "title": "DevOps Engineer",
+            "salary": "₹6-12 LPA",
+            "description": "Implement CI/CD pipelines and manage cloud infrastructure.",
+            "requirements": "AWS/GCP, Docker, Kubernetes, Terraform"
+        },
+        {
+            "title": "Mobile App Developer",
+            "salary": "₹5-9 LPA",
+            "description": "Develop cross-platform mobile applications.",
+            "requirements": "Flutter/React Native, Dart/JavaScript"
+        },
+        {
+            "title": "Cloud Architect",
+            "salary": "₹10-18 LPA",
+            "description": "Design and implement cloud solutions for enterprises.",
+            "requirements": "AWS/Azure, cloud security, networking"
+        }
+    ]
+    
+    for job in jobs:
+        st.markdown(f"""
+        <div class="job-card">
+            <div class="job-title">{job['title']}</div>
+            <div class="job-salary">Salary: {job['salary']}</div>
+            <div class="job-description">
+                <p><b>Description:</b> {job['description']}</p>
+                <p><b>Requirements:</b> {job['requirements']}</p>
+            </div>
         </div>
         """, unsafe_allow_html=True)
-        
-        # Create job cards in 3 columns
-        col1, col2, col3 = st.columns(3)
-        
-        jobs = [
-            ("AI/ML Engineer", "₹8-15L"),
-            ("Data Scientist", "₹7-12L"),
-            ("Cloud Architect", "₹10-18L"),
-            ("DevOps Engineer", "₹6-12L"),
-            ("Full Stack Developer", "₹5-10L"),
-            ("Cybersecurity Analyst", "₹5-9L"),
-            ("Blockchain Developer", "₹8-15L"),
-            ("Data Engineer", "₹6-11L"),
-            ("IoT Solutions Architect", "₹7-13L"),
-            ("AR/VR Developer", "₹5-10L"),
-            ("Site Reliability Engineer", "₹8-14L"),
-            ("Big Data Engineer", "₹7-12L"),
-            ("Quantum Computing Specialist", "₹12-20L"),
-            ("UI/UX Designer", "₹4-8L"),
-            ("Technical Product Manager", "₹10-18L")
-        ]
-        
-        for i, (title, salary) in enumerate(jobs):
-            with col1 if i % 3 == 0 else col2 if i % 3 == 1 else col3:
-                if st.button(f"**{title}**\n\nAvg Salary: {salary}", key=f"job_{i}"):
-                    st.session_state.selected_job = title
-                    st.experimental_rerun()
     
-    # Resume Builder Section
-    with st.container():
-        st.markdown("""
-        <div class="card" style="border-left-color: #3A0CA3">
-            <h3>📝 Get a Professional Resume</h3>
-            <p>Our experts will help you create an ATS-friendly resume that gets noticed</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        res_col1, res_col2 = st.columns(2)
-        with res_col1:
-            if st.button("📄 Resume Review", key="resume_review"):
-                st.session_state.show_resume_review = True
-        with res_col2:
-            if st.button("✨ Custom Resume Build", key="custom_resume"):
-                st.session_state.show_custom_resume = True
-        
-        st.markdown("""
-        <p style="text-align: center; margin-top: 10px; font-size: 0.9rem;">
-            We analyze 100+ job descriptions to optimize your resume for your target roles
-        </p>
-        """, unsafe_allow_html=True)
-        
-        if st.session_state.get('show_resume_review'):
-            with st.expander("Resume Review Details", expanded=True):
-                st.write("**Our resume review includes:**")
-                st.write("- ATS compatibility analysis")
-                st.write("- Keyword optimization")
-                st.write("- Formatting suggestions")
-                st.write("- Experience highlighting")
-                
-                uploaded_file = st.file_uploader("Upload your resume for review", type=["pdf", "docx"])
-                if uploaded_file:
-                    st.success("Thank you! Our experts will review your resume within 24 hours.")
-        
-        if st.session_state.get('show_custom_resume'):
-            with st.expander("Custom Resume Builder", expanded=True):
-                st.write("**We'll create a resume that:**")
-                st.write("- Matches your target job description")
-                st.write("- Highlights your key achievements")
-                st.write("- Uses industry-specific terminology")
-                
-                with st.form("resume_form"):
-                    name = st.text_input("Full Name")
-                    target_role = st.text_input("Target Job Title")
-                    experience = st.text_area("Your Experience")
-                    skills = st.text_area("Key Skills")
-                    submitted = st.form_submit_button("Submit Requirements")
-                    if submitted:
-                        st.success("Our resume experts will contact you within 24 hours to discuss your custom resume.")
+    # How to Apply
+    st.subheader("How to Apply")
+    st.markdown("""
+    - Send your resume to careers@orbt-learn.com
+    - Mention the job title in the subject line
+    - Include a brief cover letter in the email body
+    - Our HR team will contact shortlisted candidates within 7 working days
+    """)
     
-    # Career Consultation Section
-    with st.container():
-        st.markdown("""
-        <div class="card" style="border-left-color: #4895EF">
-            <h3>👨‍💼 Talk With a Career Expert</h3>
-            <p>30-minute free consultation with our industry professionals</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        if st.button("📅 Schedule Free Session", key="expert_session"):
-            st.session_state.show_expert_session = True
-        
-        if st.session_state.get('show_expert_session'):
-            with st.expander("Schedule Your Consultation", expanded=True):
-                st.write("**What we'll cover:**")
-                col1, col2 = st.columns(2)
-                with col1:
-                    st.write("- Career path analysis")
-                    st.write("- Skill gap assessment")
-                with col2:
-                    st.write("- Interview preparation")
-                    st.write("- Salary negotiation")
-                
-                st.write("**Our experts from:**")
-                col3, col4 = st.columns(2)
-                with col3:
-                    st.write("- FAANG Companies")
-                    st.write("- Top Indian Startups")
-                with col4:
-                    st.write("- Fortune 500 Firms")
-                    st.write("- Specialized Domains")
-                
-                with st.form("expert_form"):
-                    name = st.text_input("Your Name")
-                    email = st.text_input("Email Address")
-                    current_role = st.text_input("Current Role")
-                    target_role = st.text_input("Target Role")
-                    preferred_date = st.date_input("Preferred Date")
-                    preferred_time = st.time_input("Preferred Time")
-                    submitted = st.form_submit_button("Schedule Session")
-                    if submitted:
-                        st.success(f"Session scheduled! We've sent confirmation to {email}")
+    # Benefits Section
+    st.subheader("Employee Benefits")
+    col1, col2 = st.columns(2)
     
-    # Contact Section
-    with st.container():
+    with col1:
         st.markdown("""
-        <div class="card" style="border-left-color: #F72585">
-            <h3>📩 Contact Us</h3>
-            <p>Need any help? Contact us for assistance with your career needs.</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        with st.expander("Contact Information", expanded=False):
-            st.write("**Email:** careers@itjobhub.com")
-            st.write("**Phone:** +91 98765 43210")
-            st.write("**Office Hours:** 9:00 AM - 6:00 PM (Mon-Fri)")
-            
-            with st.form("contact_form"):
-                name = st.text_input("Your Name")
-                email = st.text_input("Your Email")
-                message = st.text_area("Your Message")
-                submitted = st.form_submit_button("Send Message")
-                if submitted:
-                    st.success("Thank you! We'll respond within 24 hours.")
-
-# Initialize session state variables
-if 'show_resume_review' not in st.session_state:
-    st.session_state.show_resume_review = False
-if 'show_custom_resume' not in st.session_state:
-    st.session_state.show_custom_resume = False
-if 'show_expert_session' not in st.session_state:
-    st.session_state.show_expert_session = False
-if 'selected_job' not in st.session_state:
-    st.session_state.selected_job = None
-
-# Show the page
-show_job_page()
-
-# Show job details if a job is selected
-if st.session_state.selected_job:
-    st.subheader(f"Job Details: {st.session_state.selected_job}")
-    st.write(f"Here are complete details about the {st.session_state.selected_job} role:")
-    
-    # You would add specific job details here
-    if st.session_state.selected_job == "AI/ML Engineer":
-        st.write("""
-        **Requirements:**
-        - Bachelor's/Master's in Computer Science or related field
-        - Strong programming skills in Python
-        - Experience with ML frameworks (TensorFlow, PyTorch)
-        - Knowledge of NLP, Computer Vision, or Deep Learning
-        
-        **Career Path:**
-        1. Junior AI Engineer (0-2 years)
-        2. AI Engineer (2-5 years)
-        3. Senior AI Engineer (5-8 years)
-        4. AI Architect/Lead (8+ years)
+        - 🏠 Flexible work arrangements
+        - 💰 Competitive salaries
+        - 📈 Performance bonuses
+        - 🏥 Health insurance
         """)
     
-    if st.button("Back to Job Listings"):
-        st.session_state.selected_job = None
-        st.experimental_rerun()
-    
+    with col2:
+        st.markdown("""
+        - 📚 Learning stipend
+        - 🏖️ Paid time off
+        - 🚀 Career growth opportunities
+        - 🧑‍💻 Modern tech stack
+        """)
+
 # Education Page
 def show_education_page():
     st.title("Education & Career Guidance")
