@@ -721,16 +721,28 @@ def show_contact_page():
                         
                         Please try again or contact us directly via phone or email.
                         """)
-st.markdown("""
-<style>
-    .stLinkButton a {
-        background-color: #4CAF50 !important;
-        color: white !important;
-    }
-</style>
-""", unsafe_allow_html=True)
+def show_education_page():
+    st.title("Education & Career Guidance")
 
-st.link_button("Explore Now", "https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/")
+    st.header("Why spend your time exploring our website?")
+    st.write("We respect your time and we provide:")
+
+    st.write("🚀 **The Right Way to Choose Your Education Path & Job**  \n"
+             "Discover how to select the best learning options for your goals")
+
+    st.write("💡 **Practical Career Advice from Industry Professionals**  \n"
+             "Get real-world insights from experts across various fields")
+
+    st.write("🏆 **Education-to-Career Roadmaps**  \n"
+             "Learn which educational choices lead to your dream jobs")
+
+    st.write("📚 **Education Guidance**  \n"
+             "Confused about what to study after 10th/12th/college? We break down all your options with pros and cons.")
+
+    st.write("💼 **Job Explorer**  \n"
+             "Discover 200+ career paths you might not have considered, with real salary ranges and growth potential.")
+
+    st.link_button("Explore Now", "https://orbtlearn-jcrdshm6johscwfx3bavgd.streamlit.app/")
 
 # Internship Page
 def show_internship_page():
@@ -829,15 +841,20 @@ def show_job_page():
     st.write("Book paid 1-on-1 sessions with industry experts:")
     
     consultation_options = {
-        "Things we will Discuss ": [
+        "30-min Session (₹700)": [
+            "Basic resume review",
+            "Quick LinkedIn profile tips",
+            "Cover letter essentials",
+            "Job search quick wins"
+        ],
+        "1-hour Session (₹1500)": [
             "Comprehensive resume building",
             "LinkedIn profile optimization",
             "Personalized cover letter writing",
             "Job application strategy",
             "Interview preparation techniques",
             "Salary negotiation guidance"
-        ],
-
+        ]
     }
     
     selected_session = st.radio(
@@ -850,16 +867,18 @@ def show_job_page():
     for point in consultation_options[selected_session]:
         st.write(f"- {point}")
     
-
+    if st.button("📅 Book Now", key="book_session"):
+        st.session_state.show_contact = True
     
     # Contact Section
     st.markdown("---")
+    st.write("### 📩 Contact Us")
     if st.button("✉️ Contact for Assistance", key="contact_button"):
         st.session_state.show_contact = True
     
     if st.session_state.show_contact:
         st.write("Please reach us at:")
-        st.write("📧 Email: careers@orbt-learn.com")
+        st.write("📧 Email: careers@itjobhub.com")
         st.write("📞 Phone: +91 98765 43210")
         st.write("🕒 Available: Mon-Sat, 9AM-8PM")
 
