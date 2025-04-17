@@ -812,7 +812,7 @@ def show_job_page():
     
     # Job Categories Section
     st.write("### Top 15 High-Demand IT Jobs:")
-    st.write("### If you Want Freelancing You can join Our Team Also")
+    st.write("### --------If you Want Freelancing Job You can join Our Team Also Contact Us.....")
     jobs = [
         "1. AI/ML Engineer",
         "2. Data Scientist",
