@@ -7,11 +7,49 @@ import random
 import pandas as pd
 
 # Configure page
+import streamlit as st
+
 st.set_page_config(
-    page_title="Orbt-Learn",
+    page_title="ORBT-LEARN",
     page_icon="🚀",
     layout="wide"
 )
+
+st.markdown("""
+    <style>
+        .orbt-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #4CAF50;
+            color: white;
+            padding: 25px 50px;
+            font-size: 24px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .orbt-button .subtitle {
+            font-size: 16px;
+            font-weight: normal;
+            color: #e0e0e0;
+            margin-top: 8px;
+        }
+
+        .orbt-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+
+    <button class="orbt-button">
+        <strong>ORBT-LEARN</strong>
+        <div class="subtitle">The Right Education for Job</div>
+    </button>
+""", unsafe_allow_html=True)
 
 # Initialize session state
 def init_session_state():
