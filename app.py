@@ -756,6 +756,8 @@ def show_internship_page():
     # Program Options Section
     with st.container(border=True):
         st.subheader("🚀 Internship Programs")
+        st.subheader("📊 Data Science with Machine Learning Internship")
+        st.subheader("💻 Full Stack Web Development Internship")
         col1, col2 = st.columns(2)
         
         with col1:
