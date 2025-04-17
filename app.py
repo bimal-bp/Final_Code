@@ -809,8 +809,10 @@ def show_job_page():
 
     st.subheader("🚀 Best IT Job Opportunities")
     
+    
     # Job Categories Section
     st.write("### Top 15 High-Demand IT Jobs:")
+    st.write("### If you Want Freelancing You can join Our Team Also")
     jobs = [
         "1. AI/ML Engineer",
         "2. Data Scientist",
