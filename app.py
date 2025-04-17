@@ -1,4 +1,5 @@
 
+
 import streamlit as st
 from streamlit_option_menu import option_menu
 import psycopg2
@@ -7,49 +8,11 @@ import random
 import pandas as pd
 
 # Configure page
-import streamlit as st
-
 st.set_page_config(
-    page_title="ORBT-LEARN",
+    page_title="Orbt-Learn",
     page_icon="🚀",
     layout="wide"
 )
-
-st.markdown("""
-    <style>
-        .orbt-button {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-color: #4CAF50;
-            color: white;
-            padding: 25px 50px;
-            font-size: 24px;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            text-align: center;
-            line-height: 1.4;
-        }
-
-        .orbt-button .subtitle {
-            font-size: 16px;
-            font-weight: normal;
-            color: #e0e0e0;
-            margin-top: 8px;
-        }
-
-        .orbt-button:hover {
-            background-color: #45a049;
-        }
-    </style>
-
-    <button class="orbt-button">
-        <strong>ORBT-LEARN</strong>
-        <div class="subtitle">The Right Education for Job</div>
-    </button>
-""", unsafe_allow_html=True)
 
 # Initialize session state
 def init_session_state():
@@ -907,6 +870,7 @@ def show_job_page():
 def main():
     # Display the header in the main content area
     st.markdown('<div class="header">Orbt-Learn</div>', unsafe_allow_html=True)
+    st.markdown('<div class="subheader">...........The Right Education For Job............</div>', unsafe_allow_html=True)
     st.markdown('<div class="subheader">Complete your final year projects with excellence</div>', unsafe_allow_html=True)
 
     # Navigation menu
