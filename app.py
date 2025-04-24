@@ -810,32 +810,12 @@ def show_job_page():
     if 'show_contact' not in st.session_state:
         st.session_state.show_contact = False
 
-    st.subheader("🚀 Best IT Job Opportunities")
     
     
     # Job Categories Section
-    st.write("### Top 15 High-Demand IT Jobs:")
+    st.write("###  High-Demand IT Jobs:")
     st.write("### --------If you Want Freelancing Job You can join Our Team Also Contact Us.....")
-    jobs = [
-        "1. AI/ML Engineer",
-        "2. Data Scientist",
-        "3. Cloud Architect",
-        "4. DevOps Engineer",
-        "5. Full Stack Developer",
-        "6. Cybersecurity Analyst",
-        "7. Blockchain Developer",
-        "8. Data Engineer",
-        "9. IoT Solutions Architect",
-        "10. AR/VR Developer",
-        "11. Site Reliability Engineer",
-        "12. Big Data Engineer",
-        "13. Quantum Computing Specialist",
-        "14. UI/UX Designer",
-        "15. Technical Product Manager"
-    ]
-    
-    for job in jobs:
-        st.write(job)
+
     
     # Resume Link Section
     st.markdown("---")
