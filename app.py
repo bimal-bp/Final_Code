@@ -829,7 +829,7 @@ def show_job_page():
     st.write("### 👨‍💼 Career Consultation Sessions")
     st.write("Book paid 1-on-1 sessions with industry experts:")
     
-    st.write("**1-hour Session (₹650) includes:**")
+    st.write("**1-hour Session (₹650) & For Group (₹350)  includes:**")
     consultation_points = [
         "Comprehensive resume building",
         "LinkedIn profile optimization",
