@@ -571,7 +571,7 @@ def show_team_page():
         st.markdown(f"""
         <div class="team-card" style="border-left-color: {get_random_color()}">
             <b>Bimal Patra</b>
-            <p>AI/ML Specialist</p>
+            <p>Officer Artificial Intelligence Process</p>
             <p>Expert in machine learning and data science</p>
         </div>
         """, unsafe_allow_html=True)
