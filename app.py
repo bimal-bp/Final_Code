@@ -9,7 +9,7 @@ import pandas as pd
 
 # Configure page
 st.set_page_config(
-    page_title="Orbt-Learn",
+    page_title="Orbt_Techgrow",
     page_icon="🚀",
     layout="wide"
 )
